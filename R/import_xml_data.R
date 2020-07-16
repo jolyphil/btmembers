@@ -21,14 +21,12 @@ temp <- "temp/temp.zip"
 # Download ZIP file containing data on members of the Bundestag in XML format
 download.file(url, temp) 
 
-xml_list <- unz(temp, "MDB_STAMMDATEN.XML") %>% # Unzip XML data
+members_list <- unz(temp, "MDB_STAMMDATEN.XML") %>% # Unzip XML data
   read_xml() %>% 
-  as_list() # Convert XML data to list 
-
-# unlink(temp) # Unlink temporary file
-
-# Each element of the list is itself a list with data for each member of the BT
-xml_list <- xml_list[["DOCUMENT"]][c(2:length(xml_list[[1]]))]
+  as_list() %>% 
+  `[[`("DOCUMENT") %>% # Select first nested list 
+  `[`(-c(1)) # Delete first element of the list "VERSION"
+             # All other siblings are named "MDB", representing one member 
 
 # ______________________________________________________________________________
 # Transform list to dataframe ====
@@ -79,4 +77,4 @@ extract_name_element <- function(name, element) {
 # _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 # Transform data ====
 
-members <- map_dfr(xml_list, list_to_df)
+members <- map_dfr(members_list, list_to_df)
