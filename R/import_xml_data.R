@@ -29,52 +29,108 @@ members_list <- unz(temp, "MDB_STAMMDATEN.XML") %>% # Unzip XML data
              # All other siblings are named "MDB", representing one member 
 
 # ______________________________________________________________________________
-# Transform list to dataframe ====
+# Generate dataframe of members of the Bundestag ====
 
-# _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+# _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 # Functions ====
 
+# -------------------------------------------------------------------------
+# Combines multiple variables for one member
+
 list_to_df <- function(member) {
-  names_df <- most_recent_name(member[["NAMEN"]])
-  names_df
+  members <- extract_one_value("ID", "id", member)
+  name_vars_df <- extract_most_recent_name(member)
+  bio_vars_df <- extract_bio_vars(member)
+  members <- bind_cols(name_vars_df, 
+                       bio_vars_df)
+  members
 }
 
-# Members can have many names at different points in time
-# Keep the most recent name
-most_recent_name <- function(names) {
-  names_df <- map_dfr(names, extract_a_name) %>%
-    filter(history_from == max(history_from))
-  names_df
+
+# -------------------------------------------------------------------------
+# Returns a 1-row dataframe with most recent name variables for one member
+
+extract_most_recent_name <- function(member) {
+  name_vars_df <- map_dfr(member[["NAMEN"]], extract_name_vars) %>%
+    mutate(history_from = as.Date(history_from, format = "%d.%m.%Y")) %>%
+    filter(history_from == max(history_from)) %>%
+    select(-history_from)
+  name_vars_df
 }
 
-# Given a list of name elements, transform this list as a dataframe
-extract_a_name <- function(name) {
-  lastname <- extract_name_element(name, "NACHNAME")
-  firstname <-  extract_name_element(name, "VORNAME")
-  nobility <- extract_name_element(name, "ADEL")
-  prefix <- extract_name_element(name, "PRAEFIX")
-  form_address <- extract_name_element(name, "ANREDE_TITEL")
-  acad_title <- extract_name_element(name, "AKAD_TITEL")
-  history_from <- extract_name_element(name, "HISTORIE_VON") %>%
-    as.Date(format = "%d.%m.%Y")
-  tibble(lastname, 
-         firstname, 
-         nobility, 
-         prefix, 
-         form_address,
-         acad_title,
-         history_from)
+# -------------------------------------------------------------------------
+# Returns a 1-row dataframe with biographical variables for one member
+
+extract_bio_vars <- function(member){
+  listnames <- c("GEBURTSDATUM",
+                 "GEBURTSORT",
+                 "GEBURTSLAND",
+                 "STERBEDATUM",
+                 "GESCHLECHT",
+                 "FAMILIENSTAND",
+                 "RELIGION",
+                 "BERUF",
+                 "PARTEI_KURZ",
+                 "VITA_KURZ",
+                 "VEROEFFENTLICHUNGSPFLICHTIGES")
+  varnames <- c("birthdate",
+                "birthplace",
+                "birthcountry",
+                "deathdate",
+                "gender",
+                "maritalstatus",
+                "religion",
+                "occupation",
+                "party",
+                "cv",
+                "declaration")
+  bio_vars_df <- map2_dfc(listnames, 
+                              varnames, 
+                              extract_one_value, 
+                              member[["BIOGRAFISCHE_ANGABEN"]])
+  bio_vars_df
 }
 
-# Given a name element, transform it as a character vector
-extract_name_element <- function(name, element) {
-  element <- ifelse(is.null(name[[element]]), 
-                    "", 
-                    as.character(name[[element]]))
-  element
+# -------------------------------------------------------------------------
+# Return a 1-row dataframe with multiple name variables for one member
+
+extract_name_vars <- function(name) {
+  
+  listnames <- c("NACHNAME",
+                 "VORNAME",
+                 "ADEL",
+                 "PRAEFIX",
+                 "ANREDE_TITEL",
+                 "AKAD_TITEL",
+                 "HISTORIE_VON")
+  varnames <- c("lastname",
+                "firstname",
+                "nobility",
+                "prefix",
+                "form_address",
+                "acad_title",
+                "history_from")
+  
+  name_vars_df <- map2_dfc(listnames, 
+                               varnames, 
+                               extract_one_value, 
+                               name)
+  name_vars_df
 }
 
-# _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-# Transform data ====
+# -------------------------------------------------------------------------
+# Return a 1-row dataframe with one variable for one member
+
+extract_one_value <- function(listname, varname, parent_list){
+  one_value <- ifelse(is.null(parent_list[[listname]]),
+                      "",
+                      as.character(parent_list[[listname]]))
+  one_value_df <- tibble(one_value)
+  names(one_value_df) <- varname
+  one_value_df
+}
+
+# _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+# Transform list to dataframe ====
 
 members <- map_dfr(members_list, list_to_df)
