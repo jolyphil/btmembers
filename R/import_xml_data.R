@@ -7,19 +7,23 @@
 # Load packages ====
 library(dplyr)
 library(purrr)
-library(xml2) # Parse XML files
+library(xml2) 
+
+# Load functions ====
+file.path("R", "gen_var_attr.R") %>%
+  source()
 
 # ______________________________________________________________________________
 # Download data, unzip, convert to list, and load ====
 
 # URL to the ZIP file containing the XML data on members of the Bundestag
-url <- "https://www.bundestag.de/resource/blob/472878/a007a4c078baf271d72b61eddb5eeeb9/MdB-Stammdaten-data.zip"
+# url <- "https://www.bundestag.de/resource/blob/472878/a007a4c078baf271d72b61eddb5eeeb9/MdB-Stammdaten-data.zip"
 
 #temp <- tempfile() # Change for temporary file
 temp <- "temp/temp.zip"
 
 # Download ZIP file containing data on members of the Bundestag in XML format
-download.file(url, temp) 
+# download.file(url, temp) 
 
 members_list <- unz(temp, "MDB_STAMMDATEN.XML") %>% # Unzip XML data
   read_xml() %>% 
@@ -29,148 +33,91 @@ members_list <- unz(temp, "MDB_STAMMDATEN.XML") %>% # Unzip XML data
              # All other siblings are named "MDB", representing one member 
 
 # ______________________________________________________________________________
-# Generate dataframe of members of the Bundestag ====
+# Identify groups of variables to extract and store recode instructions ====
 
 # _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 # Functions ====
 
 # -------------------------------------------------------------------------
-# Combines multiple variables for one member
+# Given a list name, find the corresponding variable name
 
-list_to_df <- function(member_list) {
-  member_df <- extract_one_value("ID", "id", member_list)
-  name_vars_df <- extract_most_recent_name(member_list)
-  bio_vars_df <- extract_bio_vars(member_list)
-  parlterm_vars_df <- extract_most_recent_term(member_list)
-  member_df <- member_df %>%
-    bind_cols(name_vars_df, 
-              bio_vars_df) %>%
-    left_join(combine_parlterm_vars(member_list), by = "id")
-  member_df
-}
-
-
-# -------------------------------------------------------------------------
-# Returns a 1-row dataframe with most recent name variables for one member
-
-extract_most_recent_name <- function(member_list) {
-  name_vars_df <- member_list[["NAMEN"]] %>% 
-    map_dfr(extract_name_vars) %>%
-    mutate(history_from = as.Date(history_from, format = "%d.%m.%Y")) %>%
-    filter(history_from == max(history_from)) %>%
-    select(-history_from)
-  name_vars_df
+find_varname <- function(listname, var_attr) {
+  varname <- var_attr %>%
+    filter(sourcename == listname) %>%
+    select(varname) %>%
+    as.character()
+  varname
 }
 
 # -------------------------------------------------------------------------
-# Returns a 1-row dataframe with most recent term variables for one member
+# Given a vector of list names, generate vector of corresponding variable names
 
-extract_most_recent_term <- function(member_list) {
-  parlterm_vars_df <- member_list[["WAHLPERIODEN"]] %>%
-    map_dfr(extract_parlterm_vars) %>%
-    mutate(term_num = as.integer(term_num)) %>%
-    filter(term_num == max(term_num))
-  parlterm_vars_df
+get_recode_info <- function(listnames, var_attr) {
+  varnames <- listnames %>%
+    map_chr(find_varname, var_attr = var_attr)
+  group_vars <- tibble(listnames, varnames)
+  group_vars
 }
 
-combine_parlterm_vars <- function(member_list) {
-  id <- extract_one_value("ID", "id", member_list)[["id"]]
-  parlterm_vars_df <- member_list[["WAHLPERIODEN"]] %>%
-    map_dfr(extract_parlterm_vars) %>%
-    mutate(id = id)
-  parlterm_vars_df
-}
+# _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+# Load variable attributes ====
 
-# -------------------------------------------------------------------------
-# Returns a 1-row dataframe with biographical variables for one member
+var_attr <- gen_var_attr()
 
-extract_bio_vars <- function(member_list){
-  listnames <- c("GEBURTSDATUM",
-                 "GEBURTSORT",
-                 "GEBURTSLAND",
-                 "STERBEDATUM",
-                 "GESCHLECHT",
-                 "FAMILIENSTAND",
-                 "RELIGION",
-                 "BERUF",
-                 "PARTEI_KURZ",
-                 "VITA_KURZ",
-                 "VEROEFFENTLICHUNGSPFLICHTIGES")
-  varnames <- c("birthdate",
-                "birthplace",
-                "birthcountry",
-                "deathdate",
-                "gender",
-                "maritalstatus",
-                "religion",
-                "occupation",
-                "party",
-                "cv",
-                "declaration")
-  bio_vars_df <- map2_dfc(listnames, 
-                              varnames, 
-                              extract_one_value, 
-                              member_list[["BIOGRAFISCHE_ANGABEN"]])
-  bio_vars_df
-}
+# _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+# Define groups of variables to extract at the same hiarchical level ====
 
-# -------------------------------------------------------------------------
-# Return a 1-row dataframe with multiple name variables, for one name block,
-# for one member
+group_name <-  c(
+  "NACHNAME"	,
+  "VORNAME",
+  "ADEL",
+  "PRAEFIX",
+  "ANREDE_TITEL",
+  "AKAD_TITEL",
+  "HISTORIE_VON"
+)
 
-extract_name_vars <- function(name) {
-  
-  listnames <- c("NACHNAME",
-                 "VORNAME",
-                 "ADEL",
-                 "PRAEFIX",
-                 "ANREDE_TITEL",
-                 "AKAD_TITEL",
-                 "HISTORIE_VON")
-  varnames <- c("lastname",
-                "firstname",
-                "nobility",
-                "prefix",
-                "form_address",
-                "acad_title",
-                "history_from")
-  
-  name_vars_df <- map2_dfc(listnames, 
-                           varnames, 
-                           extract_one_value, 
-                           name)
-  name_vars_df
-}
+group_bio <- c(
+  "GEBURTSDATUM",
+  "GEBURTSORT",
+  "GEBURTSLAND",
+  "STERBEDATUM",
+  "GESCHLECHT",
+  "FAMILIENSTAND",
+  "RELIGION",
+  "BERUF",
+  "PARTEI_KURZ",
+  "VITA_KURZ",
+  "VEROEFFENTLICHUNGSPFLICHTIGES"
+)
 
-# -------------------------------------------------------------------------
-# Return a 1-row dataframe with multiple variables for one parliamentary term,
-# for one member
+group_parlterm <- c(
+  "WP",
+  "MDBWP_VON",
+  "MDBWP_BIS",
+  "WKR_NUMMER",
+  "WKR_NAME",
+  "WKR_LAND",
+  "LISTE",
+  "MANDATSART"
+)
 
-extract_parlterm_vars <- function(parlterm) {
-  
-  listnames <- c("WP",
-                 "MDBWP_VON",
-                 "MDBWP_BIS",
-                 "WKR_NUMMER",
-                 "WKR_NAME",
-                 "WKR_LAND",
-                 "LISTE",
-                 "MANDATSART")
-  varnames <- c("term_num",
-                "term_start",
-                "term_end",
-                "dist_num",
-                "dist_name",
-                "dist_state",
-                "list",
-                "mandate_type")
-  
-  parlterm_vars_df <- map2_dfc(listnames, 
-                               varnames, 
-                               extract_one_value, 
-                               parlterm)
-  parlterm_vars_df
-}
+# _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+# Get recode info for different groups of variables ====
+
+group_list <- list(
+  name = group_name, 
+  bio = group_bio,
+  parlterm = group_parlterm
+) %>%
+  map(get_recode_info, var_attr = var_attr)
+
+
+# ______________________________________________________________________________
+# Generate dataframe of members of the Bundestag ====
+
+# _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+# Functions ====
 
 # -------------------------------------------------------------------------
 # Return a 1-row dataframe with one variable for one member
@@ -184,17 +131,67 @@ extract_one_value <- function(listname, varname, parent_list){
   one_value_df
 }
 
-find_list_name <- function(parent_list){
-  one_value <- ifelse(is.null(parent_list[[listname]]),
-                      "",
-                      as.character(parent_list[[listname]]))
-  one_value_df <- tibble(one_value)
-  names(one_value_df) <- varname
-  one_value_df
+# -------------------------------------------------------------------------
+# Return a 1-row dataframe with N vars from one group of vars, for one member
+
+extract_group_vars <- function(parent_list, recode_info) {
+  group_vars_df <- map2_dfc(recode_info$listnames, 
+                            recode_info$varnames, 
+                            extract_one_value, 
+                            parent_list)
+  group_vars_df
+}
+
+# -------------------------------------------------------------------------
+# Returns a 1-row dataframe with most recent name variables for one member
+
+extract_most_recent_name <- function(one_member_list, group_name) {
+  name_vars_df <- one_member_list[["NAMEN"]] %>% 
+    map_dfr(extract_group_vars, group_name) %>%
+    mutate(histfrom = as.Date(histfrom, format = "%d.%m.%Y")) %>%
+    filter(histfrom == max(histfrom)) %>%
+    select(-histfrom)
+  name_vars_df
+}
+
+# -------------------------------------------------------------------------
+# Returns a 1-row dataframe with most recent term variables for one member
+
+combine_parlterm_vars <- function(one_member_list, group_parlterm) {
+  parlterm_vars_df <- one_member_list[["WAHLPERIODEN"]] %>%
+    map_dfr(extract_group_vars, group_parlterm)
+  id <- extract_one_value("ID", "id", one_member_list)[["id"]] %>%
+    rep(times = nrow(parlterm_vars_df))
+  parlterm_vars_df <- parlterm_vars_df %>%
+    bind_cols(id = id)
+  parlterm_vars_df
+}
+
+# -------------------------------------------------------------------------
+# Combines multiple variables for one member
+
+list_to_df <- function(one_member_list, group_list) {
+  pb$tick()$print()
+  
+  one_member_df <- extract_one_value("ID", "id", one_member_list)
+  name_vars_df <- one_member_list %>%
+    extract_most_recent_name(group_list$name)
+  bio_vars_df <- one_member_list[["BIOGRAFISCHE_ANGABEN"]] %>%
+    extract_group_vars(group_list$bio)
+  parlterm_vars_df <- one_member_list %>%
+    combine_parlterm_vars(group_list$parlterm)
+  one_member_df <- one_member_df %>%
+    bind_cols(name_vars_df, 
+              bio_vars_df) %>%
+    left_join(parlterm_vars_df, by = "id")
+  one_member_df
 }
 
 # _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 # Transform list to dataframe ====
 
-members_df <- map_dfr(members_list, list_to_df)
+pb <- members_list %>%
+  length() %>%
+  progress_estimated()
+members_df <- map_dfr(members_list, list_to_df, group_list)
 
