@@ -1,0 +1,23 @@
+---
+title: "Dataset of All Members of the Bundestag since 1949: Codebook"
+author: "Philippe Joly"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{codebook}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r print}
+vars <- btmembers:::get_var_attr()
+vars$varname_de
+```
+

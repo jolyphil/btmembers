@@ -41,3 +41,4 @@ vignettes/*.pdf
 # This project
 /temp
 .Rproj.user
+inst/doc

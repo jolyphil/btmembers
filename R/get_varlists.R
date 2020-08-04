@@ -33,7 +33,7 @@ get_varlists <- function(){
   )
   var_attr <- get_var_attr()
   varlists <- list(
-      name = varlist_name, 
+      name = varlist_name,
       bio = varlist_bio,
       parlterm = varlist_parlterm
     ) %>%
@@ -48,10 +48,12 @@ get_recode_scheme <- function(listnames, var_attr) {
   recode_scheme
 }
 
-find_varname <- function(listname, var_attr) {
-  varname <- var_attr %>%
-    dplyr::filter(sourcename == listname) %>%
-    dplyr::select(varname) %>%
-    as.character()
+find_varname <- function(listname, var_attr, lang = "de") {
+  if (lang == "de"){
+    varname <- var_attr$varname_de[var_attr$sourcename == listname]
+  }
+  if (lang == "en"){
+    varname <- var_attr$varname_en[var_attr$sourcename == listname]
+  }
   varname
 }
