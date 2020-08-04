@@ -7,6 +7,7 @@
 #'
 #' @return A data frame of all parliamentary terms for all members
 #' @export
+#' @importFrom magrittr "%>%"
 
 import_members <- function() {
   members_list <- import_raw_list()
