@@ -1,0 +1,30 @@
+Package: btmembers
+Title: Import Data on All Members of the Bundestag since 1949
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Philippe",
+           family = "Joly",
+           role = c("aut", "cre"),
+           email = "jolyphil@hu-berlin.de",
+           comment = c(ORCID = "0000-0002-4278-9439"))
+Description: The Bundestag distributes biographical data on all members of the
+    Bundestag since 1949 <https://www.bundestag.de/services/opendata/>. This 
+    data, however, is only available in XML, a format difficult to work with for
+    most social scientist. This R package downloads the file "Stammdaten aller 
+    Abgeordneten seit 1949 im XML-Format," converts it to a data frame, and 
+    recodes some of the variables. The output is a longitudinal dataset, where 
+    the level analysis is a member-term. 
+Depends: R (>= 3.4.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
+Imports: 
+    dplyr (>= 0.8.3),
+    magrittr (>= 1.5), 
+    purrr (>= 0.3.3),
+    rvest (>= 0.3.4),
+    stringr (>= 1.4.0),
+    xml2 (>= 1.2.0)
+    
