@@ -15,5 +15,6 @@ devtools::install_github("jolyphil/btmembers")
 btmembers only has a single function: `import_members()`. To load the data to a data frame, simply proceed as follows:
 
 ``` r
+library(btmembers)
 members <- import_members()
 ```
