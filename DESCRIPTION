@@ -7,13 +7,14 @@ Authors@R:
            role = c("aut", "cre"),
            email = "jolyphil@hu-berlin.de",
            comment = c(ORCID = "0000-0002-4278-9439"))
-Description: The Bundestag distributes biographical data on all members of the
-    Bundestag since 1949 <https://www.bundestag.de/services/opendata/>. This 
-    data, however, is only available in XML, a format difficult to work with for
-    most social scientists. This R package downloads the file "Stammdaten aller 
-    Abgeordneten seit 1949 im XML-Format," converts it to a data frame, and 
-    recodes some of the variables. The output is a longitudinal dataset, where 
-    the level analysis is a member-term. 
+Description: The Bundestag distributes data on all of its members since 1949 
+    <https://www.bundestag.de/services/opendata/>. This data, however, is only 
+    available in XML, a format most social scientists will find difficult to 
+    work with. This R package downloads the file "Stammdaten aller Abgeordneten 
+    seit 1949 im XML-Format" from the Bundestag website, converts it to a data 
+    frame, and recodes some of the variables. The unit of analysis is a 
+    member-term. The generated dataset contains more than 11,000 observations 
+    for more than 4,000 members of the Bundestag. 
 Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8

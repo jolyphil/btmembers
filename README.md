@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Bundestag distributes [biographical data](https://www.bundestag.de/services/opendata/) on all members of the Bundestag since 1949. This data, however, is only available in XML, a format difficult to work with for most social  scientists. This R package downloads the file "Stammdaten aller Abgeordneten seit 1949 im XML-Format," converts it to a data frame, and recodes some of the variables. The output is a longitudinal dataset with more than 11,000 observations. The unit of analysis is a member-term. 
+The Bundestag distributes [biographical data](https://www.bundestag.de/services/opendata/) on all its members since 1949. This data, however, is only available in XML, a format most social scientists will find difficult to work with. The **btmembers** R package downloads the file "Stammdaten aller  Abgeordneten seit 1949 im XML-Format" from the Bundestag website, converts it to a data frame, and recodes some of the variables. The unit of analysis is a member-term. The generated dataset contains more than 11,000 observations for more than 4,000 members of the Bundestag.
 
 ## Installation
 ``` r
