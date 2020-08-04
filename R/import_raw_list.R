@@ -1,4 +1,4 @@
-import_members_list <- function(){
+import_raw_list <- function(){
   link_info <- extract_link_info()
   temp <- tempfile()
   paste0("Downloading version ", link_info$data_version) %>%
