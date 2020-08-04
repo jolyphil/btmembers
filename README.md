@@ -10,7 +10,7 @@ The Bundestag distributes [biographical data](https://www.bundestag.de/services/
 devtools::install_github("jolyphil/btmembers")
 ```
 
-## Installation
+## Usage
 
 btmembers only has a single function: `import_members()`. To load the data to a data frame, simply proceed as follows:
 
