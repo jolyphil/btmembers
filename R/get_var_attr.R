@@ -9,143 +9,167 @@ get_var_attr <- function() {
     # ID --------------------------------------------------------------
       sourcename = "ID",
       varname_de = "id",
-      varname_en = "id"
-      #,
-      #label = "Identification number",
-      #description = "Identification number of the member, format: 8 digits"
+      varname_en = "id",
+      label_de = "Identifikationsnummer"
     ) %>%
     # Name ------------------------------------------------------------
     add_row(
       "NACHNAME",
       "nachname",
-      "lastname"
+      "lastname",
+      "Nachname"
     ) %>%
     add_row(
       "VORNAME",
       "vorname",
-      "firstname"
+      "firstname",
+      "Vorname"
     ) %>%
     add_row(
       "ADEL",
       "adel",
-      "nobility"
+      "nobility",
+      "Adelsprädikat"
     ) %>%
     add_row(
       "PRAEFIX",
       "praefix",
-      "prefix"
+      "prefix",
+      "Namenspräfix"
     ) %>%
     add_row(
       "ANREDE_TITEL",
       "anrede_titel",
-      "formaddress"
+      "formaddress",
+      "Anrede-Titel"
     ) %>%
     add_row(
       "AKAD_TITEL",
       "akad_titel",
-      "acadtitle"
+      "acadtitle",
+      "Akademischer Titel"
     ) %>%
     add_row(
       "HISTORIE_VON",
       "historie_von",
-      "histfrom"
+      "histfrom",
+      "Historie zu den Namensbestandteilen, gültig von"
     ) %>%
     # Bio -------------------------------------------------------------
     add_row(
       "GEBURTSDATUM",
       "geburtsdatum",
-      "birthdate"
+      "birthdate",
+      "Geburtsdatum"
     ) %>%
     add_row(
       "GEBURTSORT",
       "geburtsort",
-      "birthplace"
+      "birthplace",
+      "Geburtsort"
     ) %>%
     add_row(
       "GEBURTSLAND",
       "geburtsland",
       "birthcountry",
+      "Geburtsland"
     ) %>%
     add_row(
       "STERBEDATUM",
       "sterbedatum",
-      "deathdate"
+      "deathdate",
+      "Sterbedatum"
     ) %>%
     add_row(
       "GESCHLECHT",
       "geschlecht",
-      "gender"
+      "gender",
+      "Geschlecht"
     ) %>%
     add_row(
       "FAMILIENSTAND",
       "familienstand",
-      "maristatus"
+      "maristatus",
+      "Familienstand"
     ) %>%
     add_row(
       "RELIGION",
       "religion",
-      "religion"
+      "religion",
+      "Religion"
     ) %>%
     add_row(
       "BERUF",
       "beruf",
-      "occup"
+      "occup",
+      "Beruf"
     ) %>%
     add_row(
       "PARTEI_KURZ",
       "partei_kurz",
-      "party"
+      "party",
+      "Parteizugehörigkeit, kurzform"
     ) %>%
     add_row(
       "VITA_KURZ",
       "vita_kurz",
-      "cv"
+      "cv",
+      "Kurzbiografie des Abgeordneten (nur aktuelle Wahlperiode)"
     ) %>%
     add_row(
       "VEROEFFENTLICHUNGSPFLICHTIGES",
       "veroeffentlichungspflichtiges",
-      "declaration"
+      "declaration",
+      "Veröffentlichungspflichtige Angaben (nur aktuelle Wahlperiode)"
     ) %>%
     # Parliamentary term ----------------------------------------------
     add_row(
       "WP",
       "wp",
-      "termnum"
+      "termnum",
+      "Nummer der Wahlperiode"
     ) %>%
     add_row(
       "MDBWP_VON",
       "mdbwp_von",
-      "termstart"
+      "termstart",
+      "Beginn der Wahlperiodenzugehörigkeit"
     ) %>%
     add_row(
       "MDBWP_BIS",
       "mdbwp_bis",
-      "termend"
+      "termend",
+      "Ende der Wahlperiodenzugehörigkeit"
     ) %>%
     add_row(
       "WKR_NUMMER",
       "wkr_nummer",
-      "distnum"
+      "distnum",
+      "Nummer des Wahlkreises"
     ) %>%
     add_row(
       "WKR_NAME",
       "wkr_name",
-      "distname"
+      "distname",
+      "Wahlkreisname"
     ) %>%
     add_row(
       "WKR_LAND",
       "wkr_land",
-      "diststate"
+      "diststate",
+      "Bundesland des Wahlkreises"
     ) %>%
     add_row(
       "LISTE",
       "liste",
-      "list"
+      "list",
+      "Liste"
     ) %>%
     add_row(
       "MANDATSART",
       "mandatsart",
-      "mandatetype"
+      "mandatetype",
+      "Art des Mandates"
     )
   var_attr
 }
@@ -154,17 +178,14 @@ add_row <- function(df,
                     sourcename,
                     varname_de,
                     varname_en,
-                    label,
-                    description) {
+                    label_de) {
   df <- df %>%
     dplyr::bind_rows(
       tibble::tibble(
         sourcename = sourcename,
         varname_de = varname_de,
-        varname_en = varname_en
-        #,
-        #label = label,
-        #description = description
+        varname_en = varname_en,
+        label_de = label_de
       )
     )
 }
