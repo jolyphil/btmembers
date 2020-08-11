@@ -16,8 +16,22 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r print}
+```{r print, results = "asis"}
 vars <- btmembers:::get_var_attr()
-vars$varname_de
+for (i in seq_along(vars)) {
+  cat(
+    paste0(
+      "**",
+      vars$varname_de[i],
+      "** ",
+      "_",
+      vars$varname_de[i],
+      "_ ",
+      "\n"
+    ),
+    "\n"
+  )
+}
+
 ```
 

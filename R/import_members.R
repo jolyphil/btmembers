@@ -9,6 +9,9 @@
 #' @export
 #' @importFrom magrittr "%>%"
 
+# Try this later...
+# assign("x", 1, envir = as.environment("package:btmembers"))
+
 import_members <- function() {
   members_list <- import_raw_list()
   varlists <- get_varlists()

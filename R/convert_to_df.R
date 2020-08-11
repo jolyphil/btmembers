@@ -4,7 +4,7 @@ convert_to_df <- function(members_list, varlists){
     dplyr::progress_estimated()
   message("Converting list to data frame...")
   members <- purrr::map_dfr(members_list, one_member_list_to_df, varlists, pb)
-  message("Done.")
+  message("\nDone.")
   members
 }
 
@@ -28,8 +28,7 @@ extract_most_recent_name <- function(one_member_list, varlist) {
   name_vars_df <- one_member_list[["NAMEN"]] %>%
     purrr::map_dfr(extract_group_vars, varlist) %>%
     dplyr::mutate(historie_von = as.Date(historie_von, format = "%d.%m.%Y")) %>%
-    dplyr::filter(historie_von == max(historie_von)) %>%
-    dplyr::select(-historie_von)
+    dplyr::filter(historie_von == max(historie_von))
   name_vars_df
 }
 
