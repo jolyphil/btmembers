@@ -13,9 +13,12 @@
 # assign("x", 1, envir = as.environment("package:btmembers"))
 
 import_members <- function() {
-  members_list <- import_raw_list()
-  varlists <- get_varlists()
-  members <- convert_to_df(members_list, varlists)
+  link_info <- extract_link_info()
+  paste0("Downloading version ", link_info$data_version) %>%
+    message()
+  members <- import_raw_list(link_info$href) %>%
+    convert_to_df() %>%
+    recode_df(link_info$data_version)
   members
 }
 
