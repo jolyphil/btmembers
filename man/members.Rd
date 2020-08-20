@@ -3,10 +3,10 @@
 \docType{data}
 \name{members}
 \alias{members}
-\title{Members of the Bundestag since 1949}
+\title{Members of the Bundestag since 1949.}
 \format{
 A tibble with 11618 observations from 4084 members of the Bundestag.
-It includes 27 variables:
+It includes 26 variables:
 \describe{
 \item{id}{A label}
 \item{nachname}{A label}
@@ -15,7 +15,6 @@ It includes 27 variables:
 \item{praefix}{A label}
 \item{anrede_titel}{A label}
 \item{akad_titel}{A label}
-\item{historie_von}{A label}
 \item{geburtsdatum}{A label}
 \item{geburtsort}{A label}
 \item{geburtsland}{A label}
