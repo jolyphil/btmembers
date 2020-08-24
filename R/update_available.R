@@ -8,8 +8,6 @@
 #' Returns TRUE if a more recent version of the data is available and FALSE
 #' otherwise.
 #'
-#' @warning
-#' New versions have not been tested and might not be imported as expected.
 
 update_available <- function() {
   online_version <- extract_link_info()$data_version
