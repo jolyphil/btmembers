@@ -1,6 +1,6 @@
 gen_data_doc <- function(){
   header <- c(
-    "#' Members of the Bundestag since 1949.",
+    "#' Members of the Bundestag since 1949",
     "#'",
     "#' A dataset with basic biographical and election data for all members of",
     "#' the Bundestag since 1949.",
@@ -14,16 +14,18 @@ gen_data_doc <- function(){
     " members of the Bundestag.\n",
     "#' It includes ",
     ncol(btmembers::members),
-    " variables:"
+    " variables (in German):"
   )
   variables <- c(
     "#' \\describe{",
-    purrr::map_chr(names(btmembers::members), var_item),
+    purrr::map2_chr(names(members), members, var_item),
     "#' }"
   )
   source <- c(
     "#' @source Adapted from Bundestag (2020), \\emph{Stammdaten aller Abgeordneten",
-    "#' seit 1949 im XML-Format},",
+    paste0("#' seit 1949 im XML-Format}, version: ",
+           attr(members, "version"),
+           ","),
     "#' \\url{https://www.bundestag.de/services/opendata}."
     )
   fileConn<-file("R/members.R")
@@ -36,11 +38,13 @@ gen_data_doc <- function(){
   close(fileConn)
 }
 
-var_item <- function(one_var) {
+var_item <- function(name, var) {
   var_item <- paste0(
-    "#'   \\item{",
-    one_var,
-    "}",
-    "{A label}"
+    "#'   \\item{`",
+    name,
+    "`}",
+    "{",
+    attr(var, "label"),
+    "}"
   )
 }

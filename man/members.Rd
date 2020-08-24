@@ -3,42 +3,42 @@
 \docType{data}
 \name{members}
 \alias{members}
-\title{Members of the Bundestag since 1949.}
+\title{Members of the Bundestag since 1949}
 \format{
 A tibble with 11618 observations from 4084 members of the Bundestag.
-It includes 26 variables:
+It includes 26 variables (in German):
 \describe{
-\item{id}{A label}
-\item{nachname}{A label}
-\item{vorname}{A label}
-\item{adel}{A label}
-\item{praefix}{A label}
-\item{anrede_titel}{A label}
-\item{akad_titel}{A label}
-\item{geburtsdatum}{A label}
-\item{geburtsort}{A label}
-\item{geburtsland}{A label}
-\item{sterbedatum}{A label}
-\item{geschlecht}{A label}
-\item{familienstand}{A label}
-\item{religion}{A label}
-\item{beruf}{A label}
-\item{partei_kurz}{A label}
-\item{vita_kurz}{A label}
-\item{veroeffentlichungspflichtiges}{A label}
-\item{wp}{A label}
-\item{mdbwp_von}{A label}
-\item{mdbwp_bis}{A label}
-\item{wkr_nummer}{A label}
-\item{wkr_name}{A label}
-\item{wkr_land}{A label}
-\item{liste}{A label}
-\item{mandatsart}{A label}
+\item{\code{id}}{Identifikationsnummer}
+\item{\code{nachname}}{Nachname}
+\item{\code{vorname}}{Vorname}
+\item{\code{adel}}{Adelsprädikat}
+\item{\code{praefix}}{Namenspräfix}
+\item{\code{anrede_titel}}{Anrede-Titel}
+\item{\code{akad_titel}}{Akademischer Titel}
+\item{\code{geburtsdatum}}{Geburtsdatum}
+\item{\code{geburtsort}}{Geburtsort}
+\item{\code{geburtsland}}{Geburtsland}
+\item{\code{sterbedatum}}{Sterbedatum}
+\item{\code{geschlecht}}{Geschlecht}
+\item{\code{familienstand}}{Familienstand}
+\item{\code{religion}}{Religion}
+\item{\code{beruf}}{Beruf}
+\item{\code{partei_kurz}}{Parteizugehörigkeit, kurzform}
+\item{\code{vita_kurz}}{Kurzbiografie des Abgeordneten (nur aktuelle Wahlperiode)}
+\item{\code{veroeffentlichungspflichtiges}}{Veröffentlichungspflichtige Angaben (nur aktuelle Wahlperiode)}
+\item{\code{wp}}{Nummer der Wahlperiode}
+\item{\code{mdbwp_von}}{Beginn der Wahlperiodenzugehörigkeit}
+\item{\code{mdbwp_bis}}{Ende der Wahlperiodenzugehörigkeit}
+\item{\code{wkr_nummer}}{Nummer des Wahlkreises}
+\item{\code{wkr_name}}{Wahlkreisname}
+\item{\code{wkr_land}}{Bundesland des Wahlkreises}
+\item{\code{liste}}{Liste}
+\item{\code{mandatsart}}{Art des Mandates}
 }
 }
 \source{
 Adapted from Bundestag (2020), \emph{Stammdaten aller Abgeordneten
-seit 1949 im XML-Format},
+seit 1949 im XML-Format}, version: 2020-03-12,
 \url{https://www.bundestag.de/services/opendata}.
 }
 \usage{
