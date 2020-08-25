@@ -8,7 +8,7 @@ The Bundestag distributes [biographical and election data](https://www.bundestag
 ## Citation
 
     #> 
-    #> To cite essurvey in publications use:
+    #> To cite btmembers in publications use:
     #> 
     #>   Joly, Philippe (2020). Import Data on All Members of the Bundestag 
     #>   since 1949. R Package version 0.0.0.9000.
@@ -57,3 +57,4 @@ members_new <- import_members()
 ```
 
 This operation, however, is not guaranteed to work since the Bundestag might occasionally change the structure of the source XML file. If you encounter problems using `import_members()`, consider creating an [issue on GitHub](https://github.com/jolyphil/btmembers/issues).
+
