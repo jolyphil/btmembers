@@ -8,6 +8,7 @@
 #' @return A data frame of all parliamentary terms for all members
 #' @export
 #' @importFrom magrittr "%>%"
+#' @importFrom tibble tibble
 
 # Try this later...
 # assign("x", 1, envir = as.environment("package:btmembers"))

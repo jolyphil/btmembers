@@ -2,3 +2,4 @@
 
 export(import_members)
 importFrom(magrittr,"%>%")
+importFrom(tibble,tibble)
