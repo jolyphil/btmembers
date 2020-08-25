@@ -4,6 +4,25 @@
 
 The Bundestag distributes [biographical and election data](https://www.bundestag.de/services/opendata/) on all its members since 1949. This data, however, is only available in XML, a format most social scientists will find difficult to work with. **btmembers** downloads the file "Stammdaten aller Abgeordneten seit 1949 im XML-Format" from the Bundestag website, converts it to a data frame, and recodes some of the variables. The unit of analysis is a member-term. The generated dataset contains more than 11,000 observations for more than 4,000 members of the Bundestag.
 
+
+## Citation
+
+    #> 
+    #> To cite essurvey in publications use:
+    #> 
+    #>   Joly, Philippe (2020). Import Data on All Members of the Bundestag 
+    #>   since 1949. R Package version 0.0.0.9000.
+    #> 
+    #> A BibTeX entry for LaTeX users is
+    #> 
+    #>   @Manual{,
+    #>     title = {Import Data on All Members of the Bundestag since 1949},
+    #>     author = {Philippe Joly},
+    #>     year = {2020},
+    #>     note = {R Package version 0.0.0.9000},
+    #>     url = {https://github.com/jolyphil/btmembers},
+    #>   }
+
 ## Installation
 ``` r
 # install.packages("devtools")
@@ -19,13 +38,13 @@ library(btmembers)
 members
 ```
 
-The associated help file presents information on the version of the dataset and provides a basic codebook:
+The associated help page presents information on the preloaded version of the dataset and provides a basic codebook.
 
 ``` r
 ?members
 ```
 
-`update_available()` allows you to check if a more recent version of the data is available on the bundestag website. 
+btmembers allows you to check if a more recent version of the data is available on the bundestag website.
 
 ``` r
 update_available()
