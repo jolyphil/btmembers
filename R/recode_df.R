@@ -43,6 +43,13 @@ recode_geburtsland <- function(members_df){
   members_df
 }
 
+recode_factors <- function(members_df){
+  members_df <- members_df %>%
+    dplyr::mutate(geschlecht = ordered(geschlecht,
+                                       levels = c("männlich", "weiblich")))
+  members_df
+}
+
 add_labels <- function(members_df){
   var_attr <- get_var_attr()
   for (i in seq_along(members_df)){
