@@ -7,21 +7,21 @@ The Bundestag distributes [biographical and election data](https://www.bundestag
 
 ## Citation
 
-    #> 
-    #> To cite btmembers in publications use:
-    #> 
-    #>   Joly, Philippe (2020). Import Data on All Members of the Bundestag 
-    #>   since 1949. R Package version 0.0.0.9000.
-    #> 
-    #> A BibTeX entry for LaTeX users is
-    #> 
-    #>   @Manual{,
-    #>     title = {Import Data on All Members of the Bundestag since 1949},
-    #>     author = {Philippe Joly},
-    #>     year = {2020},
-    #>     note = {R Package version 0.0.0.9000},
-    #>     url = {https://github.com/jolyphil/btmembers},
-    #>   }
+To cite btmembers in publications use:
+
+> Philippe Joly (2020). btmembers: Import Data on All Members of the Bundestag since 1949. R package version 0.0.0.9000. <https://github.com/jolyphil/btmembers>
+
+A BibTeX entry for LaTeX users is
+
+```
+  @Manual{,
+    title = {btmembers: Import Data on All Members of the Bundestag since 1949},
+    author = {Philippe Joly},
+    year = {2020},
+    note = {R package version 0.0.0.9000},
+    url = {https://github.com/jolyphil/btmembers},
+  }
+```
 
 ## Installation
 ``` r

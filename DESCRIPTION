@@ -1,6 +1,7 @@
 Package: btmembers
 Title: Import Data on All Members of the Bundestag since 1949
 Version: 0.0.0.9000
+Date: 2020-08-25
 Authors@R: 
     person(given = "Philippe",
            family = "Joly",
@@ -35,3 +36,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://github.com/jolyphil/btmembers
+BugReports: https://github.com/jolyphil/btmembers/issues
