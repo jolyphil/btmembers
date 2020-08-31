@@ -9,7 +9,7 @@ The Bundestag distributes [biographical and election data](https://www.bundestag
 
 To cite btmembers in publications use:
 
-> Philippe Joly (2020). btmembers: Import Data on All Members of the Bundestag since 1949. R package version 0.0.0.9000. <https://github.com/jolyphil/btmembers>
+> Philippe Joly (2020). btmembers: Import Data on All Members of the Bundestag since 1949. R package version 0.0.1. <https://github.com/jolyphil/btmembers>
 
 A BibTeX entry for LaTeX users is
 
@@ -18,7 +18,7 @@ A BibTeX entry for LaTeX users is
     title = {btmembers: Import Data on All Members of the Bundestag since 1949},
     author = {Philippe Joly},
     year = {2020},
-    note = {R package version 0.0.0.9000},
+    note = {R package version 0.0.1},
     url = {https://github.com/jolyphil/btmembers},
   }
 ```
