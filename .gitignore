@@ -39,6 +39,7 @@ vignettes/*.pdf
 .Renviron
 
 # This project
+/codebook/codebook.html
 /temp
 .Rproj.user
 inst/doc
