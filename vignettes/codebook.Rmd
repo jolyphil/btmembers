@@ -24,7 +24,8 @@ print_vars <- function(members){
 }
 
 print_var <- function(varname, var){
-  cat(paste0("### `", varname, "`"),
+  cat("---",
+      paste0("### `", varname, "`"),
       paste0("**Class**: ", class(var)),
       paste0("**Label**: ", attr(var, "label")),
       "",
