@@ -1,5 +1,5 @@
 ---
-title: "Dataset of All Members of the Bundestag since 1949: Codebook"
+title: "A Dataset of All Members of the Bundestag since 1949: Codebook"
 author: "Philippe Joly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -16,22 +16,40 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r print, results = "asis"}
-vars <- btmembers:::get_var_attr()
-for (i in seq_along(vars)) {
-  cat(
-    paste0(
-      "**",
-      vars$varname_de[i],
-      "** ",
-      "_",
-      vars$varname_de[i],
-      "_ ",
-      "\n"
-    ),
-    "\n"
-  )
+```{r load_functions, include = FALSE}
+library(btmembers)
+
+print_vars <- function(members){
+  purrr::walk2(names(members), members, print_var)
+}
+
+print_var <- function(varname, var){
+  cat(paste0("### `", varname, "`"),
+      paste0("**Class**: ", class(var)),
+      paste0("**Label**: ", attr(var, "label")),
+      "",
+      sep = "  \n")
 }
 
 ```
 
+```{r print_desc, echo = FALSE, results = "asis"}
+cat("## Description",
+    paste0("**btmembers** generates a dataset with basic biographical and election data for all members of the Bundestag since 1949. The unit of analysis of the dataset is a member-term. There are ", nrow(members), " observations from ", length(unique(btmembers::members$id)), " members. The data includes ", ncol(btmembers::members), " variables (in German):"),
+     sep = "  \n")
+```
+
+```{r print_vars, echo = FALSE, results = "asis"}
+cat("## Variables  \n")
+print_vars(members)
+```
+
+```{r print_source, echo = FALSE, results = "asis"}
+cat("## Source",
+    paste0("Adapted from Bundestag (2020), ",
+           "_Stammdaten aller Abgeordneten seit 1949 im XML-Format_, ",
+           "version: ", 
+           attr(members, "version"), 
+           ", https://www.bundestag.de/services/opendata."),
+    sep = "  \n")
+```
