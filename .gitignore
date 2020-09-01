@@ -42,3 +42,5 @@ vignettes/*.pdf
 /temp
 .Rproj.user
 inst/doc
+doc
+Meta
