@@ -58,3 +58,6 @@ members_new <- import_members()
 
 This operation, however, is not guaranteed to work since the Bundestag might occasionally change the structure of the source XML file. If you encounter problems using `import_members()`, consider creating an [issue on GitHub](https://github.com/jolyphil/btmembers/issues).
 
+## Codebook
+
+A codebook of the dataset in PDF format is available [here](https://github.com/jolyphil/btmembers/blob/master/codebook/codebook.pdf).
