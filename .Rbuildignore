@@ -1,2 +1,6 @@
 ^btmembers\.Rproj$
 ^\.Rproj\.user$
+^doc$
+^Meta$
+codebook
+R/render_codebook.R
