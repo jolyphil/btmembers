@@ -41,6 +41,7 @@ vignettes/*.pdf
 # This project
 /codebook/codebook.html
 /temp
+/R/tests
 .Rproj.user
 inst/doc
 doc
