@@ -7,7 +7,7 @@
 #' @return
 #' Returns TRUE if a more recent version of the data is available and FALSE
 #' otherwise.
-#'
+#' @export
 
 update_available <- function() {
   online_version <- extract_link_info()$data_version
