@@ -11,7 +11,7 @@ recode_df <- function(members_df, data_version){
                                 as.Date,
                                 format = "%d.%m.%Y")) %>%
     dplyr::mutate(dplyr::across(c(wp, wkr_nummer), as.integer)) %>%
-    recode_geburtsland() %>%
+    # recode_geburtsland() %>%
     add_labels()
 
   members_df
