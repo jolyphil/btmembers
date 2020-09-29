@@ -1,4 +1,4 @@
-gen_data_doc <- function(){
+gen_data_doc <- function(members){
   header <- c(
     "#' Members of the Bundestag since 1949",
     "#'",
@@ -8,12 +8,12 @@ gen_data_doc <- function(){
   )
   format <- paste0(
     "#' @format A tibble with ",
-    nrow(btmembers::members),
+    nrow(members),
     " observations from ",
-    length(unique(btmembers::members$id)),
+    length(unique(members$id)),
     " members of the Bundestag.\n",
     "#' It includes ",
-    ncol(btmembers::members),
+    ncol(members),
     " variables (in German):"
   )
   variables <- c(
