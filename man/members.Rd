@@ -5,7 +5,7 @@
 \alias{members}
 \title{Members of the Bundestag since 1949}
 \format{
-A tibble with 11618 observations from 4084 members of the Bundestag.
+A tibble with 11622 observations from 4086 members of the Bundestag.
 It includes 26 variables (in German):
 \describe{
 \item{\code{id}}{Identifikationsnummer}
@@ -38,7 +38,7 @@ It includes 26 variables (in German):
 }
 \source{
 Adapted from Bundestag (2020), \emph{Stammdaten aller Abgeordneten
-seit 1949 im XML-Format}, version: 2020-03-12,
+seit 1949 im XML-Format}, version: 2020-08-25,
 \url{https://www.bundestag.de/services/opendata}.
 }
 \usage{
