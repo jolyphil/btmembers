@@ -3,5 +3,7 @@
 ^doc$
 ^Meta$
 codebook
+R/gen_data_doc.R
 R/render_codebook.R
+R/update_data.R
 todo.md
