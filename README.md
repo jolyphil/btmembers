@@ -41,11 +41,11 @@ This operation, however, is not guaranteed to work since the Bundestag might occ
 
 ## CSV version
 
-A CSV version of the dataset is available [here](../blob/master/csv/).
+A CSV version of the dataset is available [here](csv/).
 
 ## Codebook
 
-A codebook of the dataset in PDF format is available [here](../blob/master/codebook/codebook.pdf).
+A codebook of the dataset in PDF format is available [here](codebook/codebook.pdf).
 
 ## Citation
 
