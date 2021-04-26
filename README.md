@@ -39,9 +39,13 @@ members_new <- import_members()
 
 This operation, however, is not guaranteed to work since the Bundestag might occasionally change the structure of the source XML file. If you encounter problems using `import_members()`, consider creating an [issue on GitHub](https://github.com/jolyphil/btmembers/issues).
 
+## CSV version
+
+A CSV version of the dataset is available [here](../blob/master/csv/).
+
 ## Codebook
 
-A codebook of the dataset in PDF format is available [here](https://github.com/jolyphil/btmembers/blob/master/codebook/codebook.pdf).
+A codebook of the dataset in PDF format is available [here](../blob/master/codebook/codebook.pdf).
 
 ## Citation
 
@@ -56,7 +60,7 @@ A BibTeX entry for LaTeX users is
     title = {btmembers: Import Data on All Members of the Bundestag since 1949},
     author = {Philippe Joly},
     year = {2020},
-    note = {R package version 0.0.1},
+    note = {R package version 0.0.2},
     url = {https://github.com/jolyphil/btmembers},
   }
 ```

@@ -3,7 +3,7 @@
 #' A dataset with basic biographical and election data for all members of
 #' the Bundestag since 1949.
 #'
-#' @format A tibble with 11622 observations from 4086 members of the Bundestag.
+#' @format A tibble with 11627 observations from 4089 members of the Bundestag.
 #' It includes 26 variables (in German):
 #' \describe{
 #'   \item{`id`}{Identifikationsnummer}
@@ -34,6 +34,6 @@
 #'   \item{`mandatsart`}{Art des Mandates}
 #' }
 #' @source Adapted from Bundestag (2020), \emph{Stammdaten aller Abgeordneten
-#' seit 1949 im XML-Format}, version: 2020-08-25,
+#' seit 1949 im XML-Format}, version: 2021-03-12,
 #' \url{https://www.bundestag.de/services/opendata}.
 "members"

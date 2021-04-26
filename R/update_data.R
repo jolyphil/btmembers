@@ -6,5 +6,8 @@ update_data <- function(force = FALSE){
     devtools::document()
     devtools::load_all()
     render_codebook()
+    paste0("members_", attr(members, "version"), ".csv") %>%
+      file.path("csv", .) %>%
+      write.csv(members, file = .)
   }
 }
