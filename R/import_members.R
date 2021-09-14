@@ -14,7 +14,7 @@
 import_members <- function(one_table = FALSE,
                            force_from_bt = FALSE) {
   link_info <- extract_link_info()
-  version_github <- url("https://github.com/jolyphil/btmembers/raw/add_mirror/storage/data_version.rds") %>%
+  version_github <- url("https://github.com/jolyphil/btmembers/raw/develop/storage/data_version.rds") %>%
     readRDS()
   if (link_info$version_bt > version_github | force_from_bt) {
     paste0("Downloading primary data (version: ",
@@ -31,7 +31,7 @@ import_members <- function(one_table = FALSE,
            ") from GitHub") %>%
       message()
     data_version <- version_github
-    list_clean <- url("https://github.com/jolyphil/btmembers/raw/add_mirror/storage/mdb_list.rds") %>%
+    list_clean <- url("https://github.com/jolyphil/btmembers/raw/develop/storage/mdb_list.rds") %>%
       readRDS()
   }
 
