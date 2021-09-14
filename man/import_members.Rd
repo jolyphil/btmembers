@@ -4,7 +4,7 @@
 \alias{import_members}
 \title{Import data on all members of the Bundestag since 1949}
 \usage{
-import_members()
+import_members(simplify = FALSE, force_from_source = FALSE)
 }
 \value{
 A data frame of all parliamentary terms for all members
