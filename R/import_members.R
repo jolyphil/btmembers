@@ -289,7 +289,7 @@ to_one_table <- function(list_clean, data_version){
     dplyr::ungroup() %>%
     dplyr::select(-historie_von, -historie_bis)
 
-  frak_temp <- l2$inst %>%
+  frak_temp <- list_clean$inst %>%
     dplyr::filter(insart_lang == "Fraktion/Gruppe") %>%
     dplyr::select(id, wp, ins_lang, mdbins_von, mdbins_bis) %>%
     dplyr::rename(fraktion = ins_lang) %>%
