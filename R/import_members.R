@@ -14,7 +14,7 @@
 import_members <- function(one_table = FALSE,
                            force_from_bt = FALSE) {
   link_info <- extract_link_info()
-  version_github <- extract_github_version(branch = "develop")
+  version_github <- extract_github_version()
   if (link_info$version_bt > version_github | force_from_bt) {
     paste0("Downloading primary data (version: ",
            link_info$version_bt,
@@ -30,7 +30,7 @@ import_members <- function(one_table = FALSE,
            ") from GitHub") %>%
       message()
     data_version <- version_github
-    list_clean <- extract_github_list(branch = "develop")
+    list_clean <- extract_github_list()
   }
 
   if (one_table){
@@ -87,23 +87,28 @@ extract_link_info <- function() {
   link_info
 }
 
-extract_github_version <- function(branch = "main") {
-  url <- paste0("https://github.com/jolyphil/btmembers/raw/",
+
+github_storage_url <- function(branch = "develop") {
+  storage_url <- paste0("https://github.com/jolyphil/btmembers/raw/",
                 branch,
-                "/storage/data_version.rds")
-  data_version <- url(url) %>%
+                "/storage/")
+  storage_url
+}
+
+
+extract_github_version <- function() {
+  version_url <- paste0(github_storage_url(), "data_version.rds")
+  data_version <- url(version_url) %>%
     readRDS()
   data_version
 }
 
 
-extract_github_list <- function(branch = "main") {
-  url <- paste0("https://github.com/jolyphil/btmembers/raw/",
-                branch,
-                "/storage/mdb_list.rds")
-  mdb_list <- url(url) %>%
+extract_github_list <- function() {
+  list_url <- paste0(github_storage_url(), "members_list.rds")
+  members_list <- url(list_url) %>%
     readRDS()
-  mdb_list
+  members_list
 }
 
 

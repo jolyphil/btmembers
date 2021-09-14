@@ -4,7 +4,7 @@ update_data <- function(force = FALSE){
   members <- import_members(force_from_bt = force)
 
   saveRDS(link_info$version_bt, file.path("storage", "data_version.rds"))
-  saveRDS(members, file.path("storage", "mdb_list.rds"))
+  saveRDS(members, file.path("storage", "members_list.rds"))
   # gen_data_doc(members)
   # render_codebook()
   # paste0("members_", attr(members, "version"), ".csv") %>%
