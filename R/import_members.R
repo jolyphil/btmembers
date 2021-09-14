@@ -14,8 +14,7 @@
 import_members <- function(one_table = FALSE,
                            force_from_bt = FALSE) {
   link_info <- extract_link_info()
-  version_github <- url("https://github.com/jolyphil/btmembers/raw/develop/storage/data_version.rds") %>%
-    readRDS()
+  version_github <- extract_github_version(branch = "develop")
   if (link_info$version_bt > version_github | force_from_bt) {
     paste0("Downloading primary data (version: ",
            link_info$version_bt,
@@ -31,8 +30,7 @@ import_members <- function(one_table = FALSE,
            ") from GitHub") %>%
       message()
     data_version <- version_github
-    list_clean <- url("https://github.com/jolyphil/btmembers/raw/develop/storage/mdb_list.rds") %>%
-      readRDS()
+    list_clean <- extract_github_list(branch = "develop")
   }
 
   if (one_table){
@@ -88,6 +86,26 @@ extract_link_info <- function() {
                     href = href)
   link_info
 }
+
+extract_github_version <- function(branch = "main") {
+  url <- paste0("https://github.com/jolyphil/btmembers/raw/",
+                branch,
+                "/storage/data_version.rds")
+  data_version <- url(url) %>%
+    readRDS()
+  data_version
+}
+
+
+extract_github_list <- function(branch = "main") {
+  url <- paste0("https://github.com/jolyphil/btmembers/raw/",
+                branch,
+                "/storage/mdb_list.rds")
+  mdb_list <- url(url) %>%
+    readRDS()
+  mdb_list
+}
+
 
 import_list_raw <- function(href){
   temp <- tempfile()
