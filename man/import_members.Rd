@@ -4,14 +4,97 @@
 \alias{import_members}
 \title{Import data on all members of the Bundestag since 1949}
 \usage{
-import_members(simplify = FALSE, force_from_source = FALSE)
+import_members(condensed_df = FALSE, force_from_bt = FALSE)
+}
+\arguments{
+\item{condensed_df}{logical; if \code{TRUE} join the four data frames contained
+in the default list into a single, condensed data frame. Warning: Some
+data is lost (see Value).}
+
+\item{force_from_bt}{logical; if \code{TRUE} force the function to import the data
+directly from the Bundestag website. By default, the function compares
+the versions of the data on the Bundestag website and the pre-processed
+data stored in the package repository on GitHub. If the version on the
+Bundestag website is more recent, it will import the raw data from there;
+otherwise it will import the pre-processed data from GitHub.
+\code{force_from_bt = TRUE} never imports the data from GitHub.}
 }
 \value{
-A data frame of all parliamentary terms for all members
+If \strong{\code{condensed_df = FALSE}} a list containing four data frames:
+\code{namen} (names), \code{bio} (biographical information), \code{wp}
+(parliamentary terms), and \code{inst} (institutions).
+
+\strong{\code{namen}} contains the following columns:
+\itemize{
+\item \code{id}: \emph{Identifikationsnummer}
+\item \code{nachname}: \emph{Nachname}
+\item \code{vorname}: \emph{Vorname}
+\item \code{ortszusatz}: \emph{Ortszusatz zu Nachmame, zur Unterscheidung bei Namensgleichheit}
+\item \code{adel}: \emph{Adelsprädikat}
+\item \code{praefix}: \emph{Namenspräfix}
+\item \code{anrede_titel}: \emph{Anrede-Titel}
+\item \code{akad_titel}: \emph{Akademischer Titel}
+\item \code{historie_von}: \emph{Historie zu den Namensbestandteilen, gültig von}
+\item \code{historie_bis}: \emph{Historie zu den Namensbestandteilen, gültig bis}
+}
+
+\strong{\code{bio}} contains the following columns:
+\itemize{
+\item \code{id}: \emph{Identifikationsnummer}
+\item \code{geburtsdatum}: \emph{Geburtsdatum}
+\item \code{geburtsort}: \emph{Geburtsort}
+\item \code{geburtsland}: \emph{Geburtsland}
+\item \code{sterbedatum}: \emph{Sterbedatum}
+\item \code{geschlecht}: \emph{Geschlecht}
+\item \code{familienstand}: \emph{Familienstand}
+\item \code{religion}: \emph{Religion}
+\item \code{beruf}: \emph{Beruf}
+\item \code{partei_kurz}: \emph{Letzte Parteizugehörigkeit, kurzform}
+\item \code{vita_kurz}: \emph{Kurzbiografie des Abgeordneten (nur aktuelle Wahlperiode)}
+\item \code{veroeffentlichungspflichtiges}: \emph{Veröffentlichungspflichtige Angaben (nur aktuelle Wahlperiode)}
+}
+
+\strong{\code{wp}} contains the following columns:
+\itemize{
+\item \code{id}: \emph{Identifikationsnummer}
+\item \code{wp}: \emph{Nummer der Wahlperiode}
+\item \code{mdbwp_von}: \emph{Beginn der Wahlperiodenzugehörigkeit}
+\item \code{mdbwp_bis}: \emph{Ende der Wahlperiodenzugehörigkeit}
+\item \code{wkr_nummer}: \emph{Nummer des Wahlkreises}
+\item \code{wkr_name}: \emph{Wahlkreisname}
+\item \code{wkr_land}: \emph{Bundesland des Wahlkreises}
+\item \code{liste}: \emph{Liste}
+\item \code{mandatsart}: \emph{Art des Mandates}
+}
+
+\strong{\code{inst}} contains the following columns:
+\itemize{
+\item \code{id}: \emph{Identifikationsnummer}
+\item \code{wp}: \emph{Nummer der Wahlperiode}
+\item \code{insart_lang}: \emph{Langbezeichnung der Institutionsart}
+\item \code{ins_lang}: \emph{Langbezeichnung der Institution}
+\item \code{mdbins_von}: \emph{Beginn der Institutionszugehörigkeit}
+\item \code{mdbins_bis}: \emph{Ende der Institutionszugehörigkeit}
+\item \code{fkt_lang}: \emph{Langbezeichnung der ausgeübten Funktion in einer Institution}
+\item \code{fktins_von}: \emph{Beginn der Funktionsausübung in einer Institution}
+\item \code{fktins_bis}: \emph{Ende der Funktionsausübung in einer Institution}
+}
+
+If \strong{\code{condensed_df = TRUE}} a condensed data frame. Each row corresponds
+to a member-term. Most of the information contained in the original data
+is preserved \emph{except} only the most recent name of the member is retained
+and institutions are removed. A new column named \code{fraktion} is added to
+the data. \code{fraktion} is a recoded variable and refers to the faction the
+member spent most time in during a given parliamentary term.
 }
 \description{
-This function downloads the file "Stammdaten aller Abgeordneten seit 1949 im
-XML-Format" from the Bundestag website converts it to a data frame, and
-recodes some of the variables. The output is a longitudinal dataset, where
-the level analysis is a member-term.
+\code{import_members()} downloads the file "Stammdaten aller Abgeordneten seit
+1949 im XML-Format" from the Bundestag website and converts it either to (a)
+four data frames nested into a list (retaining all the information of the
+original XML file) or (b) to a single, condensed data frame.
+}
+\examples{
+import_members()
+import_members(condensed_df = TRUE)
+
 }

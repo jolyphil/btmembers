@@ -3,7 +3,9 @@
 ^doc$
 ^Meta$
 codebook/*
-R/gen_data_doc.R
+csv/*
+temp/*
+R/save_list_vars.R
 R/render_codebook.R
 R/update_data.R
 storage/*

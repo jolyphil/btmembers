@@ -163,3 +163,6 @@ add_row <- function(df,
       )
     )
 }
+
+var_attr <- get_var_attr()
+usethis::use_data(var_attr, internal = TRUE)

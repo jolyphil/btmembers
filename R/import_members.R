@@ -1,17 +1,94 @@
 #' Import data on all members of the Bundestag since 1949
 #'
-#' This function downloads the file "Stammdaten aller Abgeordneten seit 1949 im
-#' XML-Format" from the Bundestag website converts it to a data frame, and
-#' recodes some of the variables. The output is a longitudinal dataset, where
-#' the level analysis is a member-term.
+#' `import_members()` downloads the file "Stammdaten aller Abgeordneten seit
+#' 1949 im XML-Format" from the Bundestag website and converts it either to (a)
+#' four data frames nested into a list (retaining all the information of the
+#' original XML file) or (b) to a single, condensed data frame.
 #'
-#' @return A data frame of all parliamentary terms for all members
+#' @param condensed_df logical; if `TRUE` join the four data frames contained
+#'     in the default list into a single, condensed data frame. Warning: Some
+#'     data is lost (see Value).
+#' @param force_from_bt logical; if `TRUE` force the function to import the data
+#'     directly from the Bundestag website. By default, the function compares
+#'     the versions of the data on the Bundestag website and the pre-processed
+#'     data stored in the package repository on GitHub. If the version on the
+#'     Bundestag website is more recent, it will import the raw data from there;
+#'     otherwise it will import the pre-processed data from GitHub.
+#'     `force_from_bt = TRUE` never imports the data from GitHub.
+#' @return If **`condensed_df = FALSE`** a list containing four data frames:
+#'     `namen` (names), `bio` (biographical information), `wp`
+#'     (parliamentary terms), and `inst` (institutions).
+#'
+#'    **`namen`** contains the following columns:
+#'
+#'    * `id`: _Identifikationsnummer_
+#'    * `nachname`: _Nachname_
+#'    * `vorname`: _Vorname_
+#'    * `ortszusatz`: _Ortszusatz zu Nachmame, zur Unterscheidung bei Namensgleichheit_
+#'    * `adel`: _Adelsprädikat_
+#'    * `praefix`: _Namenspräfix_
+#'    * `anrede_titel`: _Anrede-Titel_
+#'    * `akad_titel`: _Akademischer Titel_
+#'    * `historie_von`: _Historie zu den Namensbestandteilen, gültig von_
+#'    * `historie_bis`: _Historie zu den Namensbestandteilen, gültig bis_
+#'
+#'    **`bio`** contains the following columns:
+#'
+#'    * `id`: _Identifikationsnummer_
+#'    * `geburtsdatum`: _Geburtsdatum_
+#'    * `geburtsort`: _Geburtsort_
+#'    * `geburtsland`: _Geburtsland_
+#'    * `sterbedatum`: _Sterbedatum_
+#'    * `geschlecht`: _Geschlecht_
+#'    * `familienstand`: _Familienstand_
+#'    * `religion`: _Religion_
+#'    * `beruf`: _Beruf_
+#'    * `partei_kurz`: _Letzte Parteizugehörigkeit, kurzform_
+#'    * `vita_kurz`: _Kurzbiografie des Abgeordneten (nur aktuelle Wahlperiode)_
+#'    * `veroeffentlichungspflichtiges`: _Veröffentlichungspflichtige Angaben (nur aktuelle Wahlperiode)_
+#'
+#'    **`wp`** contains the following columns:
+#'
+#'    * `id`: _Identifikationsnummer_
+#'    * `wp`: _Nummer der Wahlperiode_
+#'    * `mdbwp_von`: _Beginn der Wahlperiodenzugehörigkeit_
+#'    * `mdbwp_bis`: _Ende der Wahlperiodenzugehörigkeit_
+#'    * `wkr_nummer`: _Nummer des Wahlkreises_
+#'    * `wkr_name`: _Wahlkreisname_
+#'    * `wkr_land`: _Bundesland des Wahlkreises_
+#'    * `liste`: _Liste_
+#'    * `mandatsart`: _Art des Mandates_
+#'
+#'    **`inst`** contains the following columns:
+#'
+#'    * `id`: _Identifikationsnummer_
+#'    * `wp`: _Nummer der Wahlperiode_
+#'    * `insart_lang`: _Langbezeichnung der Institutionsart_
+#'    * `ins_lang`: _Langbezeichnung der Institution_
+#'    * `mdbins_von`: _Beginn der Institutionszugehörigkeit_
+#'    * `mdbins_bis`: _Ende der Institutionszugehörigkeit_
+#'    * `fkt_lang`: _Langbezeichnung der ausgeübten Funktion in einer Institution_
+#'    * `fktins_von`: _Beginn der Funktionsausübung in einer Institution_
+#'    * `fktins_bis`: _Ende der Funktionsausübung in einer Institution_
+#'
+#'    If **`condensed_df = TRUE`** a condensed data frame. Each row corresponds
+#'    to a member-term. Most of the information contained in the original data
+#'    is preserved _except_ only the most recent name of the member is retained
+#'    and institutions are removed. A new column named `fraktion` is added to
+#'    the data. `fraktion` is a recoded variable and refers to the faction the
+#'    member spent most time in during a given parliamentary term.
+#'
+#' @examples
+#' import_members()
+#' import_members(condensed_df = TRUE)
+#'
 #' @export
 #' @importFrom magrittr "%>%"
 #' @importFrom tibble tibble
+#' @importFrom utils download.file
 
 
-import_members <- function(one_table = FALSE,
+import_members <- function(condensed_df = FALSE,
                            force_from_bt = FALSE) {
   link_info <- extract_link_info()
   version_github <- extract_github_version()
@@ -33,8 +110,8 @@ import_members <- function(one_table = FALSE,
     list_clean <- extract_github_list()
   }
 
-  if (one_table){
-    members <- to_one_table(list_clean, data_version)
+  if (condensed_df){
+    members <- to_condensed_df(list_clean, data_version)
   }
   else {
     members <- list_clean
@@ -271,7 +348,6 @@ unlist_all <- function(x) {
 
 
 add_labels <- function(df){
-  var_attr <- get_var_attr()
   for (i in seq_along(df)){
     label <- var_attr$label[var_attr$varname == names(df)[i]]
     attr(df[[i]], "label") <- label
@@ -279,7 +355,7 @@ add_labels <- function(df){
   df
 }
 
-to_one_table <- function(list_clean, data_version){
+to_condensed_df <- function(list_clean, data_version){
 
   message("Converting list to data frame...")
 
@@ -320,12 +396,12 @@ to_one_table <- function(list_clean, data_version){
     dplyr::bind_rows(frak_multi) %>%
     dplyr::ungroup()
 
-  one_table <- namen %>%
+  condensed_df <- namen %>%
     dplyr::left_join(list_clean$bio, by = "id") %>%
     dplyr::left_join(list_clean$wp, by = "id") %>%
     dplyr::left_join(frak, by = c("id", "wp"))
 
   message("Done.")
 
-  one_table
+  condensed_df
 }
