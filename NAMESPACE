@@ -2,5 +2,6 @@
 
 export(import_members)
 importFrom(magrittr,"%>%")
+importFrom(rlang,.data)
 importFrom(tibble,tibble)
 importFrom(utils,download.file)
