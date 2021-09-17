@@ -30,7 +30,7 @@ devtools::install_github("jolyphil/btmembers")
 
 ## Usage
 
-### Preserving all the information
+### Importing a list with all the information from the Bundestag
 
 btmembers exports a single function: `import_members()`. By default,
 this function returns a list containing four data frames (`namen`,
@@ -130,7 +130,7 @@ members$wp
 The data frame `inst` contains records on functions occupied by members
 inside institutions of the Bundestag. Each row represents an
 member-term-function. Members might have had multiple functions during
-multiple terms (N<sub>institutions</sub> &gt; N<sub>terms</sub> &gt;
+multiple terms (N<sub>functions</sub> &gt; N<sub>terms</sub> &gt;
 N<sub>members</sub>).
 
 ``` r
@@ -152,6 +152,68 @@ members$inst
 ```
 
 ### Importing a condensed data frame
+
+Instead of importing a list with all the information from Bundestag,
+`import_members()` can also load a condensed data frame. Each row
+corresponds to a member-term. Most of the information contained in the
+original data is preserved except only the most recent name of the
+member is retained and institutions are removed. A new column named
+`fraktion` is added to the data. `fraktion` is a recoded variable and
+refers to the faction the member spent most time in during a given
+parliamentary term.
+
+``` r
+members_df <- import_members(condensed_df = TRUE)
+#> Downloading pre-processed data (version: 2021-03-12) from GitHub
+#> Converting list to data frame...
+#> Done.
+members_df[c("nachname", "vorname", "wp", "fraktion")]
+#> # A tibble: 11,627 x 4
+#>    nachname  vorname    wp fraktion                                             
+#>    <chr>     <chr>   <int> <chr>                                                
+#>  1 Abelein   Manfred     5 Fraktion der Christlich Demokratischen Union/Christl…
+#>  2 Abelein   Manfred     6 Fraktion der Christlich Demokratischen Union/Christl…
+#>  3 Abelein   Manfred     7 Fraktion der Christlich Demokratischen Union/Christl…
+#>  4 Abelein   Manfred     8 Fraktion der Christlich Demokratischen Union/Christl…
+#>  5 Abelein   Manfred     9 Fraktion der Christlich Demokratischen Union/Christl…
+#>  6 Abelein   Manfred    10 Fraktion der Christlich Demokratischen Union/Christl…
+#>  7 Abelein   Manfred    11 Fraktion der Christlich Demokratischen Union/Christl…
+#>  8 Achenbach Ernst       3 Fraktion der Freien Demokratischen Partei            
+#>  9 Achenbach Ernst       4 Fraktion der Freien Demokratischen Partei            
+#> 10 Achenbach Ernst       5 Fraktion der Freien Demokratischen Partei            
+#> # … with 11,617 more rows
+```
+
+### Joining data frames
+
+You can join data frames by `id` (the members’ identification numbers)
+and/or `wp` (the parliamentary terms).
+
+``` r
+library(dplyr)
+#> 
+#> Attachement du package : 'dplyr'
+#> Les objets suivants sont masqués depuis 'package:stats':
+#> 
+#>     filter, lag
+#> Les objets suivants sont masqués depuis 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+library(magrittr)
+
+members$namen %>%
+  slice_max(historie_von) %>% # keep most recent name
+  left_join(members$bio, by = "id") %>%
+  left_join(members$wp, by = "id") %>%
+  left_join(members$inst, by = c("id", "wp")) %>%
+  select(nachname, vorname, wp, ins_lang, mdbins_von, mdbins_bis, fkt_lang, fktins_von, fktins_bis)
+#> # A tibble: 2 x 9
+#>   nachname vorname    wp ins_lang     mdbins_von mdbins_bis fkt_lang  fktins_von
+#>   <chr>    <chr>   <int> <chr>        <date>     <date>     <chr>     <date>    
+#> 1 Dahmen   Janosch    19 Fraktion Bü… 2020-11-12 NA         <NA>      NA        
+#> 2 Dahmen   Janosch    19 Ausschuss f… 2020-11-17 NA         Ordentli… 2020-11-17
+#> # … with 1 more variable: fktins_bis <date>
+```
 
 What is special about using `README.Rmd` instead of just `README.md`?
 You can include R chunks like so:
