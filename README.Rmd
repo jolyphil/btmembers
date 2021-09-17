@@ -78,33 +78,34 @@ members_df[c("nachname", "vorname", "wp", "fraktion")]
 
 ### Joining data frames
 
-You can join data frames by `id` (the members' identification numbers) and/or `wp` (the parliamentary terms). 
+You can join data frames by `id` (the members' identification numbers) and/or `wp` (the parliamentary terms).
 
-```{r join}
+```{r join, message = FALSE}
 library(dplyr)
 library(magrittr)
 
-members$namen %>%
+x <- members$namen %>%
+  group_by(id) %>%
   slice_max(historie_von) %>% # keep most recent name
+  ungroup() %>%
   left_join(members$bio, by = "id") %>%
   left_join(members$wp, by = "id") %>%
   left_join(members$inst, by = c("id", "wp")) %>%
-  select(nachname, vorname, wp, ins_lang, mdbins_von, mdbins_bis, fkt_lang, fktins_von, fktins_bis)
+  select(nachname, vorname, wp, ins_lang, mdbins_von, mdbins_bis)
 ```
 
+## CSV version
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+A CSV version of the dataset is available [here](csv/).
 
-```{r cars}
-summary(cars)
+## Codebook
+
+A codebook for the four data frames is available [here](codebook/codebook.pdf).
+
+## Citation
+
+To cite btmembers in publications use:
+
+```{r citation, echo = FALSE}
+citation("btmembers")
 ```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/master/examples>.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.

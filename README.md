@@ -191,53 +191,44 @@ and/or `wp` (the parliamentary terms).
 
 ``` r
 library(dplyr)
-#> 
-#> Attachement du package : 'dplyr'
-#> Les objets suivants sont masqués depuis 'package:stats':
-#> 
-#>     filter, lag
-#> Les objets suivants sont masqués depuis 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 library(magrittr)
 
-members$namen %>%
+x <- members$namen %>%
+  group_by(id) %>%
   slice_max(historie_von) %>% # keep most recent name
+  ungroup() %>%
   left_join(members$bio, by = "id") %>%
   left_join(members$wp, by = "id") %>%
   left_join(members$inst, by = c("id", "wp")) %>%
-  select(nachname, vorname, wp, ins_lang, mdbins_von, mdbins_bis, fkt_lang, fktins_von, fktins_bis)
-#> # A tibble: 2 x 9
-#>   nachname vorname    wp ins_lang     mdbins_von mdbins_bis fkt_lang  fktins_von
-#>   <chr>    <chr>   <int> <chr>        <date>     <date>     <chr>     <date>    
-#> 1 Dahmen   Janosch    19 Fraktion Bü… 2020-11-12 NA         <NA>      NA        
-#> 2 Dahmen   Janosch    19 Ausschuss f… 2020-11-17 NA         Ordentli… 2020-11-17
-#> # … with 1 more variable: fktins_bis <date>
+  select(nachname, vorname, wp, ins_lang, mdbins_von, mdbins_bis)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+## CSV version
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
+A CSV version of the dataset is available [here](csv/).
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/master/examples>.
+## Codebook
 
-You can also embed plots, for example:
+A codebook for the four data frames is available
+[here](codebook/codebook.pdf).
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+## Citation
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+To cite btmembers in publications use:
+
+    #> 
+    #> To cite package 'btmembers' in publications use:
+    #> 
+    #>   Philippe Joly (2021). btmembers: Import Data on All Members of the
+    #>   Bundestag since 1949. R package version 0.0.2.9000.
+    #>   https://github.com/jolyphil/btmembers
+    #> 
+    #> Une entrée BibTeX pour les utilisateurs LaTeX est
+    #> 
+    #>   @Manual{,
+    #>     title = {btmembers: Import Data on All Members of the Bundestag since 1949},
+    #>     author = {Philippe Joly},
+    #>     year = {2021},
+    #>     note = {R package version 0.0.2.9000},
+    #>     url = {https://github.com/jolyphil/btmembers},
+    #>   }
