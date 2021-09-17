@@ -39,31 +39,25 @@ members <- import_members()
 summary(members)
 ```
 
-```{r n-members, include = FALSE}
-n_members <- function(df) {
-  length(unique(df$id)) 
-}
-```
-
-The data frame `namen` contains data on `r nrow(members$namen)` names from `r n_members(members$namen)` members of the Bundestag:
+The data frame `namen` contains data on names of all members of the Bundestag. Each row represents a name. Members can have multiple names (N^(_names) > N^(_members)). 
 
 ```{r namen}
 summary(members$namen)
 ```
 
-The data frame `bio` contains `r nrow(members$bio)` biographical entries from `r n_members(members$bio)` members of the Bundestag:
+The data frame `bio` contains biographical information on members. Each row represents a biographical entry. There is only one entry by member. 
 
 ```{r bio}
 members$bio
 ```
 
-The data frame `wp` contains data on `r nrow(members$wp)` parliamentary terms from `r n_members(members$bio)` members of the Bundestag:
+The data frame `wp` contains data on the parliamentary terms served by the members 
 
 ```{r wp}
 members$wp
 ```
 
-The data frame `inst` contains `r nrow(members$inst)` records on institutional membership from `r n_members(members$bio)` members of the Bundestag:
+The data frame `inst` contains `r nrow(members$inst)` records on institutional membership from members of the Bundestag:
 
 ```{r inst}
 members$inst

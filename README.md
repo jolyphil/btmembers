@@ -47,8 +47,9 @@ summary(members)
 #> inst   9     tbl_df list
 ```
 
-The data frame `namen` contains data on 4363 names from 4089 members of
-the Bundestag:
+The data frame `namen` contains data on names of all members of the
+Bundestag. Each row represents a name. Members can have multiple names
+(N^(\_names) &gt; N^(\_members)).
 
 ``` r
 summary(members$namen)
@@ -78,8 +79,8 @@ summary(members$namen)
 #>                       NA's   :4089
 ```
 
-The data frame `bio` contains 4089 biographical entries from 4089
-members of the Bundestag:
+The data frame `bio` contains biographical information on members. Each
+row represents a biographical entry. There is only one entry by member.
 
 ``` r
 members$bio
@@ -101,8 +102,8 @@ members$bio
 #> #   veroeffentlichungspflichtiges <chr>
 ```
 
-The data frame `wp` contains data on 11627 parliamentary terms from 4089
-members of the Bundestag:
+The data frame `wp` contains data on the parliamentary terms served by
+the members
 
 ``` r
 members$wp
@@ -123,7 +124,7 @@ members$wp
 ```
 
 The data frame `inst` contains 15858 records on institutional membership
-from 4089 members of the Bundestag:
+from members of the Bundestag:
 
 ``` r
 members$inst
