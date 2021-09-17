@@ -23,7 +23,7 @@ The Bundestag distributes [biographical and election data](https://www.bundestag
 
 ## Installation
 
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the development version of btmembers from GitHub with:
 
 ``` r
 # install.packages("devtools")
@@ -41,38 +41,50 @@ members <- import_members()
 summary(members)
 ```
 
+
+#### Data frame `namen`
+
 The data frame `namen` contains data on names of members of the Bundestag. Each row represents a name. Members can have multiple names (N~names~ > N~members~). 
 
 ```{r namen}
-summary(members$namen)
+head(members$namen)
 ```
+
+
+#### Data frame `bio`
 
 The data frame `bio` contains biographical information on members. Each row represents a biographical entry. There is one entry by member (N~bio~ = N~members~). 
 
 ```{r bio}
-members$bio
+head(members$bio)
 ```
 
-The data frame `wp` contains data on the parliamentary terms served by the members. Each row represents a member-term. Members might have served multiple terms (N~terms~ > N~members~).
+
+#### Data frame `wp`
+
+The data frame `wp` contains data on parliamentary terms served by members. Each row represents a member-term. Many members have served multiple terms (N~terms~ > N~members~).
 
 ```{r wp}
-members$wp
+head(members$wp)
 ```
 
-The data frame `inst` contains records on functions occupied by members inside institutions of the Bundestag. Each row represents an member-term-function. Members might have had multiple functions during multiple terms (N~functions~ > N~terms~ > N~members~).
+
+#### Data frame `inst`
+
+The data frame `inst` contains records on functions occupied by members inside institutions of the Bundestag. Each row represents a member-term-function. Members might have had multiple functions during the same term (N~functions~ > N~terms~ > N~members~).
 
 ```{r inst}
-members$inst
+head(members$inst)
 ```
 
 
 ### Importing a condensed data frame
 
-Instead of importing a list with all the information from Bundestag, `import_members()` can also load a condensed data frame. Each row corresponds to a member-term. Most of the information contained in the original data is preserved except only the most recent name of the member is retained and institutions are removed. A new column named `fraktion` is added to the data. `fraktion` is a recoded variable and refers to the faction the member spent most time in during a given parliamentary term.
+Instead of importing a list with all the information from the Bundestag, `import_members()` can also load a condensed data frame. Each row corresponds to a member-term. Most of the information contained in the original data is preserved except only the most recent name of the member is retained and institutions are removed. A new column named `fraktion` is added to the data. `fraktion` is a recoded variable and refers to the faction the member spent most time in during a given parliamentary term.
 
 ```{r import-df}
 members_df <- import_members(condensed_df = TRUE)
-members_df[c("nachname", "vorname", "wp", "fraktion")]
+head(members_df[c("nachname", "vorname", "wp", "fraktion")])
 ```
 
 
@@ -91,21 +103,29 @@ x <- members$namen %>%
   left_join(members$bio, by = "id") %>%
   left_join(members$wp, by = "id") %>%
   left_join(members$inst, by = c("id", "wp")) %>%
-  select(nachname, vorname, wp, ins_lang, mdbins_von, mdbins_bis)
+  select(nachname, vorname, wp, ins_lang, mdbins_von, mdbins_bis) %>%
+  head()
 ```
+
 
 ## CSV version
 
-A CSV version of the dataset is available [here](csv/).
+Not an R user? You can also download the different datasets as CSV files [here](csv/).
+
 
 ## Codebook
 
 A codebook for the four data frames is available [here](codebook/codebook.pdf).
 
+
 ## Citation
 
-To cite btmembers in publications use:
+To cite the btmembers package in publications use:
 
-```{r citation, echo = FALSE}
+```{r citation, echo = FALSE, results='asis'}
 citation("btmembers")
 ```
+
+The package should be cited with the original source:
+
+> Bundestag. (2021). _Stammdaten aller Abgeordneten seit 1949 im XML-Format_. https://www.bundestag.de/services/opendata
