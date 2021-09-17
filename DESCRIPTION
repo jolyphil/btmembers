@@ -1,7 +1,7 @@
 Package: btmembers
 Title: Import Data on All Members of the Bundestag since 1949
-Version: 0.0.2
-Date: 2020-04-26
+Version: 0.0.2.9000
+Date: 2021-09-17
 Authors@R: 
     person(given = "Philippe",
            family = "Joly",
@@ -10,11 +10,12 @@ Authors@R:
            comment = c(ORCID = "0000-0002-4278-9439"))
 Description: The Bundestag distributes biographical and election data on all of 
     its members since 1949 <https://www.bundestag.de/services/opendata/>. This 
-    data, however, is only available in XML, a format that can be difficult to 
-    work with. btmembers downloads the file "Stammdaten aller Abgeordneten seit 
-    1949 im XML-Format" from the Bundestag website, converts it either to (a) 
-    four data frames nested into a list (retaining all the information of the
-    original XML file) or (b) a single, condensed data frame. 
+    data, however, can be difficult to work with because XML files store 
+    information in an arbitrary number of dimensions. btmembers downloads the 
+    file "Stammdaten aller Abgeordneten seit 1949 im XML-Format" from the 
+    Bundestag website and converts it either to (a) four data frames nested into
+    a list (retaining all the information of the original XML file) or (b) a 
+    single, condensed data frame.
 Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -24,6 +25,7 @@ RoxygenNote: 7.1.1
 Imports: 
     dplyr (>= 1.0.7),
     magrittr (>= 1.5),
+    rlang (>= 0.4.11),
     rvest (>= 0.3.4),
     stringr (>= 1.4.0),
     tibble (>= 3.0.3),
