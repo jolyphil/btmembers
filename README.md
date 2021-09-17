@@ -31,90 +31,105 @@ devtools::install_github("jolyphil/btmembers")
 ## Usage
 
 btmembers exports a single function: `import_members()`. By default,
-this function returns a list containing all the information contained in
-the XML file provided by the Bundestag but in a more practical format.
+this function returns a list containing four data frames (`namen`,
+`bio`, `wp`, and `inst`), which together preserve all the information
+contained in the XML file provided by the Bundestag.
 
 ``` r
 library(btmembers)
 members <- import_members()
 #> Downloading pre-processed data (version: 2021-03-12) from GitHub
-str(members)
-#> List of 4
-#>  $ namen: tibble [4,363 × 10] (S3: tbl_df/tbl/data.frame)
-#>   ..$ id          : chr [1:4363] "11000001" "11000002" "11000003" "11000004" ...
-#>   .. ..- attr(*, "label")= chr "Identifikationsnummer"
-#>   ..$ nachname    : chr [1:4363] "Abelein" "Achenbach" "Ackermann" "Ackermann" ...
-#>   .. ..- attr(*, "label")= chr "Nachname"
-#>   ..$ vorname     : chr [1:4363] "Manfred" "Ernst" "Annemarie" "Else" ...
-#>   .. ..- attr(*, "label")= chr "Vorname"
-#>   ..$ ortszusatz  : chr [1:4363] NA NA NA NA ...
-#>   .. ..- attr(*, "label")= chr "Ortszusatz zu Nachmame, zur Unterscheidung bei Namensgleichheit"
-#>   ..$ adel        : chr [1:4363] NA NA NA NA ...
-#>   .. ..- attr(*, "label")= chr "Adelsprädikat"
-#>   ..$ praefix     : chr [1:4363] NA NA NA NA ...
-#>   .. ..- attr(*, "label")= chr "Namenspräfix"
-#>   ..$ anrede_titel: chr [1:4363] "Dr." "Dr." NA "Dr." ...
-#>   .. ..- attr(*, "label")= chr "Anrede-Titel"
-#>   ..$ akad_titel  : chr [1:4363] "Prof. Dr." "Dr." NA "Dr." ...
-#>   .. ..- attr(*, "label")= chr "Akademischer Titel"
-#>   ..$ historie_von: Date[1:4363], format: "1965-10-19" "1957-10-15" ...
-#>   ..$ historie_bis: Date[1:4363], format: NA NA ...
-#>  $ bio  : tibble [4,089 × 12] (S3: tbl_df/tbl/data.frame)
-#>   ..$ id                           : chr [1:4089] "11000001" "11000002" "11000003" "11000004" ...
-#>   .. ..- attr(*, "label")= chr "Identifikationsnummer"
-#>   ..$ geburtsdatum                 : Date[1:4089], format: "1930-10-20" "1909-04-09" ...
-#>   ..$ geburtsort                   : chr [1:4089] "Stuttgart" "Siegen" "Parabutsch" "Berlin" ...
-#>   .. ..- attr(*, "label")= chr "Geburtsort"
-#>   ..$ geburtsland                  : chr [1:4089] NA NA "Jugoslawien" NA ...
-#>   .. ..- attr(*, "label")= chr "Geburtsland"
-#>   ..$ sterbedatum                  : Date[1:4089], format: "2008-01-17" "1991-12-02" ...
-#>   ..$ geschlecht                   : chr [1:4089] "männlich" "männlich" "weiblich" "weiblich" ...
-#>   .. ..- attr(*, "label")= chr "Geschlecht"
-#>   ..$ familienstand                : chr [1:4089] "keine Angaben" "verheiratet, 3 Kinder" "verheiratet, 5 Kinder" "ledig" ...
-#>   .. ..- attr(*, "label")= chr "Familienstand"
-#>   ..$ religion                     : chr [1:4089] "katholisch" "evangelisch" "katholisch" "evangelisch" ...
-#>   .. ..- attr(*, "label")= chr "Religion"
-#>   ..$ beruf                        : chr [1:4089] "Rechtsanwalt, Wirtschaftsprüfer, Universitätsprofessor" "Rechtsanwalt und Notar" "Hilfsreferentin" "Ärztin" ...
-#>   .. ..- attr(*, "label")= chr "Beruf"
-#>   ..$ partei_kurz                  : chr [1:4089] "CDU" "FDP" "CDU" "CDU" ...
-#>   .. ..- attr(*, "label")= chr "Letzte Parteizugehörigkeit, kurzform"
-#>   ..$ vita_kurz                    : chr [1:4089] NA NA NA NA ...
-#>   .. ..- attr(*, "label")= chr "Kurzbiografie des Abgeordneten (nur aktuelle Wahlperiode)"
-#>   ..$ veroeffentlichungspflichtiges: chr [1:4089] NA NA NA NA ...
-#>   .. ..- attr(*, "label")= chr "Veröffentlichungspflichtige Angaben (nur aktuelle Wahlperiode)"
-#>  $ wp   : tibble [11,627 × 9] (S3: tbl_df/tbl/data.frame)
-#>   ..$ id        : chr [1:11627] "11000001" "11000001" "11000001" "11000001" ...
-#>   .. ..- attr(*, "label")= chr "Identifikationsnummer"
-#>   ..$ wp        : int [1:11627] 5 6 7 8 9 10 11 3 4 5 ...
-#>   .. ..- attr(*, "label")= chr "Nummer der Wahlperiode"
-#>   ..$ mdbwp_von : Date[1:11627], format: "1965-10-19" "1969-10-20" ...
-#>   ..$ mdbwp_bis : Date[1:11627], format: "1969-10-19" "1972-09-22" ...
-#>   ..$ wkr_nummer: int [1:11627] 174 174 174 174 174 174 174 NA NA NA ...
-#>   .. ..- attr(*, "label")= chr "Nummer des Wahlkreises"
-#>   ..$ wkr_name  : chr [1:11627] NA NA NA NA ...
-#>   .. ..- attr(*, "label")= chr "Wahlkreisname"
-#>   ..$ wkr_land  : chr [1:11627] "BWG" "BWG" "BWG" "BWG" ...
-#>   .. ..- attr(*, "label")= chr "Bundesland des Wahlkreises"
-#>   ..$ liste     : chr [1:11627] NA NA NA NA ...
-#>   .. ..- attr(*, "label")= chr "Liste"
-#>   ..$ mandatsart: chr [1:11627] "Direktwahl" "Direktwahl" "Direktwahl" "Direktwahl" ...
-#>   .. ..- attr(*, "label")= chr "Art des Mandates"
-#>  $ inst : tibble [15,858 × 9] (S3: tbl_df/tbl/data.frame)
-#>   ..$ id         : chr [1:15858] "11000001" "11000001" "11000001" "11000001" ...
-#>   .. ..- attr(*, "label")= chr "Identifikationsnummer"
-#>   ..$ wp         : int [1:15858] 5 6 7 8 9 10 11 3 4 5 ...
-#>   .. ..- attr(*, "label")= chr "Nummer der Wahlperiode"
-#>   ..$ insart_lang: chr [1:15858] "Fraktion/Gruppe" "Fraktion/Gruppe" "Fraktion/Gruppe" "Fraktion/Gruppe" ...
-#>   .. ..- attr(*, "label")= chr "Langbezeichnung der Institutionsart"
-#>   ..$ ins_lang   : chr [1:15858] "Fraktion der Christlich Demokratischen Union/Christlich - Sozialen Union" "Fraktion der Christlich Demokratischen Union/Christlich - Sozialen Union" "Fraktion der Christlich Demokratischen Union/Christlich - Sozialen Union" "Fraktion der Christlich Demokratischen Union/Christlich - Sozialen Union" ...
-#>   .. ..- attr(*, "label")= chr "Langbezeichnung der Institution"
-#>   ..$ mdbins_von : Date[1:15858], format: "1965-10-19" "1969-10-20" ...
-#>   ..$ mdbins_bis : Date[1:15858], format: "1969-10-19" "1972-09-22" ...
-#>   ..$ fkt_lang   : chr [1:15858] NA NA NA NA ...
-#>   .. ..- attr(*, "label")= chr "Langbezeichnung der ausgeübten Funktion in einer Institution"
-#>   ..$ fktins_von : Date[1:15858], format: NA NA ...
-#>   ..$ fktins_bis : Date[1:15858], format: NA NA ...
-#>  - attr(*, "version")= Date[1:1], format: "2021-03-12"
+summary(members)
+#>       Length Class  Mode
+#> namen 10     tbl_df list
+#> bio   12     tbl_df list
+#> wp     9     tbl_df list
+#> inst   9     tbl_df list
+```
+
+The data frame `namen` contains data on 4363 names from 4089:
+
+``` r
+members$namen
+#> # A tibble: 4,363 x 10
+#>    id       nachname  vorname   ortszusatz adel  praefix anrede_titel akad_titel
+#>    <chr>    <chr>     <chr>     <chr>      <chr> <chr>   <chr>        <chr>     
+#>  1 11000001 Abelein   Manfred   <NA>       <NA>  <NA>    Dr.          Prof. Dr. 
+#>  2 11000002 Achenbach Ernst     <NA>       <NA>  <NA>    Dr.          Dr.       
+#>  3 11000003 Ackermann Annemarie <NA>       <NA>  <NA>    <NA>         <NA>      
+#>  4 11000004 Ackermann Else      <NA>       <NA>  <NA>    Dr.          Dr.       
+#>  5 11000005 Adam      Ulrich    <NA>       <NA>  <NA>    <NA>         <NA>      
+#>  6 11000007 Adams     Rudolf    <NA>       <NA>  <NA>    <NA>         <NA>      
+#>  7 11000008 Adelmann  Raban     <NA>       Graf  <NA>    <NA>         <NA>      
+#>  8 11000009 Adenauer  Konrad    <NA>       <NA>  <NA>    Dr.          Dr.       
+#>  9 11000010 Adler     Brigitte  <NA>       <NA>  <NA>    <NA>         <NA>      
+#> 10 11000011 Adorno    Eduard    <NA>       <NA>  <NA>    <NA>         <NA>      
+#> # … with 4,353 more rows, and 2 more variables: historie_von <date>,
+#> #   historie_bis <date>
+```
+
+The data frame `bio` contains 4089 biographical entries from 4089:
+
+``` r
+members$bio
+#> # A tibble: 4,089 x 12
+#>    id      geburtsdatum geburtsort            geburtsland sterbedatum geschlecht
+#>    <chr>   <date>       <chr>                 <chr>       <date>      <chr>     
+#>  1 110000… 1930-10-20   Stuttgart             <NA>        2008-01-17  männlich  
+#>  2 110000… 1909-04-09   Siegen                <NA>        1991-12-02  männlich  
+#>  3 110000… 1913-05-26   Parabutsch            Jugoslawien 1994-02-18  weiblich  
+#>  4 110000… 1933-11-06   Berlin                <NA>        2019-09-14  weiblich  
+#>  5 110000… 1950-06-09   Teterow, Kr. Teterow… <NA>        NA          männlich  
+#>  6 110000… 1919-11-10   Masburg / Kreis Coch… <NA>        2013-05-25  männlich  
+#>  7 110000… 1912-09-28   Düsseldorf            <NA>        1992-01-25  männlich  
+#>  8 110000… 1876-01-05   Köln                  <NA>        1967-04-19  männlich  
+#>  9 110000… 1944-06-22   Drangstedt / Krs. We… <NA>        2004-10-25  weiblich  
+#> 10 110000… 1920-10-31   München               <NA>        2000-12-28  männlich  
+#> # … with 4,079 more rows, and 6 more variables: familienstand <chr>,
+#> #   religion <chr>, beruf <chr>, partei_kurz <chr>, vita_kurz <chr>,
+#> #   veroeffentlichungspflichtiges <chr>
+```
+
+The data frame `wp` contains data on 11627 parliamentary terms from
+4089:
+
+``` r
+members$wp
+#> # A tibble: 11,627 x 9
+#>    id          wp mdbwp_von  mdbwp_bis  wkr_nummer wkr_name wkr_land liste
+#>    <chr>    <int> <date>     <date>          <int> <chr>    <chr>    <chr>
+#>  1 11000001     5 1965-10-19 1969-10-19        174 <NA>     BWG      <NA> 
+#>  2 11000001     6 1969-10-20 1972-09-22        174 <NA>     BWG      <NA> 
+#>  3 11000001     7 1972-12-13 1976-12-13        174 <NA>     BWG      <NA> 
+#>  4 11000001     8 1976-12-14 1980-11-04        174 <NA>     BWG      <NA> 
+#>  5 11000001     9 1980-11-04 1983-03-29        174 <NA>     BWG      <NA> 
+#>  6 11000001    10 1983-03-29 1987-02-18        174 <NA>     BWG      <NA> 
+#>  7 11000001    11 1987-02-18 1990-12-20        174 <NA>     BWG      <NA> 
+#>  8 11000002     3 1957-10-15 1961-10-15         NA <NA>     <NA>     NRW  
+#>  9 11000002     4 1961-10-17 1965-10-17         NA <NA>     <NA>     NRW  
+#> 10 11000002     5 1965-10-19 1969-10-19         NA <NA>     <NA>     NRW  
+#> # … with 11,617 more rows, and 1 more variable: mandatsart <chr>
+```
+
+The data frame `inst` contains 15858 records on institutional membership
+from 4089:
+
+``` r
+members$inst
+#> # A tibble: 15,858 x 9
+#>    id        wp insart_lang ins_lang   mdbins_von mdbins_bis fkt_lang fktins_von
+#>    <chr>  <int> <chr>       <chr>      <date>     <date>     <chr>    <date>    
+#>  1 11000…     5 Fraktion/G… Fraktion … 1965-10-19 1969-10-19 <NA>     NA        
+#>  2 11000…     6 Fraktion/G… Fraktion … 1969-10-20 1972-09-22 <NA>     NA        
+#>  3 11000…     7 Fraktion/G… Fraktion … 1972-12-13 1976-12-13 <NA>     NA        
+#>  4 11000…     8 Fraktion/G… Fraktion … 1976-12-14 1980-11-04 <NA>     NA        
+#>  5 11000…     9 Fraktion/G… Fraktion … 1980-11-04 1983-03-29 <NA>     NA        
+#>  6 11000…    10 Fraktion/G… Fraktion … 1983-03-29 1987-02-18 <NA>     NA        
+#>  7 11000…    11 Fraktion/G… Fraktion … 1987-02-18 1990-12-20 <NA>     NA        
+#>  8 11000…     3 Fraktion/G… Fraktion … 1957-10-15 1961-10-15 <NA>     NA        
+#>  9 11000…     4 Fraktion/G… Fraktion … 1961-10-17 1965-10-17 <NA>     NA        
+#> 10 11000…     5 Fraktion/G… Fraktion … 1965-10-19 1969-10-19 <NA>     NA        
+#> # … with 15,848 more rows, and 1 more variable: fktins_bis <date>
 ```
 
 What is special about using `README.Rmd` instead of just `README.md`?
