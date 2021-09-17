@@ -45,25 +45,25 @@ n_members <- function(df) {
 }
 ```
 
-The data frame `namen` contains data on `r nrow(members$namen)` names from `r n_members(members$namen)`:
+The data frame `namen` contains data on `r nrow(members$namen)` names from `r n_members(members$namen)` members of the Bundestag:
 
 ```{r namen}
-members$namen
+summary(members$namen)
 ```
 
-The data frame `bio` contains `r nrow(members$bio)` biographical entries from `r n_members(members$bio)`:
+The data frame `bio` contains `r nrow(members$bio)` biographical entries from `r n_members(members$bio)` members of the Bundestag:
 
 ```{r bio}
 members$bio
 ```
 
-The data frame `wp` contains data on `r nrow(members$wp)` parliamentary terms from `r n_members(members$bio)`:
+The data frame `wp` contains data on `r nrow(members$wp)` parliamentary terms from `r n_members(members$bio)` members of the Bundestag:
 
 ```{r wp}
 members$wp
 ```
 
-The data frame `inst` contains `r nrow(members$inst)` records on institutional membership from `r n_members(members$bio)`:
+The data frame `inst` contains `r nrow(members$inst)` records on institutional membership from `r n_members(members$bio)` members of the Bundestag:
 
 ```{r inst}
 members$inst

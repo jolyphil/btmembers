@@ -47,28 +47,39 @@ summary(members)
 #> inst   9     tbl_df list
 ```
 
-The data frame `namen` contains data on 4363 names from 4089:
+The data frame `namen` contains data on 4363 names from 4089 members of
+the Bundestag:
 
 ``` r
-members$namen
-#> # A tibble: 4,363 x 10
-#>    id       nachname  vorname   ortszusatz adel  praefix anrede_titel akad_titel
-#>    <chr>    <chr>     <chr>     <chr>      <chr> <chr>   <chr>        <chr>     
-#>  1 11000001 Abelein   Manfred   <NA>       <NA>  <NA>    Dr.          Prof. Dr. 
-#>  2 11000002 Achenbach Ernst     <NA>       <NA>  <NA>    Dr.          Dr.       
-#>  3 11000003 Ackermann Annemarie <NA>       <NA>  <NA>    <NA>         <NA>      
-#>  4 11000004 Ackermann Else      <NA>       <NA>  <NA>    Dr.          Dr.       
-#>  5 11000005 Adam      Ulrich    <NA>       <NA>  <NA>    <NA>         <NA>      
-#>  6 11000007 Adams     Rudolf    <NA>       <NA>  <NA>    <NA>         <NA>      
-#>  7 11000008 Adelmann  Raban     <NA>       Graf  <NA>    <NA>         <NA>      
-#>  8 11000009 Adenauer  Konrad    <NA>       <NA>  <NA>    Dr.          Dr.       
-#>  9 11000010 Adler     Brigitte  <NA>       <NA>  <NA>    <NA>         <NA>      
-#> 10 11000011 Adorno    Eduard    <NA>       <NA>  <NA>    <NA>         <NA>      
-#> # … with 4,353 more rows, and 2 more variables: historie_von <date>,
-#> #   historie_bis <date>
+summary(members$namen)
+#>       id              nachname           vorname           ortszusatz       
+#>  Length:4363        Length:4363        Length:4363        Length:4363       
+#>  Class :character   Class :character   Class :character   Class :character  
+#>  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+#>                                                                             
+#>                                                                             
+#>                                                                             
+#>                                                                             
+#>      adel             praefix          anrede_titel        akad_titel       
+#>  Length:4363        Length:4363        Length:4363        Length:4363       
+#>  Class :character   Class :character   Class :character   Class :character  
+#>  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+#>                                                                             
+#>                                                                             
+#>                                                                             
+#>                                                                             
+#>   historie_von         historie_bis       
+#>  Min.   :1904-01-23   Min.   :1953-01-04  
+#>  1st Qu.:1961-10-17   1st Qu.:1961-11-02  
+#>  Median :1985-03-16   Median :1980-12-16  
+#>  Mean   :1982-12-30   Mean   :1984-01-25  
+#>  3rd Qu.:2002-10-17   3rd Qu.:2005-08-01  
+#>  Max.   :2020-11-12   Max.   :2019-06-25  
+#>                       NA's   :4089
 ```
 
-The data frame `bio` contains 4089 biographical entries from 4089:
+The data frame `bio` contains 4089 biographical entries from 4089
+members of the Bundestag:
 
 ``` r
 members$bio
@@ -90,8 +101,8 @@ members$bio
 #> #   veroeffentlichungspflichtiges <chr>
 ```
 
-The data frame `wp` contains data on 11627 parliamentary terms from
-4089:
+The data frame `wp` contains data on 11627 parliamentary terms from 4089
+members of the Bundestag:
 
 ``` r
 members$wp
@@ -112,7 +123,7 @@ members$wp
 ```
 
 The data frame `inst` contains 15858 records on institutional membership
-from 4089:
+from 4089 members of the Bundestag:
 
 ``` r
 members$inst
