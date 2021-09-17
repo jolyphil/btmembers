@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The Bundestag distributes [biographical and election data](https://www.bundestag.de/services/opendata/) on all its members since 1949. This data, however, can be difficult to work with because XML files store information in an arbitrary number of dimensions. btmembers downloads the file "Stammdaten aller Abgeordneten seit 1949 im XML-Format" from the Bundestag website and converts it either to (a) four data frames nested into a list (retaining all the information of the original XML file) or (b) a single, condensed data frame.
+The Bundestag distributes [biographical and election data](https://www.bundestag.de/services/opendata/) on all members of the parliament since 1949. This data, however, can be difficult to work with because XML files store information in an arbitrary number of dimensions. btmembers downloads the file "Stammdaten aller Abgeordneten seit 1949 im XML-Format" from the Bundestag website and converts it to either (a) four data frames nested into a list (retaining all the information of the original XML file) or (b) a single, condensed data frame.
 
 ## Installation
 
@@ -71,7 +71,7 @@ head(members$wp)
 
 #### Data frame `inst`
 
-The data frame `inst` contains records on functions occupied by members inside institutions of the Bundestag. Each row represents a member-term-function. Members might have had multiple functions during the same term (N~functions~ > N~terms~ > N~members~).
+The data frame `inst` contains records of functions occupied by members inside institutions of the Bundestag. Each row represents a member-term-function. Members might have had multiple functions during the same term (N~functions~ > N~terms~ > N~members~).
 
 ```{r inst}
 head(members$inst)
@@ -80,7 +80,7 @@ head(members$inst)
 
 ### Importing a condensed data frame
 
-Instead of importing a list with all the information from the Bundestag, `import_members()` can also load a condensed data frame. Each row corresponds to a member-term. Most of the information contained in the original data is preserved except only the most recent name of the member is retained and institutions are removed. A new column named `fraktion` is added to the data. `fraktion` is a recoded variable and refers to the faction the member spent most time in during a given parliamentary term.
+Instead of importing a list with all the information from the Bundestag, `import_members()` can also load a condensed data frame. Each row corresponds to a member-term. Most of the information contained in the original data is preserved, except only the most recent name of the member is retained and functions are removed. A new column named `fraktion` is added to the data. `fraktion` is a recoded variable and refers to the faction the member spent most time in during a given parliamentary term.
 
 ```{r import-df}
 members_df <- import_members(condensed_df = TRUE)
@@ -90,13 +90,13 @@ head(members_df[c("nachname", "vorname", "wp", "fraktion")])
 
 ### Joining data frames
 
-You can join data frames by `id` (the members' identification numbers) and/or `wp` (the parliamentary terms).
+You can join data frames by `id` (the members' identification numbers) or `id` _and_ `wp` (the parliamentary terms).
 
 ```{r join, message = FALSE}
 library(dplyr)
 library(magrittr)
 
-x <- members$namen %>%
+members$namen %>%
   group_by(id) %>%
   slice_max(historie_von) %>% # keep most recent name
   ungroup() %>%
@@ -122,7 +122,8 @@ A codebook for the four data frames is available [here](codebook/codebook.pdf).
 
 To cite the btmembers package in publications use:
 
-```{r citation, echo = FALSE, results='asis'}
+```{r citation, echo = FALSE}
+Sys.setenv(lang = "en_US")
 citation("btmembers")
 ```
 

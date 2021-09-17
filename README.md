@@ -10,13 +10,14 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 The Bundestag distributes [biographical and election
-data](https://www.bundestag.de/services/opendata/) on all its members
-since 1949. This data, however, can be difficult to work with because
-XML files store information in an arbitrary number of dimensions.
-btmembers downloads the file “Stammdaten aller Abgeordneten seit 1949 im
-XML-Format” from the Bundestag website and converts it either to (a)
-four data frames nested into a list (retaining all the information of
-the original XML file) or (b) a single, condensed data frame.
+data](https://www.bundestag.de/services/opendata/) on all members of the
+parliament since 1949. This data, however, can be difficult to work with
+because XML files store information in an arbitrary number of
+dimensions. btmembers downloads the file “Stammdaten aller Abgeordneten
+seit 1949 im XML-Format” from the Bundestag website and converts it to
+either (a) four data frames nested into a list (retaining all the
+information of the original XML file) or (b) a single, condensed data
+frame.
 
 ## Installation
 
@@ -111,7 +112,7 @@ head(members$wp)
 
 #### Data frame `inst`
 
-The data frame `inst` contains records on functions occupied by members
+The data frame `inst` contains records of functions occupied by members
 inside institutions of the Bundestag. Each row represents a
 member-term-function. Members might have had multiple functions during
 the same term (N<sub>functions</sub> &gt; N<sub>terms</sub> &gt;
@@ -136,8 +137,8 @@ head(members$inst)
 Instead of importing a list with all the information from the Bundestag,
 `import_members()` can also load a condensed data frame. Each row
 corresponds to a member-term. Most of the information contained in the
-original data is preserved except only the most recent name of the
-member is retained and institutions are removed. A new column named
+original data is preserved, except only the most recent name of the
+member is retained and functions are removed. A new column named
 `fraktion` is added to the data. `fraktion` is a recoded variable and
 refers to the faction the member spent most time in during a given
 parliamentary term.
@@ -162,13 +163,13 @@ head(members_df[c("nachname", "vorname", "wp", "fraktion")])
 ### Joining data frames
 
 You can join data frames by `id` (the members’ identification numbers)
-and/or `wp` (the parliamentary terms).
+or `id` *and* `wp` (the parliamentary terms).
 
 ``` r
 library(dplyr)
 library(magrittr)
 
-x <- members$namen %>%
+members$namen %>%
   group_by(id) %>%
   slice_max(historie_von) %>% # keep most recent name
   ungroup() %>%
@@ -177,6 +178,15 @@ x <- members$namen %>%
   left_join(members$inst, by = c("id", "wp")) %>%
   select(nachname, vorname, wp, ins_lang, mdbins_von, mdbins_bis) %>%
   head()
+#> # A tibble: 6 x 6
+#>   nachname vorname    wp ins_lang                          mdbins_von mdbins_bis
+#>   <chr>    <chr>   <int> <chr>                             <date>     <date>    
+#> 1 Abelein  Manfred     5 Fraktion der Christlich Demokrat… 1965-10-19 1969-10-19
+#> 2 Abelein  Manfred     6 Fraktion der Christlich Demokrat… 1969-10-20 1972-09-22
+#> 3 Abelein  Manfred     7 Fraktion der Christlich Demokrat… 1972-12-13 1976-12-13
+#> 4 Abelein  Manfred     8 Fraktion der Christlich Demokrat… 1976-12-14 1980-11-04
+#> 5 Abelein  Manfred     9 Fraktion der Christlich Demokrat… 1980-11-04 1983-03-29
+#> 6 Abelein  Manfred    10 Fraktion der Christlich Demokrat… 1983-03-29 1987-02-18
 ```
 
 ## CSV version
@@ -193,18 +203,22 @@ A codebook for the four data frames is available
 
 To cite the btmembers package in publications use:
 
-To cite package ‘btmembers’ in publications use:
-
-Philippe Joly (2021). btmembers: Import Data on All Members of the
-Bundestag since 1949. R package version 0.0.2.9000.
-<https://github.com/jolyphil/btmembers>
-
-Une entrée BibTeX pour les utilisateurs LaTeX est
-
-@Manual{, title = {btmembers: Import Data on All Members of the
-Bundestag since 1949}, author = {Philippe Joly}, year = {2021}, note =
-{R package version 0.0.2.9000}, url =
-{<https://github.com/jolyphil/btmembers>}, }
+    #> 
+    #> To cite package 'btmembers' in publications use:
+    #> 
+    #>   Philippe Joly (2021). btmembers: Import Data on All Members of the
+    #>   Bundestag since 1949. R package version 0.0.2.9000.
+    #>   https://github.com/jolyphil/btmembers
+    #> 
+    #> A BibTeX entry for LaTeX users is
+    #> 
+    #>   @Manual{,
+    #>     title = {btmembers: Import Data on All Members of the Bundestag since 1949},
+    #>     author = {Philippe Joly},
+    #>     year = {2021},
+    #>     note = {R package version 0.0.2.9000},
+    #>     url = {https://github.com/jolyphil/btmembers},
+    #>   }
 
 The package should be cited with the original source:
 
