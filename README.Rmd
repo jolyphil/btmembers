@@ -31,6 +31,8 @@ devtools::install_github("jolyphil/btmembers")
 ```
 ## Usage
 
+### Preserving all the information
+
 btmembers exports a single function: `import_members()`. By default, this function returns a list containing four data frames (`namen`, `bio`, `wp`, and `inst`), which together preserve all the information contained in the XML file provided by the Bundestag. 
 
 ```{r import}
@@ -39,29 +41,34 @@ members <- import_members()
 summary(members)
 ```
 
-The data frame `namen` contains data on names of all members of the Bundestag. Each row represents a name. Members can have multiple names (N^(_names) > N^(_members)). 
+The data frame `namen` contains data on names of members of the Bundestag. Each row represents a name. Members can have multiple names (N~names~ > N~members~). 
 
 ```{r namen}
 summary(members$namen)
 ```
 
-The data frame `bio` contains biographical information on members. Each row represents a biographical entry. There is only one entry by member. 
+The data frame `bio` contains biographical information on members. Each row represents a biographical entry. There is one entry by member (N~bio~ = N~members~). 
 
 ```{r bio}
 members$bio
 ```
 
-The data frame `wp` contains data on the parliamentary terms served by the members 
+The data frame `wp` contains data on the parliamentary terms served by the members. Each row represents a member-term. Members might have served multiple terms (N~terms~ > N~members~).
 
 ```{r wp}
 members$wp
 ```
 
-The data frame `inst` contains `r nrow(members$inst)` records on institutional membership from members of the Bundestag:
+The data frame `inst` contains records on functions occupied by members inside institutions of the Bundestag. Each row represents an member-term-function. Members might have had multiple functions during multiple terms (N~institutions~ > N~terms~ > N~members~).
 
 ```{r inst}
 members$inst
 ```
+
+
+### Importing a condensed data frame
+
+
 
 
 What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:

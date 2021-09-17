@@ -30,6 +30,8 @@ devtools::install_github("jolyphil/btmembers")
 
 ## Usage
 
+### Preserving all the information
+
 btmembers exports a single function: `import_members()`. By default,
 this function returns a list containing four data frames (`namen`,
 `bio`, `wp`, and `inst`), which together preserve all the information
@@ -47,9 +49,9 @@ summary(members)
 #> inst   9     tbl_df list
 ```
 
-The data frame `namen` contains data on names of all members of the
+The data frame `namen` contains data on names of members of the
 Bundestag. Each row represents a name. Members can have multiple names
-(N^(\_names) &gt; N^(\_members)).
+(N<sub>names</sub> &gt; N<sub>members</sub>).
 
 ``` r
 summary(members$namen)
@@ -80,7 +82,8 @@ summary(members$namen)
 ```
 
 The data frame `bio` contains biographical information on members. Each
-row represents a biographical entry. There is only one entry by member.
+row represents a biographical entry. There is one entry by member
+(N<sub>bio</sub> = N<sub>members</sub>).
 
 ``` r
 members$bio
@@ -103,7 +106,8 @@ members$bio
 ```
 
 The data frame `wp` contains data on the parliamentary terms served by
-the members
+the members. Each row represents a member-term. Members might have
+served multiple terms (N<sub>terms</sub> &gt; N<sub>members</sub>).
 
 ``` r
 members$wp
@@ -123,8 +127,11 @@ members$wp
 #> # … with 11,617 more rows, and 1 more variable: mandatsart <chr>
 ```
 
-The data frame `inst` contains 15858 records on institutional membership
-from members of the Bundestag:
+The data frame `inst` contains records on functions occupied by members
+inside institutions of the Bundestag. Each row represents an
+member-term-function. Members might have had multiple functions during
+multiple terms (N<sub>institutions</sub> &gt; N<sub>terms</sub> &gt;
+N<sub>members</sub>).
 
 ``` r
 members$inst
@@ -143,6 +150,8 @@ members$inst
 #> 10 11000…     5 Fraktion/G… Fraktion … 1965-10-19 1969-10-19 <NA>     NA        
 #> # … with 15,848 more rows, and 1 more variable: fktins_bis <date>
 ```
+
+### Importing a condensed data frame
 
 What is special about using `README.Rmd` instead of just `README.md`?
 You can include R chunks like so:
