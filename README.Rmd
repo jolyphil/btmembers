@@ -120,8 +120,6 @@ A codebook for the four data frames is available [here](codebook/codebook.pdf).
 
 ## Citation
 
-To cite the btmembers package in publications use:
-
 ```{r citation, echo = FALSE}
 Sys.setenv(lang = "en_US")
 citation("btmembers")

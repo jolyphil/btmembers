@@ -201,8 +201,6 @@ A codebook for the four data frames is available
 
 ## Citation
 
-To cite the btmembers package in publications use:
-
     #> 
     #> To cite package 'btmembers' in publications use:
     #> 
