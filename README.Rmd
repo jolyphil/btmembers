@@ -125,6 +125,4 @@ Sys.setenv(lang = "en_US")
 citation("btmembers")
 ```
 
-The package should be cited with the original source:
-
-> Bundestag. (2021). _Stammdaten aller Abgeordneten seit 1949 im XML-Format_. https://www.bundestag.de/services/opendata
+The package should be cited with [the original source](https://www.bundestag.de/services/opendata).

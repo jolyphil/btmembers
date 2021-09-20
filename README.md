@@ -208,7 +208,7 @@ A codebook for the four data frames is available
     #>   Bundestag since 1949. R package version 0.0.2.9000.
     #>   https://github.com/jolyphil/btmembers
     #> 
-    #> A BibTeX entry for LaTeX users is
+    #> Une entrée BibTeX pour les utilisateurs LaTeX est
     #> 
     #>   @Manual{,
     #>     title = {btmembers: Import Data on All Members of the Bundestag since 1949},
@@ -218,7 +218,5 @@ A codebook for the four data frames is available
     #>     url = {https://github.com/jolyphil/btmembers},
     #>   }
 
-The package should be cited with the original source:
-
-> Bundestag. (2021). *Stammdaten aller Abgeordneten seit 1949 im
-> XML-Format*. <https://www.bundestag.de/services/opendata>
+The package should be cited with [the original
+source](https://www.bundestag.de/services/opendata).
