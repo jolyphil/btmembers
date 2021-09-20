@@ -171,7 +171,7 @@ extract_link_info <- function() {
 }
 
 
-github_storage_url <- function(branch = "develop") {
+github_storage_url <- function(branch = "main") {
   storage_url <- paste0("https://github.com/jolyphil/btmembers/raw/",
                 branch,
                 "/storage/")
