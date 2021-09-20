@@ -19,11 +19,11 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The Bundestag distributes [biographical and election data](https://www.bundestag.de/services/opendata/) on all members of the parliament since 1949. This data, however, can be difficult to work with because XML files store information in an arbitrary number of dimensions. btmembers downloads the file "Stammdaten aller Abgeordneten seit 1949 im XML-Format" from the Bundestag website and converts it to either (a) four data frames nested into a list (retaining all the information of the original XML file) or (b) a single, condensed data frame.
+The Bundestag distributes [biographical and election data](https://www.bundestag.de/services/opendata/) on all members of the parliament since 1949 in the form of an XML file. This data, however, can be difficult to work with because XML files store information in an arbitrary number of dimensions. btmembers downloads the file "Stammdaten aller Abgeordneten seit 1949 im XML-Format" from the Bundestag website and converts it to either (a) four data frames nested into a list (retaining all the information of the original XML file) or (b) a single, condensed data frame, where units of analysis are member-terms.
 
 ## Installation
 
-You can install the development version of btmembers from GitHub with:
+You can install btmembers from GitHub with:
 
 ``` r
 # install.packages("devtools")

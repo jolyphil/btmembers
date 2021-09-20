@@ -9,14 +9,14 @@ Authors@R:
            email = "philippe.joly@posteo.net",
            comment = c(ORCID = "0000-0002-4278-9439"))
 Description: The Bundestag distributes biographical and election data on all 
-    members of the parliament since 1949 
-    <https://www.bundestag.de/services/opendata/>. This  data, however, can be 
+    members of the parliament since 1949 in the form of an XML file (see: 
+    <https://www.bundestag.de/services/opendata/>). This  data, however, can be 
     difficult to work with because XML files store information in an arbitrary 
     number of dimensions. btmembers downloads the file "Stammdaten aller 
     Abgeordneten seit 1949 im XML-Format" from the Bundestag website and 
     converts it to either (a) four data frames nested into a list (retaining all 
     the information of the original XML file) or (b) a single, condensed data 
-    frame.
+    frame, where units of analysis are member-terms.
 Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8

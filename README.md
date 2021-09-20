@@ -11,17 +11,17 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 The Bundestag distributes [biographical and election
 data](https://www.bundestag.de/services/opendata/) on all members of the
-parliament since 1949. This data, however, can be difficult to work with
-because XML files store information in an arbitrary number of
-dimensions. btmembers downloads the file “Stammdaten aller Abgeordneten
-seit 1949 im XML-Format” from the Bundestag website and converts it to
-either (a) four data frames nested into a list (retaining all the
-information of the original XML file) or (b) a single, condensed data
-frame.
+parliament since 1949 in the form of an XML file. This data, however,
+can be difficult to work with because XML files store information in an
+arbitrary number of dimensions. btmembers downloads the file “Stammdaten
+aller Abgeordneten seit 1949 im XML-Format” from the Bundestag website
+and converts it to either (a) four data frames nested into a list
+(retaining all the information of the original XML file) or (b) a
+single, condensed data frame, where units of analysis are member-terms.
 
 ## Installation
 
-You can install the development version of btmembers from GitHub with:
+You can install btmembers from GitHub with:
 
 ``` r
 # install.packages("devtools")
@@ -57,7 +57,7 @@ Bundestag. Each row represents a name. Members can have multiple names
 
 ``` r
 head(members$namen)
-#> # A tibble: 6 x 10
+#> # A tibble: 6 × 10
 #>   id       nachname  vorname   ortszusatz adel  praefix anrede_titel akad_titel
 #>   <chr>    <chr>     <chr>     <chr>      <chr> <chr>   <chr>        <chr>     
 #> 1 11000001 Abelein   Manfred   <NA>       <NA>  <NA>    Dr.          Prof. Dr. 
@@ -77,15 +77,15 @@ row represents a biographical entry. There is one entry by member
 
 ``` r
 head(members$bio)
-#> # A tibble: 6 x 12
-#>   id    geburtsdatum geburtsort geburtsland sterbedatum geschlecht familienstand
-#>   <chr> <date>       <chr>      <chr>       <date>      <chr>      <chr>        
-#> 1 1100… 1930-10-20   Stuttgart  <NA>        2008-01-17  männlich   keine Angaben
-#> 2 1100… 1909-04-09   Siegen     <NA>        1991-12-02  männlich   verheiratet,…
-#> 3 1100… 1913-05-26   Parabutsch Jugoslawien 1994-02-18  weiblich   verheiratet,…
-#> 4 1100… 1933-11-06   Berlin     <NA>        2019-09-14  weiblich   ledig        
-#> 5 1100… 1950-06-09   Teterow, … <NA>        NA          männlich   verheiratet,…
-#> 6 1100… 1919-11-10   Masburg /… <NA>        2013-05-25  männlich   verheiratet,…
+#> # A tibble: 6 × 12
+#>   id       geburtsdatum geburtsort geburtsland sterbedatum geschlecht familienstand
+#>   <chr>    <date>       <chr>      <chr>       <date>      <chr>      <chr>        
+#> 1 11000001 1930-10-20   Stuttgart  <NA>        2008-01-17  männlich   keine Angaben
+#> 2 11000002 1909-04-09   Siegen     <NA>        1991-12-02  männlich   verheiratet,…
+#> 3 11000003 1913-05-26   Parabutsch Jugoslawien 1994-02-18  weiblich   verheiratet,…
+#> 4 11000004 1933-11-06   Berlin     <NA>        2019-09-14  weiblich   ledig        
+#> 5 11000005 1950-06-09   Teterow, … <NA>        NA          männlich   verheiratet,…
+#> 6 11000007 1919-11-10   Masburg /… <NA>        2013-05-25  männlich   verheiratet,…
 #> # … with 5 more variables: religion <chr>, beruf <chr>, partei_kurz <chr>,
 #> #   vita_kurz <chr>, veroeffentlichungspflichtiges <chr>
 ```
@@ -98,7 +98,7 @@ multiple terms (N<sub>terms</sub> &gt; N<sub>members</sub>).
 
 ``` r
 head(members$wp)
-#> # A tibble: 6 x 9
+#> # A tibble: 6 × 9
 #>   id          wp mdbwp_von  mdbwp_bis  wkr_nummer wkr_name wkr_land liste
 #>   <chr>    <int> <date>     <date>          <int> <chr>    <chr>    <chr>
 #> 1 11000001     5 1965-10-19 1969-10-19        174 <NA>     BWG      <NA> 
@@ -120,15 +120,15 @@ N<sub>members</sub>).
 
 ``` r
 head(members$inst)
-#> # A tibble: 6 x 9
-#>   id        wp insart_lang ins_lang    mdbins_von mdbins_bis fkt_lang fktins_von
-#>   <chr>  <int> <chr>       <chr>       <date>     <date>     <chr>    <date>    
-#> 1 11000…     5 Fraktion/G… Fraktion d… 1965-10-19 1969-10-19 <NA>     NA        
-#> 2 11000…     6 Fraktion/G… Fraktion d… 1969-10-20 1972-09-22 <NA>     NA        
-#> 3 11000…     7 Fraktion/G… Fraktion d… 1972-12-13 1976-12-13 <NA>     NA        
-#> 4 11000…     8 Fraktion/G… Fraktion d… 1976-12-14 1980-11-04 <NA>     NA        
-#> 5 11000…     9 Fraktion/G… Fraktion d… 1980-11-04 1983-03-29 <NA>     NA        
-#> 6 11000…    10 Fraktion/G… Fraktion d… 1983-03-29 1987-02-18 <NA>     NA        
+#> # A tibble: 6 × 9
+#>   id          wp insart_lang  ins_lang mdbins_von mdbins_bis fkt_lang fktins_von
+#>   <chr>    <int> <chr>        <chr>    <date>     <date>     <chr>    <date>    
+#> 1 11000001     5 Fraktion/Gr… Fraktio… 1965-10-19 1969-10-19 <NA>     NA        
+#> 2 11000001     6 Fraktion/Gr… Fraktio… 1969-10-20 1972-09-22 <NA>     NA        
+#> 3 11000001     7 Fraktion/Gr… Fraktio… 1972-12-13 1976-12-13 <NA>     NA        
+#> 4 11000001     8 Fraktion/Gr… Fraktio… 1976-12-14 1980-11-04 <NA>     NA        
+#> 5 11000001     9 Fraktion/Gr… Fraktio… 1980-11-04 1983-03-29 <NA>     NA        
+#> 6 11000001    10 Fraktion/Gr… Fraktio… 1983-03-29 1987-02-18 <NA>     NA        
 #> # … with 1 more variable: fktins_bis <date>
 ```
 
@@ -149,7 +149,7 @@ members_df <- import_members(condensed_df = TRUE)
 #> Converting list to data frame...
 #> Done.
 head(members_df[c("nachname", "vorname", "wp", "fraktion")])
-#> # A tibble: 6 x 4
+#> # A tibble: 6 × 4
 #>   nachname vorname    wp fraktion                                               
 #>   <chr>    <chr>   <int> <chr>                                                  
 #> 1 Abelein  Manfred     5 Fraktion der Christlich Demokratischen Union/Christlic…
@@ -178,7 +178,7 @@ members$namen %>%
   left_join(members$inst, by = c("id", "wp")) %>%
   select(nachname, vorname, wp, ins_lang, mdbins_von, mdbins_bis) %>%
   head()
-#> # A tibble: 6 x 6
+#> # A tibble: 6 × 6
 #>   nachname vorname    wp ins_lang                          mdbins_von mdbins_bis
 #>   <chr>    <chr>   <int> <chr>                             <date>     <date>    
 #> 1 Abelein  Manfred     5 Fraktion der Christlich Demokrat… 1965-10-19 1969-10-19
