@@ -205,7 +205,7 @@ A codebook for the four data frames is available
     #> To cite package 'btmembers' in publications use:
     #> 
     #>   Philippe Joly (2021). btmembers: Import Data on All Members of the
-    #>   Bundestag since 1949. R package version 0.0.2.9000.
+    #>   Bundestag since 1949. R package version 0.1.0.
     #>   https://github.com/jolyphil/btmembers
     #> 
     #> Une entrée BibTeX pour les utilisateurs LaTeX est
@@ -214,7 +214,7 @@ A codebook for the four data frames is available
     #>     title = {btmembers: Import Data on All Members of the Bundestag since 1949},
     #>     author = {Philippe Joly},
     #>     year = {2021},
-    #>     note = {R package version 0.0.2.9000},
+    #>     note = {R package version 0.1.0},
     #>     url = {https://github.com/jolyphil/btmembers},
     #>   }
 
