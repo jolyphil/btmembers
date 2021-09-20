@@ -92,8 +92,13 @@
 import_members <- function(condensed_df = FALSE,
                            force_from_bt = FALSE) {
   link_info <- extract_link_info()
-  version_github <- extract_github_version()
-  if (link_info$version_bt > version_github | force_from_bt) {
+  if (force_from_bt == FALSE) {
+    version_github <- extract_github_version()
+    if (link_info$version_bt > version_github) {
+      force_from_bt = TRUE
+    }
+  }
+  if (force_from_bt) {
     paste0("Downloading primary data (version: ",
            link_info$version_bt,
            ") from the Bundestag website") %>%

@@ -1,11 +1,8 @@
-# members_list <- readRDS(file.path("storage", "members_list.rds"))
-render_codebook <- function(members_list){
+render_codebook <- function(members_list = readRDS(file.path("storage", "members_list.rds"))){
   save_codebook_md(members_list)
   rmarkdown::render("codebook/codebook.md",
                     output_format = "pdf_document")
 }
-
-# source_file = file.path("storage", "members_list.rds")
 
 save_codebook_md <- function(members_list) {
   header <- c("{_btmembers_}",
@@ -16,12 +13,7 @@ save_codebook_md <- function(members_list) {
               "",
               "The btmembers R package restructures the open data provided by the Bundestag. See:",
               "",
-              paste0("> Bundestag (",
-                     format(attr(members_list, "version"), format = "%Y"),
-                     "), _Stammdaten aller Abgeordneten seit 1949 im XML-Format_, ",
-                     "version: ",
-                     attr(members_list, "version"),
-                     ", https://www.bundestag.de/services/opendata."),
+              paste0("> ", export_source(attr(members_list, "version"))),
               "",
               "By default, the function `import_members()` returns a list containing four data frames: `namen` (names), `bio` (biographical information), `wp` (parliamentary terms), and `inst` (institutions). These four data frames are presented below.",
               "",
@@ -34,6 +26,20 @@ save_codebook_md <- function(members_list) {
   footer <- "If `import_members()` is called with the argument `condensed_df = TRUE`, the function will return a condensed data frame. Each row corresponds to a member-term. Most of the information contained in the original data is preserved except _only the most recent name of the member is retained_ and _institutions are removed_. A new column named `fraktion` is added to the data. `fraktion` is a recoded variable and refers to the faction the member spent most time in during a given parliamentary term."
   codebook <- c(header, var_blocks, footer)
   writeLines(codebook, "codebook/codebook.md")
+}
+
+export_source <- function(data_version,
+                          filename = NULL) {
+  source <- paste0("Bundestag (",
+                   format(data_version, format = "%Y"),
+                   "), _Stammdaten aller Abgeordneten seit 1949 im XML-Format_, ",
+                   "version: ",
+                   data_version,
+                   ". https://www.bundestag.de/services/opendata")
+  if (!is.null(filename)) {
+    writeLines(source, filename)
+  }
+  source
 }
 
 codebook_var_block <- function(dfname, df) {
@@ -65,3 +71,4 @@ codebook_var_item <- function(varname, var) {
     paste0("**Label**: ", attr(var, "label")),
     "")
 }
+
