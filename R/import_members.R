@@ -45,7 +45,6 @@
 #'    * `beruf`: _Beruf_
 #'    * `partei_kurz`: _Letzte Parteizugehörigkeit, kurzform_
 #'    * `vita_kurz`: _Kurzbiografie des Abgeordneten (nur aktuelle Wahlperiode)_
-#'    * `veroeffentlichungspflichtiges`: _Veröffentlichungspflichtige Angaben (nur aktuelle Wahlperiode)_
 #'
 #'    **`wp`** contains the following columns:
 #'
@@ -271,8 +270,7 @@ restructure_list <- function(list_raw) {
                     .data$RELIGION,
                     .data$BERUF,
                     .data$PARTEI_KURZ,
-                    .data$VITA_KURZ,
-                    .data$VEROEFFENTLICHUNGSPFLICHTIGES)
+                    .data$VITA_KURZ)
 
   tbl_wp_list <- tbl_mdb_list %>%
     dplyr::select(.data$ID, .data$WAHLPERIODEN) %>%
