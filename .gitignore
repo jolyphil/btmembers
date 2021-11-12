@@ -40,6 +40,9 @@ vignettes/*.pdf
 
 # This project
 /codebook/codebook.html
+data-raw/MDB_STAMMDATEN.DTD
+data-raw/MDB_STAMMDATEN.XML
+data-raw/mdb.R
 /temp
 /R/tests
 .Rproj.user

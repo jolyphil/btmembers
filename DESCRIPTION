@@ -1,7 +1,7 @@
 Package: btmembers
 Title: Import Data on All Members of the Bundestag since 1949
-Version: 0.1.0
-Date: 2021-09-20
+Version: 0.1.1
+Date: 2021-11-12
 Authors@R: 
     person(given = "Philippe",
            family = "Joly",
@@ -22,7 +22,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports: 
     dplyr (>= 1.0.7),
     magrittr (>= 1.5),

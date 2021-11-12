@@ -14,9 +14,12 @@ data is lost (see Value).}
 \item{force_from_bt}{logical; if \code{TRUE} force the function to import the data
 directly from the Bundestag website. By default, the function compares
 the versions of the data on the Bundestag website and the pre-processed
-data stored in the package repository on GitHub. If the version on the
-Bundestag website is more recent, it will import the raw data from there;
-otherwise it will import the pre-processed data from GitHub.
+data stored in the package repository on GitHub. If the version on GitHub
+is the same as the one on the Bundestag website, the function downloads
+the data from GitHub. If the version on the Bundestag website is more
+recent, the user will be presented with a menu of three choices:
+(1) Download the new, non-tested version from the Bundestag website;
+(2) Download the older, pre-processed data from Github; or (3) Cancel.
 \code{force_from_bt = TRUE} never imports the data from GitHub.}
 }
 \value{
@@ -24,61 +27,8 @@ If \strong{\code{condensed_df = FALSE}} a list containing four data frames:
 \code{namen} (names), \code{bio} (biographical information), \code{wp}
 (parliamentary terms), and \code{inst} (institutions).
 
-\strong{\code{namen}} contains the following columns:
-\itemize{
-\item \code{id}: \emph{Identifikationsnummer}
-\item \code{nachname}: \emph{Nachname}
-\item \code{vorname}: \emph{Vorname}
-\item \code{ortszusatz}: \emph{Ortszusatz zu Nachmame, zur Unterscheidung bei Namensgleichheit}
-\item \code{adel}: \emph{Adelsprädikat}
-\item \code{praefix}: \emph{Namenspräfix}
-\item \code{anrede_titel}: \emph{Anrede-Titel}
-\item \code{akad_titel}: \emph{Akademischer Titel}
-\item \code{historie_von}: \emph{Historie zu den Namensbestandteilen, gültig von}
-\item \code{historie_bis}: \emph{Historie zu den Namensbestandteilen, gültig bis}
-}
-
-\strong{\code{bio}} contains the following columns:
-\itemize{
-\item \code{id}: \emph{Identifikationsnummer}
-\item \code{geburtsdatum}: \emph{Geburtsdatum}
-\item \code{geburtsort}: \emph{Geburtsort}
-\item \code{geburtsland}: \emph{Geburtsland}
-\item \code{sterbedatum}: \emph{Sterbedatum}
-\item \code{geschlecht}: \emph{Geschlecht}
-\item \code{familienstand}: \emph{Familienstand}
-\item \code{religion}: \emph{Religion}
-\item \code{beruf}: \emph{Beruf}
-\item \code{partei_kurz}: \emph{Letzte Parteizugehörigkeit, kurzform}
-\item \code{vita_kurz}: \emph{Kurzbiografie des Abgeordneten (nur aktuelle Wahlperiode)}
-\item \code{veroeffentlichungspflichtiges}: \emph{Veröffentlichungspflichtige Angaben (nur aktuelle Wahlperiode)}
-}
-
-\strong{\code{wp}} contains the following columns:
-\itemize{
-\item \code{id}: \emph{Identifikationsnummer}
-\item \code{wp}: \emph{Nummer der Wahlperiode}
-\item \code{mdbwp_von}: \emph{Beginn der Wahlperiodenzugehörigkeit}
-\item \code{mdbwp_bis}: \emph{Ende der Wahlperiodenzugehörigkeit}
-\item \code{wkr_nummer}: \emph{Nummer des Wahlkreises}
-\item \code{wkr_name}: \emph{Wahlkreisname}
-\item \code{wkr_land}: \emph{Bundesland des Wahlkreises}
-\item \code{liste}: \emph{Liste}
-\item \code{mandatsart}: \emph{Art des Mandates}
-}
-
-\strong{\code{inst}} contains the following columns:
-\itemize{
-\item \code{id}: \emph{Identifikationsnummer}
-\item \code{wp}: \emph{Nummer der Wahlperiode}
-\item \code{insart_lang}: \emph{Langbezeichnung der Institutionsart}
-\item \code{ins_lang}: \emph{Langbezeichnung der Institution}
-\item \code{mdbins_von}: \emph{Beginn der Institutionszugehörigkeit}
-\item \code{mdbins_bis}: \emph{Ende der Institutionszugehörigkeit}
-\item \code{fkt_lang}: \emph{Langbezeichnung der ausgeübten Funktion in einer Institution}
-\item \code{fktins_von}: \emph{Beginn der Funktionsausübung in einer Institution}
-\item \code{fktins_bis}: \emph{Ende der Funktionsausübung in einer Institution}
-}
+A codebook with a full list of variables is available
+\href{https://github.com/jolyphil/btmembers/blob/main/codebook/codebook.pdf}{here}.
 
 If \strong{\code{condensed_df = TRUE}} a condensed data frame. Each row corresponds
 to a member-term. Most of the information contained in the original data
