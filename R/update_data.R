@@ -33,6 +33,8 @@ write_csv_all <- function(members_list) {
 
 write_csv_df <- function(df, df_name) {
   filename <- paste0(df_name, ".csv")
-  write.csv(df, file.path("csv", filename))
+  write.csv(df,
+            file.path("csv", filename),
+            row.names = FALSE)
 }
 

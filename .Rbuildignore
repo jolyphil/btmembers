@@ -3,6 +3,7 @@
 ^doc$
 ^Meta$
 codebook/*
+checklist.md
 csv/*
 data-raw/*
 temp/*

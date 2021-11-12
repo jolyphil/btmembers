@@ -11,65 +11,19 @@
 #' @param force_from_bt logical; if `TRUE` force the function to import the data
 #'     directly from the Bundestag website. By default, the function compares
 #'     the versions of the data on the Bundestag website and the pre-processed
-#'     data stored in the package repository on GitHub. If the version on the
-#'     Bundestag website is more recent, it will import the raw data from there;
-#'     otherwise it will import the pre-processed data from GitHub.
+#'     data stored in the package repository on GitHub. If the version on GitHub
+#'     is the same as the one on the Bundestag website, the function downloads
+#'     the data from GitHub. If the version on the Bundestag website is more
+#'     recent, the user will be presented with a menu of three choices:
+#'     (1) Download the new, non-tested version from the Bundestag website;
+#'     (2) Download the older, pre-processed data from Github; or (3) Cancel.
 #'     `force_from_bt = TRUE` never imports the data from GitHub.
 #' @return If **`condensed_df = FALSE`** a list containing four data frames:
 #'     `namen` (names), `bio` (biographical information), `wp`
 #'     (parliamentary terms), and `inst` (institutions).
 #'
-#'    **`namen`** contains the following columns:
-#'
-#'    * `id`: _Identifikationsnummer_
-#'    * `nachname`: _Nachname_
-#'    * `vorname`: _Vorname_
-#'    * `ortszusatz`: _Ortszusatz zu Nachmame, zur Unterscheidung bei Namensgleichheit_
-#'    * `adel`: _Adelsprädikat_
-#'    * `praefix`: _Namenspräfix_
-#'    * `anrede_titel`: _Anrede-Titel_
-#'    * `akad_titel`: _Akademischer Titel_
-#'    * `historie_von`: _Historie zu den Namensbestandteilen, gültig von_
-#'    * `historie_bis`: _Historie zu den Namensbestandteilen, gültig bis_
-#'
-#'    **`bio`** contains the following columns:
-#'
-#'    * `id`: _Identifikationsnummer_
-#'    * `geburtsdatum`: _Geburtsdatum_
-#'    * `geburtsort`: _Geburtsort_
-#'    * `geburtsland`: _Geburtsland_
-#'    * `sterbedatum`: _Sterbedatum_
-#'    * `geschlecht`: _Geschlecht_
-#'    * `familienstand`: _Familienstand_
-#'    * `religion`: _Religion_
-#'    * `beruf`: _Beruf_
-#'    * `partei_kurz`: _Letzte Parteizugehörigkeit, kurzform_
-#'    * `vita_kurz`: _Kurzbiografie des Abgeordneten (nur aktuelle Wahlperiode)_
-#'    * `veroeffentlichungspflichtiges`: _Veröffentlichungspflichtige Angaben (nur aktuelle Wahlperiode)_
-#'
-#'    **`wp`** contains the following columns:
-#'
-#'    * `id`: _Identifikationsnummer_
-#'    * `wp`: _Nummer der Wahlperiode_
-#'    * `mdbwp_von`: _Beginn der Wahlperiodenzugehörigkeit_
-#'    * `mdbwp_bis`: _Ende der Wahlperiodenzugehörigkeit_
-#'    * `wkr_nummer`: _Nummer des Wahlkreises_
-#'    * `wkr_name`: _Wahlkreisname_
-#'    * `wkr_land`: _Bundesland des Wahlkreises_
-#'    * `liste`: _Liste_
-#'    * `mandatsart`: _Art des Mandates_
-#'
-#'    **`inst`** contains the following columns:
-#'
-#'    * `id`: _Identifikationsnummer_
-#'    * `wp`: _Nummer der Wahlperiode_
-#'    * `insart_lang`: _Langbezeichnung der Institutionsart_
-#'    * `ins_lang`: _Langbezeichnung der Institution_
-#'    * `mdbins_von`: _Beginn der Institutionszugehörigkeit_
-#'    * `mdbins_bis`: _Ende der Institutionszugehörigkeit_
-#'    * `fkt_lang`: _Langbezeichnung der ausgeübten Funktion in einer Institution_
-#'    * `fktins_von`: _Beginn der Funktionsausübung in einer Institution_
-#'    * `fktins_bis`: _Ende der Funktionsausübung in einer Institution_
+#'    A codebook with a full list of variables is available
+#'    [here](https://github.com/jolyphil/btmembers/blob/main/codebook/codebook.pdf).
 #'
 #'    If **`condensed_df = TRUE`** a condensed data frame. Each row corresponds
 #'    to a member-term. Most of the information contained in the original data
@@ -91,13 +45,20 @@
 
 import_members <- function(condensed_df = FALSE,
                            force_from_bt = FALSE) {
+
   link_info <- extract_link_info()
+
   if (force_from_bt == FALSE) {
     version_github <- extract_github_version()
-    if (link_info$version_bt > version_github) {
-      force_from_bt = TRUE
+    decision <- import_new(link_info$version_bt, version_github)
+    if (decision == 1) {
+      force_from_bt <- TRUE
+    }
+    if (decision == 3) {
+      stop("Cancelling data import.")
     }
   }
+
   if (force_from_bt) {
     paste0("Downloading primary data (version: ",
            link_info$version_bt,
@@ -194,6 +155,18 @@ extract_github_list <- function() {
   members_list
 }
 
+import_new <- function(version_bt, version_github){
+  if (version_bt > version_github) {
+    decision <- utils::menu(
+      title = "A new version of the data is available on the Bundestag website, but it has not been tested yet. Would you like to import this new version anyway?",
+      choices =c("Yes, try importing the new version of the data from the Bundestag website.",
+                 "No, import the preprocessed data from GitHub.",
+                 "Cancel."))
+  } else {
+    decision <- 2
+  }
+    decision
+}
 
 import_list_raw <- function(href){
   temp <- tempfile()
@@ -271,8 +244,7 @@ restructure_list <- function(list_raw) {
                     .data$RELIGION,
                     .data$BERUF,
                     .data$PARTEI_KURZ,
-                    .data$VITA_KURZ,
-                    .data$VEROEFFENTLICHUNGSPFLICHTIGES)
+                    .data$VITA_KURZ)
 
   tbl_wp_list <- tbl_mdb_list %>%
     dplyr::select(.data$ID, .data$WAHLPERIODEN) %>%

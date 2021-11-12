@@ -1,3 +1,10 @@
+# btmembers 0.1.1
+
+* `import_members()` now adds a user interaction if the version of the data on the Bundestag website is more recent than the version on GitHub. In this case, the user is be presented with a menu of three choices: (1) Download the new, non-tested version from the Bundestag website; (2) Download the older, pre-processed data from Github; or (3) Cancel.
+* The variable `veroeffentlichungspfligtes` has been removed since it is absent from the new version of the data. 
+* The documentation of `import_members()` has been changed to include a link to the codebook instead of a list of variables. 
+
+
 # btmembers 0.1.0
 
 * By default, `import_members()` now returns a list containing four data frames (`namen`, `bio`, `wp`, and `inst`), which together preserve all the information contained in the XML file provided by the Bundestag.
