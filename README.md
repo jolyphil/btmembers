@@ -40,11 +40,11 @@ contained in the XML file provided by the Bundestag.
 ``` r
 library(btmembers)
 members <- import_members()
-#> Downloading pre-processed data (version: 2021-03-12) from GitHub
+#> Downloading pre-processed data (version: 2021-11-04) from GitHub
 summary(members)
 #>       Length Class  Mode
 #> namen 10     tbl_df list
-#> bio   12     tbl_df list
+#> bio   11     tbl_df list
 #> wp     9     tbl_df list
 #> inst   9     tbl_df list
 ```
@@ -77,17 +77,17 @@ row represents a biographical entry. There is one entry by member
 
 ``` r
 head(members$bio)
-#> # A tibble: 6 × 12
-#>   id       geburtsdatum geburtsort geburtsland sterbedatum geschlecht familienstand
-#>   <chr>    <date>       <chr>      <chr>       <date>      <chr>      <chr>        
-#> 1 11000001 1930-10-20   Stuttgart  <NA>        2008-01-17  männlich   keine Angaben
-#> 2 11000002 1909-04-09   Siegen     <NA>        1991-12-02  männlich   verheiratet,…
-#> 3 11000003 1913-05-26   Parabutsch Jugoslawien 1994-02-18  weiblich   verheiratet,…
-#> 4 11000004 1933-11-06   Berlin     <NA>        2019-09-14  weiblich   ledig        
-#> 5 11000005 1950-06-09   Teterow, … <NA>        NA          männlich   verheiratet,…
-#> 6 11000007 1919-11-10   Masburg /… <NA>        2013-05-25  männlich   verheiratet,…
-#> # … with 5 more variables: religion <chr>, beruf <chr>, partei_kurz <chr>,
-#> #   vita_kurz <chr>, veroeffentlichungspflichtiges <chr>
+#> # A tibble: 6 × 11
+#>   id    geburtsdatum geburtsort geburtsland sterbedatum geschlecht familienstand
+#>   <chr> <date>       <chr>      <chr>       <date>      <chr>      <chr>        
+#> 1 1100… 1930-10-20   Stuttgart  <NA>        2008-01-17  männlich   keine Angaben
+#> 2 1100… 1909-04-09   Siegen     <NA>        1991-12-02  männlich   verheiratet,…
+#> 3 1100… 1913-05-26   Parabutsch Jugoslawien 1994-02-18  weiblich   verheiratet,…
+#> 4 1100… 1933-11-06   Berlin     <NA>        2019-09-14  weiblich   ledig        
+#> 5 1100… 1950-06-09   Teterow, … <NA>        NA          männlich   verheiratet,…
+#> 6 1100… 1919-11-10   Masburg /… <NA>        2013-05-25  männlich   verheiratet,…
+#> # … with 4 more variables: religion <chr>, beruf <chr>, partei_kurz <chr>,
+#> #   vita_kurz <chr>
 ```
 
 #### Data frame `wp`
@@ -145,7 +145,7 @@ parliamentary term.
 
 ``` r
 members_df <- import_members(condensed_df = TRUE)
-#> Downloading pre-processed data (version: 2021-03-12) from GitHub
+#> Downloading pre-processed data (version: 2021-11-04) from GitHub
 #> Converting list to data frame...
 #> Done.
 head(members_df[c("nachname", "vorname", "wp", "fraktion")])
@@ -201,22 +201,11 @@ A codebook for the four data frames is available
 
 ## Citation
 
-    #> 
-    #> To cite package 'btmembers' in publications use:
-    #> 
-    #>   Philippe Joly (2021). btmembers: Import Data on All Members of the
-    #>   Bundestag since 1949. R package version 0.1.0.
-    #>   https://github.com/jolyphil/btmembers
-    #> 
-    #> Une entrée BibTeX pour les utilisateurs LaTeX est
-    #> 
-    #>   @Manual{,
-    #>     title = {btmembers: Import Data on All Members of the Bundestag since 1949},
-    #>     author = {Philippe Joly},
-    #>     year = {2021},
-    #>     note = {R package version 0.1.0},
-    #>     url = {https://github.com/jolyphil/btmembers},
-    #>   }
+To cite package ‘btmembers’ in publications use:
+
+> Joly, P. (2021). *btmembers: Import Data on All Members of the
+> Bundestag since 1949*. R package version 0.1.1.
+> <https://github.com/jolyphil/btmembers>
 
 The package should be cited with [the original
 source](https://www.bundestag.de/services/opendata).
