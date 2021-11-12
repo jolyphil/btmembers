@@ -201,7 +201,7 @@ A codebook for the four data frames is available
 
 ## Citation
 
-To cite package ‘btmembers’ in publications use:
+To cite the package ‘btmembers’ in publications use:
 
 > Joly, P. (2021). *btmembers: Import Data on All Members of the
 > Bundestag since 1949*. R package version 0.1.1.
