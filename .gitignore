@@ -39,6 +39,7 @@ vignettes/*.pdf
 .Renviron
 
 # This project
+checklist.md
 /codebook/codebook.html
 data-raw/MDB_STAMMDATEN.DTD
 data-raw/MDB_STAMMDATEN.XML
