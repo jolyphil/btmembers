@@ -104,17 +104,17 @@ extract_link_info <- function() {
 
   for (i in seq_along(node_attrs)){
     title <- node_attrs[[i]][["title"]]
-    if (stringr::str_detect(title, pattern_title)) {
+    if (grepl(pattern = pattern_title, x = title)) {
       pattern_data_version <- paste0(
-        "(?<=Stand[:blank:])", # Preceeded by
-        "[:digit:]{2}", # d
+        "[[:digit:]]{2}", # d
         "\\.",
-        "[:digit:]{2}", # m
+        "[[:digit:]]{2}", # m
         "\\.",
-        "[:digit:]{4}" # Y
+        "[[:digit:]]{4}" # Y
       )
-      data_version <- title %>%
-        stringr::str_extract(pattern_data_version) %>%
+      matches <- regexpr(pattern = pattern_data_version,
+                         text = title) # digits
+      data_version <- regmatches(title, m = matches) %>%
         as.Date(format = "%d.%m.%Y")
       href <- paste0(
         "https://www.bundestag.de",
@@ -379,7 +379,7 @@ to_condensed_df <- function(list_clean, data_version){
   frak <- frak_temp %>%
     dplyr::filter(.data$fraktion_n == 1) %>%
     dplyr::select(.data$id, .data$wp, .data$fraktion) %>%
-    dplyr::bind_rows(.data$frak_multi) %>%
+    dplyr::bind_rows(frak_multi) %>%
     dplyr::ungroup()
 
   condensed_df <- namen %>%
