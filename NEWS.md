@@ -1,3 +1,9 @@
+# btmembers 0.1.2
+
+* `btmembers` does not depend on the `stringr` package anymore.
+* A bug with `import_members(condensed_df = TRUE)` was fixed.
+
+
 # btmembers 0.1.1
 
 * `import_members()` now adds a user interaction if the version of the data on the Bundestag website is more recent than the version on GitHub. In this case, the user is be presented with a menu of three choices: (1) Download the new, non-tested version from the Bundestag website; (2) Download the older, pre-processed data from Github; or (3) Cancel.
