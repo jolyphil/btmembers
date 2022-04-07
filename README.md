@@ -3,8 +3,7 @@
 
 # btmembers
 
-**An R Package to Import Data on All Members of the Bundestag since
-1949**
+### An R Package to Import Data on All Members of the Bundestag since 1949
 
 <!-- badges: start -->
 
