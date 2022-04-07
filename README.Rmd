@@ -13,7 +13,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-# btmembers: An R Package to Import Data on All Members of the Bundestag since 1949
+# btmembers
+
+**An R Package to Import Data on All Members of the Bundestag since 1949**
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
