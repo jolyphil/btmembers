@@ -3,6 +3,8 @@
 
 # btmembers
 
+### An R Package to Import Data on All Members of the Bundestag since 1949
+
 <!-- badges: start -->
 
 [![Lifecycle:
@@ -18,6 +20,12 @@ aller Abgeordneten seit 1949 im XML-Format” from the Bundestag website
 and converts it to either (a) four data frames nested into a list
 (retaining all the information of the original XML file) or (b) a
 single, condensed data frame, where units of analysis are member-terms.
+
+**Not an R user?** You can also download the different datasets as CSV
+files [here](csv/).
+
+A **codebook** for the four data frames is available
+[here](codebook/codebook.pdf).
 
 ## Installation
 
@@ -188,16 +196,6 @@ members$namen %>%
 #> 5 Abelein  Manfred     9 Fraktion der Christlich Demokrat… 1980-11-04 1983-03-29
 #> 6 Abelein  Manfred    10 Fraktion der Christlich Demokrat… 1983-03-29 1987-02-18
 ```
-
-## CSV version
-
-Not an R user? You can also download the different datasets as CSV files
-[here](csv/).
-
-## Codebook
-
-A codebook for the four data frames is available
-[here](codebook/codebook.pdf).
 
 ## Citation
 
