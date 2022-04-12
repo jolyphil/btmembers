@@ -47,6 +47,5 @@ data-raw/mdb.R
 /temp
 /R/tests
 .Rproj.user
-inst/doc
 doc
 Meta

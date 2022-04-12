@@ -38,3 +38,6 @@
 ## Tests
 
 * Create tests for the package. 
+  - Test for new variables
+  - Test for impossible values
+  - Test for missings
