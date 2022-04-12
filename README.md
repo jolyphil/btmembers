@@ -48,11 +48,11 @@ contained in the XML file provided by the Bundestag.
 ``` r
 library(btmembers)
 members <- import_members()
-#> Downloading pre-processed data (version: 2021-11-04) from GitHub
+#> Downloading pre-processed data (version: 2022-04-07) from GitHub
 summary(members)
 #>       Length Class  Mode
 #> namen 10     tbl_df list
-#> bio   11     tbl_df list
+#> bio   12     tbl_df list
 #> wp     9     tbl_df list
 #> inst   9     tbl_df list
 ```
@@ -85,17 +85,17 @@ row represents a biographical entry. There is one entry by member
 
 ``` r
 head(members$bio)
-#> # A tibble: 6 × 11
+#> # A tibble: 6 × 12
 #>   id    geburtsdatum geburtsort geburtsland sterbedatum geschlecht familienstand
 #>   <chr> <date>       <chr>      <chr>       <date>      <chr>      <chr>        
 #> 1 1100… 1930-10-20   Stuttgart  <NA>        2008-01-17  männlich   keine Angaben
 #> 2 1100… 1909-04-09   Siegen     <NA>        1991-12-02  männlich   verheiratet,…
 #> 3 1100… 1913-05-26   Parabutsch Jugoslawien 1994-02-18  weiblich   verheiratet,…
 #> 4 1100… 1933-11-06   Berlin     <NA>        2019-09-14  weiblich   ledig        
-#> 5 1100… 1950-06-09   Teterow, … <NA>        NA          männlich   verheiratet,…
+#> 5 1100… 1950-06-09   Teterow    <NA>        NA          männlich   verheiratet,…
 #> 6 1100… 1919-11-10   Masburg /… <NA>        2013-05-25  männlich   verheiratet,…
-#> # … with 4 more variables: religion <chr>, beruf <chr>, partei_kurz <chr>,
-#> #   vita_kurz <chr>
+#> # … with 5 more variables: religion <chr>, beruf <chr>, partei_kurz <chr>,
+#> #   vita_kurz <chr>, veroeffentlichungspflichtiges <lgl>
 ```
 
 #### Data frame `wp`
@@ -153,7 +153,7 @@ parliamentary term.
 
 ``` r
 members_df <- import_members(condensed_df = TRUE)
-#> Downloading pre-processed data (version: 2021-11-04) from GitHub
+#> Downloading pre-processed data (version: 2022-04-07) from GitHub
 #> Converting list to data frame...
 #> Done.
 head(members_df[c("nachname", "vorname", "wp", "fraktion")])
