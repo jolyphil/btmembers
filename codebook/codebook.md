@@ -2,18 +2,18 @@
 
 # Data on All Members of the Bundestag since 1949: Codebook
 
-Version: 2021-11-04
+Version: 2022-04-07
 
 The btmembers R package restructures the open data provided by the Bundestag. See:
 
-> Bundestag (2021), _Stammdaten aller Abgeordneten seit 1949 im XML-Format_, version: 2021-11-04. https://www.bundestag.de/services/opendata
+> Bundestag (2022), _Stammdaten aller Abgeordneten seit 1949 im XML-Format_, version: 2022-04-07. https://www.bundestag.de/services/opendata
 
 By default, the function `import_members()` returns a list containing four data frames: `namen` (names), `bio` (biographical information), `wp` (parliamentary terms), and `inst` (institutions). These four data frames are presented below.
 
 ---
 
 ## Data frame `namen`
-`namen` contains 4640 observations from 4365 members of the Bundestag. It includes 10 variables:
+`namen` contains 4643 observations from 4366 members of the Bundestag. It includes 10 variables:
 
 ### `id`
 
@@ -78,7 +78,7 @@ By default, the function `import_members()` returns a list containing four data 
 ---
 
 ## Data frame `bio`
-`bio` contains 4365 observations from 4365 members of the Bundestag. It includes 11 variables:
+`bio` contains 4366 observations from 4366 members of the Bundestag. It includes 12 variables:
 
 ### `id`
 
@@ -146,10 +146,16 @@ By default, the function `import_members()` returns a list containing four data 
 
 **Label**: Kurzbiografie des Abgeordneten (nur aktuelle Wahlperiode)
 
+### `veroeffentlichungspflichtiges`
+
+**Class**: logical
+
+**Label**: Veröffentlichungspflichtige Angaben (nur aktuelle Wahlperiode)
+
 ---
 
 ## Data frame `wp`
-`wp` contains 12375 observations from 4365 members of the Bundestag. It includes 9 variables:
+`wp` contains 12376 observations from 4366 members of the Bundestag. It includes 9 variables:
 
 ### `id`
 
@@ -208,7 +214,7 @@ By default, the function `import_members()` returns a list containing four data 
 ---
 
 ## Data frame `inst`
-`inst` contains 12866 observations from 4365 members of the Bundestag. It includes 9 variables:
+`inst` contains 16255 observations from 4366 members of the Bundestag. It includes 9 variables:
 
 ### `id`
 
