@@ -1,3 +1,9 @@
+# btmembers 0.1.3
+
+* Bug "Unable to locate XML file" was fixed.
+* `btmembers` now relies on CSS instead of XPath. 
+
+
 # btmembers 0.1.2
 
 * `btmembers` does not depend on the `stringr` package anymore.

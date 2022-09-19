@@ -61,7 +61,7 @@ summary(members)
 
 The data frame `namen` contains data on names of members of the
 Bundestag. Each row represents a name. Members can have multiple names
-(N<sub>names</sub> &gt; N<sub>members</sub>).
+(N<sub>names</sub> \> N<sub>members</sub>).
 
 ``` r
 head(members$namen)
@@ -102,7 +102,7 @@ head(members$bio)
 
 The data frame `wp` contains data on parliamentary terms served by
 members. Each row represents a member-term. Many members have served
-multiple terms (N<sub>terms</sub> &gt; N<sub>members</sub>).
+multiple terms (N<sub>terms</sub> \> N<sub>members</sub>).
 
 ``` r
 head(members$wp)
@@ -123,7 +123,7 @@ head(members$wp)
 The data frame `inst` contains records of functions occupied by members
 inside institutions of the Bundestag. Each row represents a
 member-term-function. Members might have had multiple functions during
-the same term (N<sub>functions</sub> &gt; N<sub>terms</sub> &gt;
+the same term (N<sub>functions</sub> \> N<sub>terms</sub> \>
 N<sub>members</sub>).
 
 ``` r
@@ -202,7 +202,7 @@ members$namen %>%
 To cite the package ‘btmembers’ in publications use:
 
 > Joly, P. (2022). *btmembers: Import Data on All Members of the
-> Bundestag since 1949*. R package version 0.1.2.
+> Bundestag since 1949*. R package version 0.1.3.
 > <https://github.com/jolyphil/btmembers>
 
 The package should be cited with [the original
