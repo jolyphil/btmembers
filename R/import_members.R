@@ -94,10 +94,9 @@ extract_link_info <- function() {
 
   url <-"https://www.bundestag.de/services/opendata"
   url_parsed <- xml2::read_html(url)
-  xpath <- "/html/body/main/div[3]/div/div/aside/div/div[2]/div/ul/li/a"
 
   node_attrs <- url_parsed %>%
-    rvest::html_nodes(xpath = xpath) %>%
+    rvest::html_elements(css = ".bt-link-dokument") %>%
     rvest::html_attrs()
 
   pattern_title <- "Stammdaten aller Abgeordneten seit 1949 im XML-Format"
