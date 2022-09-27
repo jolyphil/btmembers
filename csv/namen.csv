@@ -50,7 +50,7 @@
 "11000047","Arndt","Adolf",NA,NA,NA,"Dr.","Dr.",1949-09-07,1961-10-15
 "11000047","Arndt","Adolf","(Berlin)",NA,NA,"Dr.","Dr.",1961-10-17,1965-10-17
 "11000047","Arndt","Adolf","(Berlin/Köln)",NA,NA,"Dr.","Dr.",1965-10-19,NA
-"11000048","Arndt","Claus","(Hamburg)",NA,NA,"Prof. Dr.","Prof. Dr.",1968-06-04,NA
+"11000048","Arndt","Claus","(Hamburg)",NA,NA,"Dr.","Prof. Dr.",1968-06-04,NA
 "11000049","Arndt","Klaus Dieter","(Berlin)",NA,NA,"Dr.","Dr.",1965-10-19,NA
 "11000050","Arnholz","Otto",NA,NA,NA,NA,NA,1949-09-07,NA
 "11000051","Arnold","Gottfried",NA,NA,NA,"Dr.","Dr.",1961-10-17,NA
@@ -82,7 +82,7 @@
 "11000077","Bäumer","Rudolf",NA,NA,NA,NA,NA,1957-10-15,NA
 "11000078","Bahlburg","Wilhelm",NA,NA,NA,NA,NA,1949-09-07,NA
 "11000079","Bahner","Dietrich",NA,NA,NA,NA,NA,1979-09-12,NA
-"11000080","Bahr","Egon",NA,NA,NA,"Prof.","Prof.",1972-12-13,NA
+"11000080","Bahr","Egon",NA,NA,NA,NA,"Prof.",1972-12-13,NA
 "11000081","Baier","Fritz","(Buchen)",NA,NA,NA,NA,1956-06-26,1957-10-06
 "11000081","Baier","Fritz","(Mosbach)",NA,NA,NA,NA,1957-10-15,1965-10-17
 "11000081","Baier","Fritz",NA,NA,NA,NA,NA,1965-10-19,NA
@@ -324,7 +324,7 @@
 "11000301","Büttner","Fritz",NA,NA,NA,NA,NA,1957-10-15,NA
 "11000302","Büttner","Hans","(Ingolstadt)",NA,NA,NA,NA,1990-12-20,NA
 "11000303","Büttner","Hartmut","(Schönebeck)",NA,NA,NA,NA,1990-12-20,NA
-"11000304","Bugl","Josef",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1980-11-04,NA
+"11000304","Bugl","Josef",NA,NA,NA,"Dr.","Prof. Dr.",1980-11-04,NA
 "11000305","Bulmahn","Edelgard",NA,NA,NA,"Dr. h. c.","Dr. h. c.",1987-02-18,NA
 "11000306","Burchardt","Ulla",NA,NA,NA,NA,NA,1994-11-10,NA
 "11000307","Burckardt","Richard",NA,NA,NA,NA,NA,1961-10-17,NA
@@ -371,7 +371,7 @@
 "11000346","Czermak","Fritz",NA,NA,NA,"Dr.","Dr.",1953-10-06,NA
 "11000347","Däubler-Gmelin","Herta",NA,NA,NA,"Dr.","Dr.",1972-12-13,NA
 "11000348","Dahlgrün","Rolf",NA,NA,NA,"Dr.","Dr.",1957-10-15,NA
-"11000349","Dahrendorf","Ralf",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1969-10-20,NA
+"11000349","Dahrendorf","Ralf",NA,NA,NA,"Dr.","Prof. Dr.",1969-10-20,NA
 "11000350","Dallmeyer","Harm",NA,NA,NA,NA,NA,1980-11-04,NA
 "11000351","Damm","Carl",NA,NA,NA,NA,NA,1965-10-19,NA
 "11000352","Daniels","Hans",NA,NA,NA,"Dr.","Dr.",1983-03-29,1987-02-18
@@ -396,10 +396,10 @@
 "11000369","Delorme","Karl",NA,NA,NA,NA,NA,1983-03-29,NA
 "11000370","Demmelmeier","Hans",NA,NA,NA,NA,NA,1953-10-06,NA
 "11000371","Dempwolf","Gertrud",NA,NA,NA,NA,NA,1984-03-22,NA
-"11000372","Deneke","J.F. Volrad",NA,NA,NA,"Prof.","Prof. Dr. h. c.",1963-07-26,NA
+"11000372","Deneke","J.F. Volrad",NA,NA,NA,"Dr. h. c.","Prof. Dr. h. c.",1963-07-26,NA
 "11000373","Deneke","Marlies",NA,NA,NA,NA,NA,1990-10-03,NA
 "11000374","Deres","Karl",NA,NA,NA,NA,NA,1980-11-04,NA
-"11000375","Deringer","Arved",NA,NA,NA,"Prof.","Prof.",1957-10-15,NA
+"11000375","Deringer","Arved",NA,NA,NA,NA,"Prof.",1957-10-15,NA
 "11000376","Deß","Albert",NA,NA,NA,NA,NA,1990-12-20,NA
 "11000377","Determann","Gregor",NA,NA,NA,NA,NA,1949-09-07,NA
 "11000378","Dewald","Georg",NA,NA,NA,NA,NA,1953-10-06,NA
@@ -468,7 +468,7 @@
 "11000438","Ehlers","Hermann",NA,NA,NA,"Dr.","Dr.",1949-09-07,NA
 "11000439","Ehlers","Wolfgang",NA,NA,NA,NA,NA,1990-10-03,NA
 "11000440","Ehmke","Horst",NA,NA,NA,"Dr.","Dr.",1969-10-20,1983-03-29
-"11000440","Ehmke","Horst","(Bonn)",NA,NA,"Prof. Dr.","Prof. Dr.",1983-03-29,NA
+"11000440","Ehmke","Horst","(Bonn)",NA,NA,"Dr.","Prof. Dr.",1983-03-29,NA
 "11000441","Ehmke","Wolfgang","(Ettlingen)",NA,NA,"Dr.","Dr.",1983-03-29,NA
 "11000442","Ehnes","Georg",NA,NA,NA,NA,NA,1961-10-17,NA
 "11000443","Ehrbar","Udo",NA,NA,NA,NA,NA,1983-03-29,NA
@@ -624,7 +624,7 @@
 "11000586","Friderichs","Hans",NA,NA,NA,"Dr.","Dr.",1965-10-19,NA
 "11000587","Friedensburg","Ferdinand",NA,NA,NA,"Dr.","Dr. Dr. h. c.",1952-02-01,NA
 "11000588","Friedhoff","Paul K.",NA,NA,NA,NA,NA,1990-12-20,NA
-"11000589","Friedmann","Bernhard",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1976-12-14,NA
+"11000589","Friedmann","Bernhard",NA,NA,NA,"Dr.","Prof. Dr.",1976-12-14,NA
 "11000590","Friedrich","Bruno",NA,NA,NA,NA,NA,1972-12-13,1976-12-13
 "11000590","Friedrich","Bruno","(Würzburg)",NA,NA,NA,NA,1976-12-14,NA
 "11000592","Friedrich","Hans",NA,NA,NA,"Dr.","Dr.",1949-09-07,NA
@@ -670,7 +670,7 @@
 "11000628","Gallus","Georg",NA,NA,NA,NA,NA,1970-09-10,NA
 "11000629","Ganschow","Jörg Wolfgang",NA,NA,NA,NA,NA,1990-12-20,1999-08-04
 "11000629","Winter","Jörg Wolfgang",NA,NA,NA,NA,NA,1999-08-05,NA
-"11000630","Ganseforth","Monika",NA,NA,NA,"Prof.","Prof.",1987-02-18,NA
+"11000630","Ganseforth","Monika",NA,NA,NA,NA,"Prof.",1987-02-18,NA
 "11000631","Gansel","Norbert",NA,NA,NA,NA,NA,1972-12-13,NA
 "11000632","Ganswindt","Elisabeth",NA,NA,NA,NA,NA,1955-11-09,NA
 "11000633","Gantenberg","Mathilde",NA,NA,NA,"Dr.","Dr.",1956-10-08,NA
@@ -736,7 +736,7 @@
 "11000689","Gleissner","Franz",NA,NA,NA,"Dr.","Dr.",1961-10-17,NA
 "11000690","Glombig","Eugen",NA,NA,NA,NA,NA,1962-01-25,NA
 "11000691","Glos","Michael",NA,NA,NA,NA,NA,1976-12-14,NA
-"11000692","Glotz","Peter",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1972-12-13,NA
+"11000692","Glotz","Peter",NA,NA,NA,"Dr.","Prof. Dr.",1972-12-13,NA
 "11000693","Glüsing","Hermann",NA,NA,NA,NA,NA,1949-09-07,1957-10-06
 "11000693","Glüsing","Hermann","(Dithmarschen)",NA,NA,NA,NA,1957-10-15,NA
 "11000694","Gnädinger","Fritz-Joachim",NA,NA,NA,NA,NA,1969-10-20,NA
@@ -880,7 +880,7 @@
 "11000823","Hasinger","Albrecht",NA,NA,NA,NA,NA,1976-12-14,NA
 "11000824","Hassel","Kai-Uwe",NA,NA,"von",NA,NA,1953-10-06,NA
 "11000825","Hasselfeldt","Gerda",NA,NA,NA,NA,NA,1987-03-24,NA
-"11000826","Hauchler","Ingomar",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1983-03-29,NA
+"11000826","Hauchler","Ingomar",NA,NA,NA,"Dr.","Prof. Dr.",1983-03-29,NA
 "11000827","Hauck","Rudolf",NA,NA,NA,NA,NA,1965-10-19,NA
 "11000828","Hauff","Volker",NA,NA,NA,"Dr.","Dr.",1969-10-20,NA
 "11000829","Hauffe","Herbert",NA,NA,NA,NA,NA,1953-10-06,NA
@@ -892,7 +892,7 @@
 "11000834","Hauser","Hugo",NA,NA,NA,"Dr.","Dr.",1960-03-11,1965-10-17
 "11000834","Hauser","Hugo","(Sasbach)",NA,NA,"Dr.","Dr.",1965-10-19,NA
 "11000835","Hauser","Otto","(Esslingen)",NA,NA,NA,NA,1983-03-29,NA
-"11000836","Haussmann","Helmut",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1976-12-14,NA
+"11000836","Haussmann","Helmut",NA,NA,NA,"Dr.","Prof. Dr.",1976-12-14,NA
 "11000837","Heck","Bruno","(Rottweil)",NA,NA,"Dr.","Dr.",1957-10-15,1961-10-15
 "11000837","Heck","Bruno",NA,NA,NA,"Dr.","Dr.",1961-10-17,NA
 "11000838","Hecker","Klaus J.",NA,NA,NA,NA,"Dipl. - Ing.",1983-03-29,NA
@@ -902,7 +902,7 @@
 "11000842","Heide","Johann Karl",NA,NA,NA,NA,NA,1953-10-06,NA
 "11000843","Heiland","Rudolf-Ernst",NA,NA,NA,NA,NA,1949-09-07,NA
 "11000844","Heiler","Anne Marie",NA,NA,NA,NA,NA,1949-09-07,NA
-"11000845","Heimann","Gerhard",NA,NA,NA,"Prof.","Prof.",1983-03-29,NA
+"11000845","Heimann","Gerhard",NA,NA,NA,NA,"Prof.",1983-03-29,NA
 "11000846","Hein","Alfred","(Salzgitter-Lebenstedt)",NA,NA,NA,NA,1970-04-27,NA
 "11000847","Hein","Udo",NA,NA,NA,"Dr.","Dr.",1965-10-19,NA
 "11000848","Heinemann","Gustav W.",NA,NA,NA,"Dr.","Dr. Dr.",1957-10-15,NA
@@ -916,7 +916,7 @@
 "11000857","Hellenbrock","Josef",NA,NA,NA,NA,NA,1953-10-06,NA
 "11000858","Hellige","Walther",NA,NA,NA,"Dr.","Dr.",1961-10-17,NA
 "11000859","Hellwege","Heinrich",NA,NA,NA,NA,NA,1949-09-07,NA
-"11000860","Hellwig","Fritz",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1953-10-06,NA
+"11000860","Hellwig","Fritz",NA,NA,NA,"Dr.","Prof. Dr.",1953-10-06,NA
 "11000861","Hellwig","Renate",NA,NA,NA,"Dr.","Dr.",1980-11-04,NA
 "11000862","Helmrich","Herbert",NA,NA,NA,NA,NA,1976-12-14,NA
 "11000863","Helms","Wilhelm",NA,NA,NA,NA,NA,1969-10-20,NA
@@ -1011,7 +1011,7 @@
 "11000945","Holla","Ernst",NA,NA,NA,NA,NA,1953-10-06,NA
 "11000946","Hollerith","Josef",NA,NA,NA,NA,NA,1990-12-20,NA
 "11000947","Holsteg","Erwin",NA,NA,NA,NA,NA,1980-11-04,NA
-"11000948","Holtz","Uwe",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1972-12-13,NA
+"11000948","Holtz","Uwe",NA,NA,NA,"Dr.","Prof. Dr.",1972-12-13,NA
 "11000949","Holz","Joachim",NA,NA,NA,NA,NA,1990-10-03,NA
 "11000950","Holzapfel","Friedrich",NA,NA,NA,"Dr.","Dr.",1949-09-07,NA
 "11000951","Holzmeister","Lieselotte",NA,NA,NA,NA,NA,1968-02-05,NA
@@ -1098,7 +1098,7 @@
 "11001023","Jelpke","Ulla",NA,NA,NA,NA,NA,1990-12-20,NA
 "11001024","Jeltsch","Karin",NA,NA,NA,NA,NA,1990-12-20,NA
 "11001025","Jenninger","Philipp",NA,NA,NA,"Dr.","Dr.",1969-10-20,NA
-"11001026","Jens","Uwe",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1972-12-13,NA
+"11001026","Jens","Uwe",NA,NA,NA,"Dr.","Prof. Dr.",1972-12-13,NA
 "11001027","Jentsch","Hans-Joachim","(Wiesbaden)",NA,NA,"Dr.","Dr.",1976-12-14,NA
 "11001028","Jentzsch","Wilhelm",NA,NA,NA,"Dr.","Dr.",1953-10-06,NA
 "11001029","Jobst","Dionys",NA,NA,NA,"Dr.","Dr.",1969-10-20,NA
@@ -1188,16 +1188,16 @@
 "11001107","Klabunde","Erich",NA,NA,NA,NA,NA,1949-09-07,NA
 "11001108","Klappert","Marianne",NA,NA,NA,NA,NA,1990-12-20,NA
 "11001109","Klausner","Wolfgang",NA,NA,NA,NA,NA,1953-10-06,NA
-"11001110","Kleditzsch","Jürgen",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1990-10-03,NA
+"11001110","Kleditzsch","Jürgen",NA,NA,NA,"Dr.","Prof. Dr.",1990-10-03,NA
 "11001111","Klee","Marie-Elisabeth",NA,NA,NA,NA,NA,1961-10-17,NA
 "11001112","Klein","Günter","(Berlin)",NA,NA,"Dr.","Dr.",1961-10-17,NA
 "11001113","Klein","Günter","(Bremen)",NA,NA,NA,NA,1990-12-20,NA
 "11001114","Klein","Hans","(München)",NA,NA,NA,NA,1976-12-14,NA
-"11001115","Klein","Hans Hugo","(Göttingen)",NA,NA,"Prof. Dr.","Prof. Dr.",1972-12-13,NA
+"11001115","Klein","Hans Hugo","(Göttingen)",NA,NA,"Dr.","Prof. Dr.",1972-12-13,NA
 "11001116","Klein","Heinrich","(Dieburg)",NA,NA,NA,NA,1976-12-14,NA
 "11001117","Klein","Johann","(Saarbrücken)",NA,NA,NA,NA,1961-10-17,1965-10-17
 "11001117","Klein","Johann",NA,NA,NA,NA,NA,1965-10-19,NA
-"11001118","Klein","Josef","(Stolberg)",NA,NA,"Prof. Dr.","Prof. Dr.",1972-12-13,NA
+"11001118","Klein","Josef","(Stolberg)",NA,NA,"Dr.","Prof. Dr.",1972-12-13,NA
 "11001119","Klein","Thomas",NA,NA,NA,"Dr.","Dr.",1990-10-03,NA
 "11001120","Kleindinst","Josef Ferdinand",NA,NA,NA,"Dr.","Dr.",1949-09-07,NA
 "11001121","Kleinert","Detlef","(Hannover)",NA,NA,NA,NA,1983-03-29,NA
@@ -1342,7 +1342,7 @@
 "11001256","Kunz","Gerhard",NA,NA,NA,NA,NA,1971-12-13,1972-09-22
 "11001256","Kunz","Gerhard","(Berlin)",NA,NA,NA,NA,1972-12-13,NA
 "11001257","Kunz","Lothar","(Schwalbach)",NA,NA,NA,NA,1953-10-06,NA
-"11001258","Kunz","Max","(Weiden)",NA,NA,"Prof. Dr.","Prof. Dr.",1972-12-13,NA
+"11001258","Kunz","Max","(Weiden)",NA,NA,"Dr.","Prof. Dr.",1972-12-13,NA
 "11001259","Kunze","Johannes",NA,NA,NA,NA,NA,1949-09-07,NA
 "11001259","Kunze","Johannes","(Bielefeld)",NA,NA,NA,NA,1953-10-06,1957-10-06
 "11001260","Kunze","Werner",NA,NA,NA,NA,NA,1965-10-19,NA
@@ -1350,7 +1350,7 @@
 "11001263","Kurtz","Josef",NA,NA,NA,NA,NA,1964-10-12,NA
 "11001264","Kutschera","Walter",NA,NA,NA,NA,NA,1953-10-06,NA
 "11001265","Ladebeck","Artur",NA,NA,NA,NA,NA,1953-10-06,NA
-"11001266","Laermann","Karl-Hans",NA,NA,NA,"Prof. Dr. - Ing.","Prof. Dr. - Ing.",1974-06-28,NA
+"11001266","Laermann","Karl-Hans",NA,NA,NA,"Dr.","Prof. Dr. - Ing.",1974-06-28,NA
 "11001267","Laforet","Wilhelm",NA,NA,NA,"Dr.","Dr.",1949-09-07,NA
 "11001268","Lagershausen","Karl-Hans",NA,NA,NA,NA,NA,1972-12-13,NA
 "11001269","Lahnstein","Manfred",NA,NA,NA,NA,NA,1983-03-29,NA
@@ -1379,7 +1379,7 @@
 "11001290","Larcher","Detlev",NA,NA,"von",NA,NA,1990-12-20,NA
 "11001291","Lattmann","Dieter",NA,NA,NA,NA,NA,1972-12-13,NA
 "11001292","Lattmann","Herbert",NA,NA,NA,NA,NA,1982-04-27,NA
-"11001293","Laufs","Paul",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1976-12-14,NA
+"11001293","Laufs","Paul",NA,NA,NA,"Dr.","Prof. Dr.",1976-12-14,NA
 "11001294","Laumann","Karl-Josef",NA,NA,NA,NA,NA,1990-12-20,NA
 "11001295","Lauritzen","Lauritz",NA,NA,NA,"Dr.","Dr.",1969-10-20,NA
 "11001296","Lausen","Willi",NA,NA,NA,NA,NA,1949-09-07,NA
@@ -1392,7 +1392,7 @@
 "11001302","Lehment","Conrad-Michael",NA,NA,NA,NA,NA,1990-10-03,NA
 "11001303","Lehne","Klaus-Heiner",NA,NA,NA,NA,NA,1992-03-12,NA
 "11001304","Lehr","Robert",NA,NA,NA,"Dr.","Dr. Dr.",1949-09-07,NA
-"11001305","Lehr","Ursula Maria",NA,NA,NA,"Prof. Dr.","Prof. Dr. Dr. h. c.",1990-12-20,NA
+"11001305","Lehr","Ursula Maria",NA,NA,NA,"Dr. Dr. h. c.","Prof. Dr. Dr. h. c.",1990-12-20,NA
 "11001306","Leibbrand","Robert",NA,NA,NA,NA,NA,1949-09-07,NA
 "11001307","Leibfried","Eugen",NA,NA,NA,NA,NA,1949-09-07,NA
 "11001308","Leibing","Christian",NA,NA,NA,NA,NA,1955-08-08,NA
@@ -1499,7 +1499,7 @@
 "11001402","Maaß","Erich","(Wilhelmshaven)",NA,NA,NA,NA,1990-12-20,NA
 "11001403","Mälzig","Konrad",NA,NA,NA,"Dr.","Dr.",1961-10-17,NA
 "11001404","Männing","Peter",NA,NA,NA,NA,NA,1975-06-19,NA
-"11001405","Männle","Ursula",NA,NA,NA,"Prof.","Prof.",1979-10-04,NA
+"11001405","Männle","Ursula",NA,NA,NA,NA,"Prof.",1979-10-04,NA
 "11001406","Maerkl","Heinrich",NA,NA,NA,NA,NA,1952-09-01,NA
 "11001407","Magin","Theo",NA,NA,NA,NA,NA,1980-11-04,NA
 "11001408","Mahlo","Dietrich",NA,NA,NA,"Dr.","Dr.",1987-12-09,NA
@@ -1595,7 +1595,7 @@
 "11001491","Meyer","Ernst Wilhelm","(Frankfurt)",NA,NA,"Dr.","Dr.",1957-10-15,NA
 "11001492","Meyer","Heinz","(Bremen)",NA,NA,NA,NA,1949-09-07,NA
 "11001493","Meyer","Heinz-Werner",NA,NA,NA,NA,NA,1987-02-18,NA
-"11001494","Meyer","Jürgen","(Ulm)",NA,NA,"Prof. Dr.","Prof. Dr.",1990-12-20,NA
+"11001494","Meyer","Jürgen","(Ulm)",NA,NA,"Dr.","Prof. Dr.",1990-12-20,NA
 "11001495","Meyer","Philipp","(Oppertshofen)",NA,NA,NA,NA,1953-10-06,NA
 "11001496","Meyer","Trudel","(Dortmund)",NA,NA,NA,NA,1953-10-06,NA
 "11001497","Meyer zu Bentrup","Reinhard",NA,NA,NA,"Dr.","Dr.",1976-12-14,NA
@@ -1764,8 +1764,8 @@
 "11001654","Orgaß","Gerhard",NA,NA,NA,NA,NA,1965-10-19,NA
 "11001655","Orth","Eduard",NA,NA,NA,"Dr.","Dr.",1949-09-07,NA
 "11001656","Orth","Elisabeth",NA,NA,NA,"Dr.","Dr.",1969-10-20,NA
-"11001657","Ortleb","Rainer",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1990-10-03,2001-12-21
-"11001657","Solka","Rainer",NA,NA,NA,"Prof. Dr.","Prof. Dr.",2001-12-22,NA
+"11001657","Ortleb","Rainer",NA,NA,NA,"Dr.","Prof. Dr.",1990-10-03,2001-12-21
+"11001657","Solka","Rainer",NA,NA,NA,"Dr.","Prof. Dr.",2001-12-22,NA
 "11001658","Osswald","Klaus-Dieter",NA,NA,NA,"Dr.","Prof. Dr.",1980-11-04,NA
 "11001659","Ost","Friedhelm",NA,NA,NA,NA,NA,1990-12-20,NA
 "11001660","Ostertag","Adolf",NA,NA,NA,NA,NA,1990-12-20,NA
@@ -1811,7 +1811,7 @@
 "11001698","Petersen","Helmut",NA,NA,NA,NA,NA,1953-10-06,NA
 "11001699","Petersen","Peter",NA,NA,NA,NA,NA,1965-10-19,NA
 "11001700","Petzold","Ulrich",NA,NA,NA,NA,NA,1990-12-20,NA
-"11001701","Pfaff","Martin",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1990-12-20,NA
+"11001701","Pfaff","Martin",NA,NA,NA,"Dr.","Prof. Dr.",1990-12-20,NA
 "11001702","Pfeffermann","Gerhard O.",NA,NA,NA,NA,NA,1972-12-13,NA
 "11001703","Pfeifer","Anton",NA,NA,NA,NA,NA,1969-10-20,NA
 "11001704","Pfeiffer","Angelika",NA,NA,NA,NA,NA,1990-10-03,NA
@@ -1825,7 +1825,7 @@
 "11001712","Philipp","Gerhard",NA,NA,NA,"Dr.","Dr. - Ing.",1957-10-15,NA
 "11001713","Philipp","Ingeborg",NA,NA,NA,NA,NA,1992-05-21,NA
 "11001714","Picard","Walter",NA,NA,NA,NA,NA,1965-10-19,NA
-"11001715","Pick","Eckhart",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1987-02-18,NA
+"11001715","Pick","Eckhart",NA,NA,NA,"Dr.","Prof. Dr.",1987-02-18,NA
 "11001716","Pieroth","Elmar",NA,NA,NA,NA,NA,1969-10-20,NA
 "11001717","Pieser","Liselotte",NA,NA,NA,NA,NA,1968-06-26,NA
 "11001718","Pietscher","Carl",NA,NA,NA,NA,NA,1957-10-15,NA
@@ -1953,7 +1953,7 @@
 "11001837","Riebensahm","Dietrich",NA,NA,NA,NA,NA,1982-12-13,NA
 "11001838","Riede","Paula","(Oeffingen)",NA,NA,"Dr.","Dr.",1972-12-13,NA
 "11001839","Riedel","Clemens","(Frankfurt)",NA,NA,NA,NA,1957-10-15,NA
-"11001841","Rieder","Norbert",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1990-12-20,NA
+"11001841","Rieder","Norbert",NA,NA,NA,"Dr.","Prof. Dr.",1990-12-20,NA
 "11001842","Riederer von Paar","Max",NA,"Freiherr",NA,NA,NA,1953-10-06,NA
 "11001843","Riedl","Erich","(München)",NA,NA,"Dr.","Dr.",1969-10-20,NA
 "11001844","Riege","Gerhard",NA,NA,NA,"Dr.","Dr.",1990-10-03,NA
@@ -1998,7 +1998,7 @@
 "11001880","Rommerskirchen","Josef",NA,NA,NA,NA,NA,1960-12-12,NA
 "11001881","Ronneburger","Uwe",NA,NA,NA,NA,NA,1972-12-13,NA
 "11001882","Rose","Klaus",NA,NA,NA,"Dr.","Dr.",1977-03-24,NA
-"11001883","Rosenthal","Philip",NA,NA,NA,"Prof.","Prof.",1969-10-20,NA
+"11001883","Rosenthal","Philip",NA,NA,NA,NA,"Prof.",1969-10-20,NA
 "11001884","Roser","Hans",NA,NA,NA,NA,NA,1969-10-20,NA
 "11001885","Roske","Norbert",NA,NA,NA,"Dr.","Dr.",1990-06-22,NA
 "11001886","Ross","Kurt",NA,NA,NA,NA,NA,1964-08-18,NA
@@ -2215,7 +2215,7 @@
 "11002080","Schröder","Horst","(Lüneburg)",NA,NA,"Dr.","Dr. h. c.",1972-12-13,NA
 "11002081","Schröder","Kurt","(Osterode)",NA,NA,NA,NA,1957-10-15,NA
 "11002082","Schroeder","Louise","(Berlin)",NA,NA,NA,NA,1949-09-07,NA
-"11002083","Schröder","Richard","(Blankenfelde)",NA,NA,"Prof. Dr.","Prof. Dr. Dr. h. c.",1990-10-03,NA
+"11002083","Schröder","Richard","(Blankenfelde)",NA,NA,"Dr.","Prof. Dr. Dr. h. c.",1990-10-03,NA
 "11002084","Schröer","Thomas","(Mülheim)",NA,NA,NA,NA,1980-11-04,NA
 "11002085","Schröter","Carl",NA,NA,NA,NA,NA,1949-09-07,NA
 "11002086","Schröter","Gisela",NA,NA,NA,NA,NA,1990-12-20,2003-10-03
@@ -2273,7 +2273,7 @@
 "11002128","Schwarz-Schilling","Christian",NA,NA,NA,"Dr.","Dr.",1976-12-14,NA
 "11002129","Schwarzhaupt","Elisabeth",NA,NA,NA,"Dr.","Dr.",1953-10-06,NA
 "11002130","Schwedler","Rolf",NA,NA,NA,NA,NA,1972-12-13,NA
-"11002131","Schweitzer","Carl-Christoph",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1972-12-13,NA
+"11002131","Schweitzer","Carl-Christoph",NA,NA,NA,"Dr.","Prof. Dr.",1972-12-13,NA
 "11002132","Schwencke","Olaf",NA,NA,NA,"Dr.","Dr.",1972-12-13,1976-12-13
 "11002132","Schwencke","Olaf","(Nienburg)",NA,NA,"Dr.","Dr.",1976-12-14,NA
 "11002133","Schwenk","Wolfgang","(Stade)",NA,NA,"Dr.","Dr.",1974-06-03,NA
@@ -2369,7 +2369,7 @@
 "11002217","Stark","Anton","(Nürtingen)",NA,NA,"Dr.","Dr.",1969-10-20,NA
 "11002218","Starke","Heinz",NA,NA,NA,"Dr.","Dr.",1953-10-06,1965-10-17
 "11002218","Starke","Heinz","(Franken)",NA,NA,"Dr.","Dr.",1965-10-19,NA
-"11002219","Starnick","Jürgen",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1990-12-20,NA
+"11002219","Starnick","Jürgen",NA,NA,NA,"Dr.","Prof. Dr.",1990-12-20,NA
 "11002220","Stauch","Robert",NA,NA,NA,NA,NA,1949-09-07,NA
 "11002221","Staudt","Reinhold",NA,NA,NA,"Dr.","Dr.",1976-12-14,NA
 "11002222","Stauffenberg","Franz Ludwig Schenk",NA,"Graf","von",NA,NA,1972-12-13,NA
@@ -2489,7 +2489,7 @@
 "11002332","Tobaben","Peter",NA,NA,NA,NA,NA,1949-09-07,NA
 "11002333","Todenhöfer","Jürgen",NA,NA,NA,"Dr.","Dr.",1972-12-13,NA
 "11002334","Tönjes","Albert",NA,NA,NA,NA,NA,1965-10-19,NA
-"11002335","Töpfer","Klaus",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1990-12-20,NA
+"11002335","Töpfer","Klaus",NA,NA,NA,"Dr.","Prof. Dr.",1990-12-20,NA
 "11002336","Toetemeyer","Hans-Günther",NA,NA,NA,NA,NA,1983-03-29,NA
 "11002337","Topmann","Günter",NA,NA,NA,NA,NA,1976-12-14,NA
 "11002338","Toscher","Willibald",NA,NA,NA,NA,NA,1990-10-03,NA
@@ -2582,7 +2582,7 @@
 "11002420","Walter","Albert",NA,NA,NA,NA,NA,1949-09-07,NA
 "11002421","Walter","Fritz",NA,NA,NA,NA,NA,1957-10-15,NA
 "11002422","Walter","Ralf","(Cochem)",NA,NA,NA,NA,1991-06-10,NA
-"11002423","Walther","Hansjoachim",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1990-10-03,NA
+"11002423","Walther","Hansjoachim",NA,NA,NA,"Dr.","Prof. Dr.",1990-10-03,NA
 "11002424","Walther","Rudi",NA,NA,NA,NA,NA,1972-12-13,1990-12-20
 "11002424","Walther","Rudi","(Zierenberg)",NA,NA,NA,NA,1990-12-20,NA
 "11002425","Walz","Hanna",NA,NA,NA,"Dr.","Dr.",1969-10-20,NA
@@ -2699,7 +2699,7 @@
 "11002529","Winterstein","Ladislaus",NA,NA,NA,NA,NA,1964-10-26,NA
 "11002530","Wirths","Carl",NA,NA,NA,NA,NA,1949-09-07,NA
 "11002531","Wischnewski","Hans-Jürgen",NA,NA,NA,NA,NA,1957-10-15,NA
-"11002532","Wisniewski","Roswitha",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1976-12-14,NA
+"11002532","Wisniewski","Roswitha",NA,NA,NA,"Dr.","Prof. Dr.",1976-12-14,NA
 "11002533","Wissebach","Hans",NA,NA,NA,NA,NA,1969-10-20,NA
 "11002534","Wissmann","Matthias",NA,NA,NA,NA,NA,1976-12-14,NA
 "11002535","Witek","Lothar",NA,NA,NA,NA,NA,1980-11-04,NA
@@ -2827,7 +2827,7 @@
 "11002653","Fograscher","Gabriele",NA,NA,NA,NA,NA,1994-11-10,NA
 "11002654","Follak","Iris",NA,NA,NA,NA,NA,1994-11-10,NA
 "11002655","Freitag","Dagmar",NA,NA,NA,NA,NA,1994-11-10,NA
-"11002656","Frick","Gisela",NA,NA,NA,"Prof.","Prof.",1994-11-10,NA
+"11002656","Frick","Gisela",NA,NA,NA,NA,"Prof.",1994-11-10,NA
 "11002657","Friedrich","Gerhard","(Erlangen)",NA,NA,"Dr.","Dr.",1987-02-18,NA
 "11002659","Gerhardt","Wolfgang",NA,NA,NA,"Dr.","Dr.",1994-11-10,NA
 "11002660","Gloser","Günter",NA,NA,NA,NA,NA,1994-11-10,NA
@@ -2941,7 +2941,7 @@
 "11002760","Richter","Roland",NA,NA,NA,NA,NA,1994-11-10,NA
 "11002761","Richwien","Roland",NA,NA,NA,NA,NA,1994-11-10,NA
 "11002762","Robbe","Reinhold",NA,NA,NA,NA,NA,1994-11-10,NA
-"11002763","Rochlitz","Jürgen",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1994-11-10,NA
+"11002763","Rochlitz","Jürgen",NA,NA,NA,"Dr.","Prof. Dr.",1994-11-10,NA
 "11002764","Rössel","Uwe-Jens",NA,NA,NA,"Dr.","Dr.",1994-11-10,NA
 "11002765","Röttgen","Norbert",NA,NA,NA,"Dr.","Dr.",1994-11-10,NA
 "11002766","Ronsöhr","Heinrich-Wilhelm",NA,NA,NA,NA,NA,1994-11-10,NA
@@ -2960,7 +2960,7 @@
 "11002779","Schmidt","Albert","(Hitzhofen)",NA,NA,NA,NA,1994-11-10,2002-11-26
 "11002779","Schmidt","Albert","(Ingolstadt)",NA,NA,NA,NA,2002-11-26,NA
 "11002780","Schmidt","Dagmar","(Meschede)",NA,NA,NA,NA,1994-11-10,NA
-"11002781","Schmidt-Jortzig","Edzard",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1994-11-10,NA
+"11002781","Schmidt-Jortzig","Edzard",NA,NA,NA,"Dr.","Prof. Dr.",1994-11-10,NA
 "11002782","Schmiedeberg","Hans-Otto",NA,NA,NA,NA,NA,1994-11-10,NA
 "11002783","Schmitt","Heinz","(Berg)",NA,NA,NA,NA,1994-11-10,2003-01-17
 "11002783","Schmitt","Heinz","(Landau)",NA,NA,NA,NA,2003-01-18,NA
@@ -2968,7 +2968,7 @@
 "11002785","Schnieber-Jastram","Birgit",NA,NA,NA,NA,NA,1994-11-10,NA
 "11002786","Schönberger","Ursula",NA,NA,NA,NA,NA,1994-11-10,NA
 "11002787","Schubert","Mathias",NA,NA,NA,"Dr.","Dr.",1994-11-10,NA
-"11002788","Schuchardt","Erika",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1994-11-10,NA
+"11002788","Schuchardt","Erika",NA,NA,NA,"Dr.","Prof. Dr.",1994-11-10,NA
 "11002789","Schütze","Diethard","(Berlin)",NA,NA,NA,NA,1994-11-10,NA
 "11002790","Schuhmann","Richard","(Delitzsch)",NA,NA,NA,NA,1994-11-10,NA
 "11002791","Schultz","Reinhard","(Everswinkel)",NA,NA,NA,NA,1994-11-10,NA
@@ -2995,7 +2995,7 @@
 "11002811","Storm","Andreas",NA,NA,NA,NA,NA,1994-11-10,NA
 "11002812","Straubinger","Max",NA,NA,NA,NA,NA,1994-11-10,NA
 "11002813","Tauss","Jörg",NA,NA,NA,NA,NA,1994-11-10,NA
-"11002814","Teichmann","Bodo",NA,NA,NA,"Prof. Dr.","Prof. Dr.",1994-11-10,NA
+"11002814","Teichmann","Bodo",NA,NA,NA,"Dr.","Prof. Dr.",1994-11-10,NA
 "11002815","Teiser","Michael",NA,NA,NA,NA,NA,1994-11-10,NA
 "11002816","Teuchner","Jella",NA,NA,NA,NA,NA,1994-11-10,NA
 "11002817","Thieser","Dietmar",NA,NA,NA,NA,NA,1994-11-10,NA
@@ -3360,7 +3360,7 @@
 "11003607","Pawelski","Rita",NA,NA,NA,NA,NA,2002-10-17,NA
 "11003608","Pfeiffer","Joachim",NA,NA,NA,"Dr.","Dr.",2002-10-17,NA
 "11003609","Pfeiffer","Sibylle",NA,NA,NA,NA,NA,2002-10-17,NA
-"11003610","Pinkwart","Andreas",NA,NA,NA,"Prof. Dr.",NA,2002-10-17,NA
+"11003610","Pinkwart","Andreas",NA,NA,NA,"Dr.",NA,2002-10-17,NA
 "11003611","Priesmeier","Wilhelm",NA,NA,NA,"Dr.","Dr.",2002-10-17,NA
 "11003612","Pronold","Florian",NA,NA,NA,NA,NA,2002-10-17,NA
 "11003613","Raab","Daniela",NA,NA,NA,NA,NA,2002-10-17,2010-12-14
@@ -4521,7 +4521,8 @@
 "11005147","Mehltretter","Andreas",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005148","Mehmet Ali","Takis",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005149","Menge","Susanne",NA,NA,NA,NA,NA,2021-10-26,NA
-"11005150","Merten","Anikó",NA,NA,NA,NA,NA,2021-10-26,NA
+"11005150","Merten","Anikó",NA,NA,NA,NA,NA,2021-10-26,2022-08-03
+"11005150","Glogowski-Merten","Anikó",NA,NA,NA,NA,NA,2022-08-04,NA
 "11005151","Mesarosch","Robin",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005152","Michaelsen","Swantje Henrike",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005153","Michel","Kathrin",NA,NA,NA,NA,NA,2021-10-26,NA
@@ -4569,7 +4570,8 @@
 "11005195","Rudolph","Tina",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005197","Saleh","Kassem Taher",NA,NA,NA,NA,NA,2021-10-26,2022-02-08
 "11005197","Taher Saleh","Kassem",NA,NA,NA,NA,NA,2022-02-09,NA
-"11005198","Santos Firnhaber","Catarina",NA,NA,"dos",NA,NA,2021-10-26,NA
+"11005198","Santos Firnhaber","Catarina",NA,NA,"dos",NA,NA,2021-10-26,2022-09-02
+"11005198","Santos-Wintz","Catarina",NA,NA,"dos",NA,NA,2022-09-03,NA
 "11005199","Schäfer","Ingo",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005200","Schäfer","Jamila",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005201","Schäfer","Sebastian",NA,NA,NA,"Dr.","Dr.",2021-10-26,NA
@@ -4642,3 +4644,5 @@
 "11005268","Zschau","Katrin",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005273","Raffelhüschen","Claudia",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005289","Bünger","Clara",NA,NA,NA,NA,NA,2022-01-05,NA
+"11005298","Sacher","Michael",NA,NA,NA,NA,NA,2022-06-30,NA
+"11005299","Gründer","Nils",NA,NA,NA,NA,NA,2022-08-02,NA
