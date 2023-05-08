@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DTD für die Stammdaten der Abgeordneten des Deutschen Bundestages ab der 1. Wahlperiode -->
+<!ELEMENT DOCUMENT (VERSION, MDB+)>
+	<!--DOCUMENT bestehend aus Dokumentenversion und Angaben zu Abgeordneten des Deutschen Bundestages
+		Elemente, die mit einem + gekennzeichnet sind, können einmal oder mehrmals vorkommen.
+	-->
+<!ELEMENT VERSION (#PCDATA)>
+	<!--Dokumentenversion
+	-->
+<!ELEMENT MDB (ID, NAMEN, BIOGRAFISCHE_ANGABEN, WAHLPERIODEN)>
+	<!--Angaben zu Abgeordneten des Deutschen Bundestages
+		-->
+<!ELEMENT ID (#PCDATA)>
+	<!--Identifikationsnummer des Abgeordneten
+		Format: 8-stellig
+	-->
+<!ELEMENT NAMEN (NAME+)>
+	<!--Namensbestandteile zu Namen des Abgeordneten einschl. Namenshistorie
+		Element kann einmal oder mehrmals vorkommen.
+	-->
+<!ELEMENT BIOGRAFISCHE_ANGABEN (GEBURTSDATUM?, GEBURTSORT?, GEBURTSLAND?, STERBEDATUM?, GESCHLECHT?, FAMILIENSTAND?, RELIGION?, BERUF?, PARTEI_KURZ?, VITA_KURZ?, VEROEFFENTLICHUNGSPFLICHTIGES?)>
+	<!--Biografische Angaben des Abgeordneten
+		Elemente, die mit einem ? gekennzeichnet sind, können keinmal oder genau einmal vorkommen.
+		-->
+<!ELEMENT WAHLPERIODEN (WAHLPERIODE+)>
+	<!--Angaben zur Wahlperiode 
+		Element kann einmal oder mehrmals vorkommen.
+	-->
+<!ELEMENT NAME (NACHNAME, VORNAME, ORTSZUSATZ, ADEL, PRAEFIX, ANREDE_TITEL, AKAD_TITEL, HISTORIE_VON, HISTORIE_BIS)>
+	<!--Namensbestandteile je Name des Abgeordneten einschl. Namenshistorie
+	-->	
+<!ELEMENT GEBURTSDATUM (#PCDATA)>
+	<!--Geburtsdatum des Abgeordneten
+		-->
+<!ELEMENT GEBURTSORT (#PCDATA)>
+	<!--Geburtsort des Abgeordneten
+		-->
+<!ELEMENT GEBURTSLAND (#PCDATA)>
+	<!--Geburtsland des Abgeordneten
+		-->
+<!ELEMENT STERBEDATUM (#PCDATA)>
+	<!--Sterbedatum des Abgeordneten
+		-->
+<!ELEMENT GESCHLECHT (#PCDATA)>
+	<!--Geschlecht des Abgeordneten
+		-->
+<!ELEMENT FAMILIENSTAND (#PCDATA)>
+	<!--Familienstand des Abgeordneten
+		-->
+<!ELEMENT RELIGION (#PCDATA)>
+	<!--Religion des Abgeordneten
+		-->
+<!ELEMENT BERUF (#PCDATA)>
+	<!--Beruf des Abgeordneten
+		-->
+<!ELEMENT PARTEI_KURZ (#PCDATA)>
+	<!--Parteizugehörigkeit des Abgeordneten - Kurzform
+		-->
+<!ELEMENT VITA_KURZ (#PCDATA)>
+	<!--Kurzbiografie des Abgeordneten (nur aktuelle Wahlperiode)
+		-->
+<!ELEMENT VEROEFFENTLICHUNGSPFLICHTIGES (#PCDATA)>
+	<!--Veröffentlichungspflichtige Angaben des Abgeordneten (nur aktuelle Wahlperiode)
+		Kategorien der Veröffentlichung
+		1. Berufliche Tätigkeit vor der Mitgliedschaft im Deutschen Bundestag
+		  (§ 1 Abs. 1 Nr. 1 VR, Nr. 2 und 5 Ausführungsbestimmungen - AB)
+		2. Entgeltliche Tätigkeiten neben dem Mandat
+		  (§ 1 Abs. 2 Nr. 1 VR, Nr. 3, 4 und 8 AB)
+		3. Funktionen in Unternehmen
+		  (§ 1 Abs. 2 Nr. 2 VR, Nr. 3 AB)
+		4. Funktionen in Körperschaften und Anstalten des öffentlichen Rechts
+		  (§ 1 Abs. 2 Nr. 3 VR, Nr. 3 AB)
+		5. Funktionen in Vereinen, Verbänden und Stiftungen
+		  (§ 1 Abs. 2 Nr. 4 VR, Nr. 3 AB)
+		6. Vereinbarungen über künftige Tätigkeiten oder Vermögensvorteile
+		  (§ 1 Abs. 2 Nr. 5 VR, Nr. 6 AB)
+		7. Beteiligungen an Kapital- oder Personengesellschaften
+		  (§ 1 Abs. 2 Nr. 6 VR, Nr. 7 AB)
+		8. Spenden
+		  (§ 4 VR, Nr. 10 AB)
+		-->
+<!ELEMENT WAHLPERIODE (WP, MDBWP_VON, MDBWP_BIS, WKR_NUMMER, WKR_NAME, WKR_LAND, LISTE, MANDATSART, INSTITUTIONEN)>
+	<!--Angaben je Wahlperiode des Abgeordneten
+		-->
+<!ELEMENT NACHNAME (#PCDATA)>
+	<!--Nachname des Abgeordneten
+	-->
+<!ELEMENT VORNAME (#PCDATA)>
+	<!--VORNAME des Abgeordneten
+	-->
+<!ELEMENT ORTSZUSATZ (#PCDATA)>
+	<!--Ortszusatz zu NACHNAME, zur Unterscheidung bei Namensgleichheit
+		z.B. (Berlin)
+	-->
+<!ELEMENT ADEL (#PCDATA)>
+	<!--Adelsprädikat (z.B. Freiherr, Baron u.ä.)
+	-->
+<!ELEMENT PRAEFIX (#PCDATA)>
+	<!--Namenspräfix (z.B. von, van u.ä.)
+	-->
+<!ELEMENT ANREDE_TITEL (#PCDATA)>
+	<!--Anrede-Titel des Abgeordneten (z.B. Dr., Prof. u.ä.)
+		-->
+<!ELEMENT AKAD_TITEL (#PCDATA)>
+	<!--Akademischer Titel des Abgeordneten (z.B. Dr.-Ing., Prof. Dr. h. c. u.ä.)
+	-->
+<!ELEMENT HISTORIE_VON (#PCDATA)>
+	<!--Historie zu den Namensbestandteilen des Abgeordneten - gültig von
+		Format: TT.MM.JJJJ
+		(ab Eintritt in den Bundestag oder ab Änderung der Namensbestandteile während des Mandates (z.B. durch Heirat))
+	-->
+<!ELEMENT HISTORIE_BIS (#PCDATA)>
+	<!--Historie zu den Namensbestandteilen des Abgeordneten - gültig bis
+		Format: TT.MM.JJJJ
+		(bei Änderung der Namensbestandteile während des Mandates)
+	-->
+<!ELEMENT WP (#PCDATA)>
+	<!--Nummer der Wahlperiode
+		Format: 1 oder 2-stellig	
+	-->
+<!ELEMENT MDBWP_VON (#PCDATA)>
+	<!--Beginn der Wahlperiodenzugehörigkeit des Abgeordneten
+		Format: TT.MM.JJJJ
+	-->
+<!ELEMENT MDBWP_BIS (#PCDATA)>
+	<!--Ende der Wahlperiodenzugehörigkeit des Abgeordneten
+		Format: TT.MM.JJJJ
+	-->
+<!ELEMENT WKR_NUMMER (#PCDATA)>
+	<!--Nummer des Wahlkreises, in dem der MDB kandidiert hat oder gewählt wurde.
+		Format: 1 bis 3-stellig
+	-->
+<!ELEMENT WKR_NAME (#PCDATA)>
+	<!--Wahlkreisname, in dem der MDB kandidiert hat oder gewählt wurde.
+	-->
+<!ELEMENT WKR_LAND (#PCDATA)>
+	<!--Kurzbezeichnung des Bundeslandes, 
+	    in dem der Wahlkreis liegt, in dem der MDB kandidiert hat oder gewählt wurde.
+	-->
+<!ELEMENT LISTE (#PCDATA)>
+	<!--Kurzbezeichnung der Liste, über die der MDB kandidiert hat oder gewählt wurde.
+		Normalform: Bundeslandkürzel
+		Ausnahmen: * Eingliederung Saarland, ** Berlin West Änderungsgesetz, *** von der Volkskammer gewählt
+		Format: 1 bis 3-stellig
+	-->
+<!ELEMENT MANDATSART (#PCDATA)>
+	<!--Art des Mandates (Direktmandat, Landesliste oder Volkskammer)
+	-->
+<!ELEMENT INSTITUTIONEN (INSTITUTION*)>
+	<!--Angaben zu Institutionen (hier: nur Fraktion, außer aktuelle Wahlperiode)
+		Element kann einmal oder mehrmals vorkommen.
+	-->
+<!ELEMENT INSTITUTION (INSART_LANG, INS_LANG, MDBINS_VON, MDBINS_BIS, FKT_LANG, FKTINS_VON, FKTINS_BIS)>
+	<!--Angaben je Institution (hier: nur Fraktion, außer aktuelle Wahlperiode)
+	-->
+<!ELEMENT INSART_LANG (#PCDATA)>
+	<!--Langbezeichnung der Institutionsart 
+		(z.B. Fraktion, Ausschuss usw., hier: nur Fraktion, außer aktuelle Wahlperiode)
+	-->
+<!ELEMENT INS_LANG (#PCDATA)>
+	<!--Langbezeichnung der Institution 
+		(z.B. Fraktionsname, Ausschussname usw., hier: nur Fraktion, außer aktuelle Wahlperiode)
+	-->
+<!ELEMENT MDBINS_VON (#PCDATA)>
+	<!--Beginn der Institutionszugehörigkeit des Abgeordneten
+		Format: TT.MM.JJJJ
+	-->
+<!ELEMENT MDBINS_BIS (#PCDATA)>
+	<!--Ende der Institutionszugehörigkeit des Abgeordneten
+		Format: TT.MM.JJJJ
+	-->
+<!ELEMENT FKT_LANG (#PCDATA)>
+	<!--Langbezeichnung der ausgeübten Funktion des Abgeordneten in einer Institution
+		(z.B. Ordentliches Mitglied, Vorsitzender, Stellvertreter usw.)
+	-->
+<!ELEMENT FKTINS_VON (#PCDATA)>
+	<!--Beginn der Funktionsausübung des Abgeordneten in einer Institution
+		Format: TT.MM.JJJJ
+	-->
+<!ELEMENT FKTINS_BIS (#PCDATA)>
+	<!--Ende der Funktionsausübung des Abgeordneten in einer Institution
+		Format: TT.MM.JJJJ
+	-->
