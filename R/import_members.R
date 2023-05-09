@@ -246,6 +246,8 @@ restructure_list <- function(list_raw) {
     dplyr::mutate(dplyr::across(.fns = unlist_all)) %>%
     dplyr::mutate(dplyr::across(.cols = c("GEBURTSDATUM", "STERBEDATUM"),
                                 .fns = ~as.Date(.x, format = "%d.%m.%Y"))) %>%
+    dplyr::mutate(dplyr::across(.cols = c("FAMILIENSTAND", "RELIGION", "BERUF"),
+                                .fns = recode_missing)) %>%
     dplyr::relocate(.data$ID,
                     .data$GEBURTSDATUM,
                     .data$GEBURTSORT,
@@ -340,6 +342,10 @@ unlist_all <- function(x) {
   unlist(x)
 }
 
+recode_missing <- function(x) {
+  x[grepl("((keine)|(ohne)) Angabe(n)?", x)] <- NA_character_
+  x
+}
 
 add_labels <- function(df){
   for (i in seq_along(df)){
