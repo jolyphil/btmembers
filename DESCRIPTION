@@ -1,39 +1,41 @@
 Package: btmembers
 Title: Import Data on All Members of the Bundestag since 1949
-Version: 0.1.3
-Date: 2022-09-19
+Version: 0.2.0
+Date: 2023-05-13
 Authors@R: 
     person(given = "Philippe",
            family = "Joly",
            role = c("aut", "cre"),
            email = "philippe.joly@posteo.net",
            comment = c(ORCID = "0000-0002-4278-9439"))
-Description: The Bundestag distributes biographical and election data on all 
-    members of the parliament since 1949 in the form of an XML file (see: 
+Description: The Bundestag distributes data on all members of the parliament 
+    since 1949 in the form of an XML file (see: 
     <https://www.bundestag.de/services/opendata/>). This  data, however, can be 
     difficult to work with because XML files store information in an arbitrary 
     number of dimensions. btmembers downloads the file "Stammdaten aller 
     Abgeordneten seit 1949 im XML-Format" from the Bundestag website and 
     converts it to either (a) four data frames nested into a list (retaining all 
     the information of the original XML file) or (b) a single, condensed data 
-    frame, where units of analysis are member-terms.
+    frame, where the units of analysis are member-terms.
 Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 Imports: 
-    dplyr (>= 1.0.7),
+    dplyr (>= 1.0.10),
     magrittr (>= 1.5),
-    rlang (>= 0.4.11),
-    rvest (>= 1.0.2),
-    tibble (>= 3.0.3),
-    tidyr (>= 1.1.3),
-    xml2 (>= 1.2.0)
+    rlang (>= 1.1.0),
+    rvest (>= 1.0.3),
+    tibble (>= 3.1.8),
+    tidyr (>= 1.2.1),
+    xml2 (>= 1.3.3)
 Suggests: 
     knitr,
-    rmarkdown
+    purrr,
+    rmarkdown,
+    writexl
 VignetteBuilder: knitr
 URL: https://github.com/jolyphil/btmembers
 BugReports: https://github.com/jolyphil/btmembers/issues

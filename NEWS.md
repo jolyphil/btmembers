@@ -1,3 +1,13 @@
+# btmembers 0.2.0
+
+* The `force_from_bt` argument has been deprecated and is replaced by `data_source` with three options: `"auto"`, `"Bundestag"`, or `"GitHub"`. 
+* If `btmembers` finds more recent data on the Bundestag website, it will not prompt the user. 
+* Instead, the package now implements an automatic test and compares the version of the documentation file (`*.DTD`) stored internally and the one on the Bundestag website. If no difference is found, `btmembers` downloads and processes the new data. 
+* Missing values (ohne/keine Angabe) in the variables "FAMILIENSTAND", "RELIGION", and "BERUF" are recoded as `NA`.
+* Exported CSV files no longer contain line breaks.
+* The data is also exported to Excel using the `writexl` package. 
+
+
 # btmembers 0.1.3
 
 * Bug "Unable to locate XML file" was fixed.

@@ -4,33 +4,35 @@
 \alias{import_members}
 \title{Import data on all members of the Bundestag since 1949}
 \usage{
-import_members(condensed_df = FALSE, force_from_bt = FALSE)
+import_members(condensed_df = FALSE, data_source = "auto")
 }
 \arguments{
-\item{condensed_df}{logical; if \code{TRUE} join the four data frames contained
-in the default list into a single, condensed data frame. Warning: Some
-data is lost (see Value).}
+\item{condensed_df}{logical; if \code{TRUE}, the function joins the four data
+frames contained in the default list into a single, condensed data frame.
+Warning: Some data is lost (see Value).}
 
-\item{force_from_bt}{logical; if \code{TRUE} force the function to import the data
-directly from the Bundestag website. By default, the function compares
-the versions of the data on the Bundestag website and the pre-processed
-data stored in the package repository on GitHub. If the version on GitHub
-is the same as the one on the Bundestag website, the function downloads
-the data from GitHub. If the version on the Bundestag website is more
-recent, the user will be presented with a menu of three choices:
-(1) Download the new, non-tested version from the Bundestag website;
-(2) Download the older, pre-processed data from Github; or (3) Cancel.
-\code{force_from_bt = TRUE} never imports the data from GitHub.}
+\item{data_source}{character: \code{"auto"}, \code{"Bundestag"}, or \code{"GitHub"}. With
+the value \code{"auto"}, the function compares the versions of the data on the
+Bundestag website and the pre-processed data stored in the package
+repository on GitHub. If the version on GitHub is the same as the one on
+the Bundestag website, the function downloads the data from GitHub. If
+the version on the Bundestag website is more recent, the function checks
+if there were changes in the documentation of the XML file. If not,
+the function imports and processes the raw data from the Bundestag.
+With the value \code{"Bundestag"}, the function tests if the documentation of
+the XML file has been changed. If not, the function imports and processes
+the raw data from the Bundestag.
+With the value \code{"GitHub"}, the function imports the pre-processed data
+from the package repository on GitHub.}
 }
 \value{
-If \strong{\code{condensed_df = FALSE}} a list containing four data frames:
+If \code{condensed_df = FALSE}, a list containing four data frames:
 \code{namen} (names), \code{bio} (biographical information), \code{wp}
-(parliamentary terms), and \code{inst} (institutions).
-
-A codebook with a full list of variables is available
+(parliamentary terms), and \code{inst} (institutions). A \strong{codebook} with a
+full list of variables is available
 \href{https://github.com/jolyphil/btmembers/blob/main/codebook/codebook.pdf}{here}.
 
-If \strong{\code{condensed_df = TRUE}} a condensed data frame. Each row corresponds
+If \code{condensed_df = TRUE}, a condensed data frame. Each row corresponds
 to a member-term. Most of the information contained in the original data
 is preserved \emph{except} only the most recent name of the member is retained
 and institutions are removed. A new column named \code{fraktion} is added to
