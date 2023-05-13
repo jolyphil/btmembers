@@ -20,12 +20,13 @@
 #'     With the value `"Bundestag"`, the function tests if the documentation of
 #'     the XML file has been changed. If not, the function imports and processes
 #'     the raw data from the Bundestag.
-#'     With the value `"GitHub"`, the function imports the preprocessed data
+#'     With the value `"GitHub"`, the function imports the pre-processed data
 #'     from the package repository on GitHub.
 #'
 #' @return If `condensed_df = FALSE`, a list containing four data frames:
 #'     `namen` (names), `bio` (biographical information), `wp`
-#'     (parliamentary terms), and `inst` (institutions). A **codebook** with a full list of variables is available
+#'     (parliamentary terms), and `inst` (institutions). A **codebook** with a
+#'     full list of variables is available
 #'    [here](https://github.com/jolyphil/btmembers/blob/main/codebook/codebook.pdf).
 #'
 #'    If `condensed_df = TRUE`, a condensed data frame. Each row corresponds
@@ -343,7 +344,7 @@ unlist_all <- function(x) {
 }
 
 recode_missing <- function(x) {
-  x[grepl("((keine)|(ohne)) Angabe(n)?", x)] <- NA_character_
+  x[grepl("^((keine)|(ohne)) Angabe(n)?$", x)] <- NA_character_
   x
 }
 

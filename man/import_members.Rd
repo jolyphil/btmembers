@@ -22,13 +22,14 @@ the function imports and processes the raw data from the Bundestag.
 With the value \code{"Bundestag"}, the function tests if the documentation of
 the XML file has been changed. If not, the function imports and processes
 the raw data from the Bundestag.
-With the value \code{"GitHub"}, the function imports the preprocessed data
+With the value \code{"GitHub"}, the function imports the pre-processed data
 from the package repository on GitHub.}
 }
 \value{
 If \code{condensed_df = FALSE}, a list containing four data frames:
 \code{namen} (names), \code{bio} (biographical information), \code{wp}
-(parliamentary terms), and \code{inst} (institutions). A \strong{codebook} with a full list of variables is available
+(parliamentary terms), and \code{inst} (institutions). A \strong{codebook} with a
+full list of variables is available
 \href{https://github.com/jolyphil/btmembers/blob/main/codebook/codebook.pdf}{here}.
 
 If \code{condensed_df = TRUE}, a condensed data frame. Each row corresponds

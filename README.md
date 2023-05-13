@@ -11,21 +11,43 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The Bundestag distributes [biographical and election
-data](https://www.bundestag.de/services/opendata/) on all members of the
-parliament since 1949 in the form of an XML file. This data, however,
-can be difficult to work with because XML files store information in an
-arbitrary number of dimensions. btmembers downloads the file “Stammdaten
-aller Abgeordneten seit 1949 im XML-Format” from the Bundestag website
-and converts it to either (a) four data frames nested into a list
-(retaining all the information of the original XML file) or (b) a
-single, condensed data frame, where units of analysis are member-terms.
+**(EN)**
 
-**Not an R user?** You can also download the different datasets as CSV
-files [here](csv/).
+The German Bundestag distributes [data on all members of the parliament
+since 1949](https://www.bundestag.de/services/opendata/) in the form of
+an XML file. These data, however, can be difficult to work with because
+XML files store information in an arbitrary number of dimensions.
+btmembers downloads the file “Stammdaten aller Abgeordneten seit 1949 im
+XML-Format” from the Bundestag website and converts it into either (a)
+four data frames nested in a list (retaining all the information of the
+original XML file) or (b) a single, condensed data frame, where the
+units of analysis are the terms served by a member (member-terms).
+
+**Not an R user?** You can also download the various datasets as
+[CSV](csv/) or [Excel](excel/) files.
 
 A **codebook** for the four data frames is available
 [here](codebook/codebook.pdf).
+
+**(DE)**
+
+Der Deutsche Bundestag verteilt [Stammdaten aller Abgeordneten seit
+1949](https://www.bundestag.de/services/opendata/) in Form einer
+XML-Datei. Die Arbeit mit diesen Daten kann jedoch schwierig sein, da
+XML-Dateien Informationen in beliebig vielen Dimensionen speichern.
+btmembers lädt die Datei “Stammdaten aller Abgeordneten seit 1949 im
+XML-Format” von der Website des Bundestages herunter und konvertiert sie
+entweder (a) in vier *data frames*, die zu einer Liste gruppiert sind
+(wobei alle Informationen der ursprünglichen XML-Datei erhalten
+bleiben), oder (b) in einen einzigen, komprimierten *data frame*, bei
+dem die Analyseeinheiten die jeweiliegen Wahlperioden der einzelnen
+Abgeordneten sind (Abgeordneten-Wahlperioden).
+
+**Sie verwenden R nicht?** Sie können die verschiedenen Datensätze auch
+als [CSV-Dateien](csv/) oder als [Excel-Dateien](excel/) herunterladen.
+
+Ein **Codebook** für die vier Datensätze finden Sie
+[hier](codebook/codebook.pdf).
 
 ## Installation
 
@@ -48,7 +70,11 @@ contained in the XML file provided by the Bundestag.
 ``` r
 library(btmembers)
 members <- import_members()
-#> Downloading pre-processed data (version: 2022-04-07) from GitHub
+#> Downloading primary data (version: 2023-03-15) from the Bundestag website
+#> Converting XML file to list...
+#> Done.
+#> Restructuring list...
+#> Done.
 summary(members)
 #>       Length Class  Mode
 #> namen 10     tbl_df list
@@ -66,15 +92,16 @@ Bundestag. Each row represents a name. Members can have multiple names
 ``` r
 head(members$namen)
 #> # A tibble: 6 × 10
-#>   id       nachname  vorname   ortszusatz adel  praefix anrede_titel akad_titel
-#>   <chr>    <chr>     <chr>     <chr>      <chr> <chr>   <chr>        <chr>     
-#> 1 11000001 Abelein   Manfred   <NA>       <NA>  <NA>    Dr.          Prof. Dr. 
-#> 2 11000002 Achenbach Ernst     <NA>       <NA>  <NA>    Dr.          Dr.       
-#> 3 11000003 Ackermann Annemarie <NA>       <NA>  <NA>    <NA>         <NA>      
-#> 4 11000004 Ackermann Else      <NA>       <NA>  <NA>    Dr.          Dr.       
-#> 5 11000005 Adam      Ulrich    <NA>       <NA>  <NA>    <NA>         <NA>      
-#> 6 11000007 Adams     Rudolf    <NA>       <NA>  <NA>    <NA>         <NA>      
-#> # … with 2 more variables: historie_von <date>, historie_bis <date>
+#>   id       nachname  vorname   ortszu…¹ adel  praefix anred…² akad_…³ historie…⁴
+#>   <chr>    <chr>     <chr>     <chr>    <chr> <chr>   <chr>   <chr>   <date>    
+#> 1 11000001 Abelein   Manfred   <NA>     <NA>  <NA>    Dr.     Prof. … 1965-10-19
+#> 2 11000002 Achenbach Ernst     <NA>     <NA>  <NA>    Dr.     Dr.     1957-10-15
+#> 3 11000003 Ackermann Annemarie <NA>     <NA>  <NA>    <NA>    <NA>    1953-10-06
+#> 4 11000004 Ackermann Else      <NA>     <NA>  <NA>    Dr.     Dr.     1990-10-03
+#> 5 11000005 Adam      Ulrich    <NA>     <NA>  <NA>    <NA>    <NA>    1990-12-20
+#> 6 11000007 Adams     Rudolf    <NA>     <NA>  <NA>    <NA>    <NA>    1966-12-08
+#> # … with 1 more variable: historie_bis <date>, and abbreviated variable names
+#> #   ¹​ortszusatz, ²​anrede_titel, ³​akad_titel, ⁴​historie_von
 ```
 
 #### Data frame `bio`
@@ -86,16 +113,18 @@ row represents a biographical entry. There is one entry by member
 ``` r
 head(members$bio)
 #> # A tibble: 6 × 12
-#>   id    geburtsdatum geburtsort geburtsland sterbedatum geschlecht familienstand
-#>   <chr> <date>       <chr>      <chr>       <date>      <chr>      <chr>        
-#> 1 1100… 1930-10-20   Stuttgart  <NA>        2008-01-17  männlich   keine Angaben
-#> 2 1100… 1909-04-09   Siegen     <NA>        1991-12-02  männlich   verheiratet,…
-#> 3 1100… 1913-05-26   Parabutsch Jugoslawien 1994-02-18  weiblich   verheiratet,…
-#> 4 1100… 1933-11-06   Berlin     <NA>        2019-09-14  weiblich   ledig        
-#> 5 1100… 1950-06-09   Teterow    <NA>        NA          männlich   verheiratet,…
-#> 6 1100… 1919-11-10   Masburg /… <NA>        2013-05-25  männlich   verheiratet,…
-#> # … with 5 more variables: religion <chr>, beruf <chr>, partei_kurz <chr>,
-#> #   vita_kurz <chr>, veroeffentlichungspflichtiges <lgl>
+#>   id       geburtsdatum gebur…¹ gebur…² sterbeda…³ gesch…⁴ famil…⁵ relig…⁶ beruf
+#>   <chr>    <date>       <chr>   <chr>   <date>     <chr>   <chr>   <chr>   <chr>
+#> 1 11000001 1930-10-20   Stuttg… <NA>    2008-01-17 männli… <NA>    kathol… Rech…
+#> 2 11000002 1909-04-09   Siegen  <NA>    1991-12-02 männli… verhei… evange… Rech…
+#> 3 11000003 1913-05-26   Parabu… Jugosl… 1994-02-18 weibli… verhei… kathol… Hilf…
+#> 4 11000004 1933-11-06   Berlin  <NA>    2019-09-14 weibli… ledig   evange… Ärzt…
+#> 5 11000005 1950-06-09   Teterow <NA>    NA         männli… verhei… evange… Math…
+#> 6 11000007 1919-11-10   Masbur… <NA>    2013-05-25 männli… verhei… evange… Gewe…
+#> # … with 3 more variables: partei_kurz <chr>, vita_kurz <chr>,
+#> #   veroeffentlichungspflichtiges <lgl>, and abbreviated variable names
+#> #   ¹​geburtsort, ²​geburtsland, ³​sterbedatum, ⁴​geschlecht, ⁵​familienstand,
+#> #   ⁶​religion
 ```
 
 #### Data frame `wp`
@@ -107,15 +136,15 @@ multiple terms (N<sub>terms</sub> \> N<sub>members</sub>).
 ``` r
 head(members$wp)
 #> # A tibble: 6 × 9
-#>   id          wp mdbwp_von  mdbwp_bis  wkr_nummer wkr_name wkr_land liste
-#>   <chr>    <int> <date>     <date>          <int> <chr>    <chr>    <chr>
-#> 1 11000001     5 1965-10-19 1969-10-19        174 <NA>     BWG      <NA> 
-#> 2 11000001     6 1969-10-20 1972-09-22        174 <NA>     BWG      <NA> 
-#> 3 11000001     7 1972-12-13 1976-12-13        174 <NA>     BWG      <NA> 
-#> 4 11000001     8 1976-12-14 1980-11-04        174 <NA>     BWG      <NA> 
-#> 5 11000001     9 1980-11-04 1983-03-29        174 <NA>     BWG      <NA> 
-#> 6 11000001    10 1983-03-29 1987-02-18        174 <NA>     BWG      <NA> 
-#> # … with 1 more variable: mandatsart <chr>
+#>   id          wp mdbwp_von  mdbwp_bis  wkr_nummer wkr_name wkr_l…¹ liste manda…²
+#>   <chr>    <int> <date>     <date>          <int> <chr>    <chr>   <chr> <chr>  
+#> 1 11000001     5 1965-10-19 1969-10-19        174 <NA>     BWG     <NA>  Direkt…
+#> 2 11000001     6 1969-10-20 1972-09-22        174 <NA>     BWG     <NA>  Direkt…
+#> 3 11000001     7 1972-12-13 1976-12-13        174 <NA>     BWG     <NA>  Direkt…
+#> 4 11000001     8 1976-12-14 1980-11-04        174 <NA>     BWG     <NA>  Direkt…
+#> 5 11000001     9 1980-11-04 1983-03-29        174 <NA>     BWG     <NA>  Direkt…
+#> 6 11000001    10 1983-03-29 1987-02-18        174 <NA>     BWG     <NA>  Direkt…
+#> # … with abbreviated variable names ¹​wkr_land, ²​mandatsart
 ```
 
 #### Data frame `inst`
@@ -129,15 +158,16 @@ N<sub>members</sub>).
 ``` r
 head(members$inst)
 #> # A tibble: 6 × 9
-#>   id          wp insart_lang  ins_lang mdbins_von mdbins_bis fkt_lang fktins_von
-#>   <chr>    <int> <chr>        <chr>    <date>     <date>     <chr>    <date>    
-#> 1 11000001     5 Fraktion/Gr… Fraktio… 1965-10-19 1969-10-19 <NA>     NA        
-#> 2 11000001     6 Fraktion/Gr… Fraktio… 1969-10-20 1972-09-22 <NA>     NA        
-#> 3 11000001     7 Fraktion/Gr… Fraktio… 1972-12-13 1976-12-13 <NA>     NA        
-#> 4 11000001     8 Fraktion/Gr… Fraktio… 1976-12-14 1980-11-04 <NA>     NA        
-#> 5 11000001     9 Fraktion/Gr… Fraktio… 1980-11-04 1983-03-29 <NA>     NA        
-#> 6 11000001    10 Fraktion/Gr… Fraktio… 1983-03-29 1987-02-18 <NA>     NA        
-#> # … with 1 more variable: fktins_bis <date>
+#>   id          wp insart_lang    ins_l…¹ mdbins_von mdbins_bis fkt_l…² fktins_von
+#>   <chr>    <int> <chr>          <chr>   <date>     <date>     <chr>   <date>    
+#> 1 11000001     5 Fraktion/Grup… Frakti… 1965-10-19 1969-10-19 <NA>    NA        
+#> 2 11000001     6 Fraktion/Grup… Frakti… 1969-10-20 1972-09-22 <NA>    NA        
+#> 3 11000001     7 Fraktion/Grup… Frakti… 1972-12-13 1976-12-13 <NA>    NA        
+#> 4 11000001     8 Fraktion/Grup… Frakti… 1976-12-14 1980-11-04 <NA>    NA        
+#> 5 11000001     9 Fraktion/Grup… Frakti… 1980-11-04 1983-03-29 <NA>    NA        
+#> 6 11000001    10 Fraktion/Grup… Frakti… 1983-03-29 1987-02-18 <NA>    NA        
+#> # … with 1 more variable: fktins_bis <date>, and abbreviated variable names
+#> #   ¹​ins_lang, ²​fkt_lang
 ```
 
 ### Importing a condensed data frame
@@ -153,7 +183,11 @@ parliamentary term.
 
 ``` r
 members_df <- import_members(condensed_df = TRUE)
-#> Downloading pre-processed data (version: 2022-04-07) from GitHub
+#> Downloading primary data (version: 2023-03-15) from the Bundestag website
+#> Converting XML file to list...
+#> Done.
+#> Restructuring list...
+#> Done.
 #> Converting list to data frame...
 #> Done.
 head(members_df[c("nachname", "vorname", "wp", "fraktion")])
@@ -201,8 +235,8 @@ members$namen %>%
 
 To cite the package ‘btmembers’ in publications use:
 
-> Joly, P. (2022). *btmembers: Import Data on All Members of the
-> Bundestag since 1949*. R package version 0.1.3.
+> Joly, P. (2023). *btmembers: Import Data on All Members of the
+> Bundestag since 1949*. R package version 0.2.0.
 > <https://github.com/jolyphil/btmembers>
 
 The package should be cited with [the original
