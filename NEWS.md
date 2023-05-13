@@ -1,3 +1,8 @@
+# btmembers 0.2.2
+
+* Fix `dplyr` warning again.
+
+
 # btmembers 0.2.1
 
 * Fix `dplyr` warning.
