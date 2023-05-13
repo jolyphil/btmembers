@@ -1,6 +1,6 @@
 Package: btmembers
 Title: Import Data on All Members of the Bundestag since 1949
-Version: 0.2.1
+Version: 0.2.2
 Date: 2023-05-13
 Authors@R: 
     person(given = "Philippe",

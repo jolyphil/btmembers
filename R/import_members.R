@@ -307,7 +307,8 @@ restructure_list <- function(list_raw) {
                   .data$INSTITUTIONEN) %>%
     tidyr::unnest_longer(.data$INSTITUTIONEN, indices_include = FALSE) %>%
     tidyr::unnest_wider(.data$INSTITUTIONEN) %>%
-    dplyr::mutate(dplyr::across(.fns = unlist_all)) %>%
+    dplyr::mutate(dplyr::across(.cols = .data$ID:.data$FKTINS_BIS,
+                                .fns = unlist_all)) %>%
     dplyr::mutate(dplyr::across(.cols = c(.data$MDBINS_VON,
                                           .data$MDBINS_BIS,
                                           .data$FKTINS_VON,

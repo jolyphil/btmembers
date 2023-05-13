@@ -224,7 +224,7 @@ members$namen %>%
 To cite the package ‘btmembers’ in publications use:
 
 > Joly, P. (2023). *btmembers: Import Data on All Members of the
-> Bundestag since 1949*. R package version 0.2.1.
+> Bundestag since 1949*. R package version 0.2.2.
 > <https://github.com/jolyphil/btmembers>
 
 The package should be cited with [the original
