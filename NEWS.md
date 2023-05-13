@@ -1,3 +1,8 @@
+# btmembers 0.2.1
+
+* Fix `dplyr` warning.
+
+
 # btmembers 0.2.0
 
 * The `force_from_bt` argument has been deprecated and is replaced by `data_source` with three options: `"auto"`, `"Bundestag"`, or `"GitHub"`. 
