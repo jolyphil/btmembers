@@ -207,7 +207,7 @@ restructure_list <- function(list_raw) {
 
     # Unnest each row (each list representing an MDB) and turn list elements
     # into columns: ID, NAMEN, BIOGRAPHISCHE_ANGABEN, WAHLPERIODEN
-    tidyr::unnest_wider(.data$value)
+    tidyr::unnest_wider("value")
 
 
   namen <- tbl_mdb_list %>%
@@ -223,10 +223,11 @@ restructure_list <- function(list_raw) {
 
     # Apply following function to all rows: Convert null elements to NA and then
     # unlist all elements
-    dplyr::mutate(dplyr::across(.fns = unlist_all)) %>%
+    dplyr::mutate(dplyr::across(.cols = .data$ID:.data$HISTORIE_BIS,
+                                .fns = unlist_all)) %>%
 
     # Recode date variables
-    dplyr::mutate(dplyr::across(.cols = c("HISTORIE_VON", "HISTORIE_BIS"),
+    dplyr::mutate(dplyr::across(.cols = c(.data$HISTORIE_VON, .data$HISTORIE_BIS),
                                 .fns = ~as.Date(.x, format = "%d.%m.%Y"))) %>%
 
     dplyr::relocate(.data$ID,
@@ -244,10 +245,11 @@ restructure_list <- function(list_raw) {
   bio <- tbl_mdb_list %>%
     dplyr::select(.data$ID, .data$BIOGRAFISCHE_ANGABEN) %>%
     tidyr::unnest_wider(.data$BIOGRAFISCHE_ANGABEN) %>%
-    dplyr::mutate(dplyr::across(.fns = unlist_all)) %>%
-    dplyr::mutate(dplyr::across(.cols = c("GEBURTSDATUM", "STERBEDATUM"),
+    dplyr::mutate(dplyr::across(.cols = .data$ID:.data$VEROEFFENTLICHUNGSPFLICHTIGES,
+                                .fns = unlist_all)) %>%
+    dplyr::mutate(dplyr::across(.cols = c(.data$GEBURTSDATUM, .data$STERBEDATUM),
                                 .fns = ~as.Date(.x, format = "%d.%m.%Y"))) %>%
-    dplyr::mutate(dplyr::across(.cols = c("FAMILIENSTAND", "RELIGION", "BERUF"),
+    dplyr::mutate(dplyr::across(.cols = c(.data$FAMILIENSTAND, .data$RELIGION, .data$BERUF),
                                 .fns = recode_missing)) %>%
     dplyr::relocate(.data$ID,
                     .data$GEBURTSDATUM,
@@ -270,19 +272,19 @@ restructure_list <- function(list_raw) {
     dplyr::select(.data$ID, .data$WAHLPERIODEN) %>%
     tidyr::unnest_longer(.data$WAHLPERIODEN, indices_include = FALSE) %>%
     tidyr::unnest_wider(.data$WAHLPERIODEN) %>%
-    dplyr::mutate(dplyr::across(.cols = c("ID",
-                                          "WP",
-                                          "MDBWP_VON",
-                                          "MDBWP_BIS",
-                                          "WKR_NUMMER",
-                                          "WKR_LAND",
-                                          "MANDATSART",
-                                          "LISTE",
-                                          "WKR_NAME"),
+    dplyr::mutate(dplyr::across(.cols = c(.data$ID,
+                                          .data$WP,
+                                          .data$MDBWP_VON,
+                                          .data$MDBWP_BIS,
+                                          .data$WKR_NUMMER,
+                                          .data$WKR_LAND,
+                                          .data$MANDATSART,
+                                          .data$LISTE,
+                                          .data$WKR_NAME),
                                 .fns = unlist_all)) %>%
-    dplyr::mutate(dplyr::across(.cols = c("MDBWP_VON", "MDBWP_BIS"),
+    dplyr::mutate(dplyr::across(.cols = c(.data$MDBWP_VON, .data$MDBWP_BIS),
                                 .fns = ~as.Date(.x, format = "%d.%m.%Y"))) %>%
-    dplyr::mutate(dplyr::across(.cols = c("WP", "WKR_NUMMER"),
+    dplyr::mutate(dplyr::across(.cols = c(.data$WP, .data$WKR_NUMMER),
                                 .fns = ~as.integer(.x)))
 
   wp <- wp_temp %>%
@@ -306,10 +308,10 @@ restructure_list <- function(list_raw) {
     tidyr::unnest_longer(.data$INSTITUTIONEN, indices_include = FALSE) %>%
     tidyr::unnest_wider(.data$INSTITUTIONEN) %>%
     dplyr::mutate(dplyr::across(.fns = unlist_all)) %>%
-    dplyr::mutate(dplyr::across(.cols = c("MDBINS_VON",
-                                          "MDBINS_BIS",
-                                          "FKTINS_VON",
-                                          "FKTINS_BIS"),
+    dplyr::mutate(dplyr::across(.cols = c(.data$MDBINS_VON,
+                                          .data$MDBINS_BIS,
+                                          .data$FKTINS_VON,
+                                          .data$FKTINS_BIS),
                                 .fns = ~as.Date(.x, format = "%d.%m.%Y"))) %>%
     dplyr::mutate(MDBINS_VON = dplyr::if_else(is.na(.data$MDBINS_VON),
                                               .data$MDBWP_VON,
