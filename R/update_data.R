@@ -54,6 +54,10 @@ write_excel_all <- function(members_list) {
 }
 
 write_excel_df <- function(df, df_name) {
+
+  df <- df %>%
+    mutate(across(where(~ class(.x) == "Date"), as.character))
+
   filename <- paste0(df_name, ".xlsx")
   writexl::write_xlsx(df,
                       file.path("excel", filename))

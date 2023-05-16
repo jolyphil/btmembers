@@ -24,7 +24,7 @@ original XML file) or (b) a single, condensed data frame, where the
 units of analysis are the terms served by a member (member-terms).
 
 **Not an R user?** You can also download the various datasets as
-[CSV](csv/) or [Excel](excel/) files.
+[CSV](csv/) (encoding: UFT-8) or [Excel](excel/) files.
 
 A **codebook** for the four data frames is available
 [here](codebook/codebook.pdf).
@@ -197,9 +197,6 @@ or `id` *and* `wp` (the parliamentary terms).
 
 ``` r
 library(dplyr)
-#> Warning: Paket 'dplyr' wurde unter R Version 4.2.3 erstellt
-library(magrittr)
-#> Warning: Paket 'magrittr' wurde unter R Version 4.2.3 erstellt
 
 members$namen %>%
   group_by(id) %>%

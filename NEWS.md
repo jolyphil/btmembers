@@ -2,6 +2,7 @@
 
 * Integrate changes to the `tidyselect` package.
 * Adjust dependencies. 
+* Fix problem with dates in Excel 
 
 
 # btmembers 0.2.2
