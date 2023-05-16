@@ -1,7 +1,7 @@
 Package: btmembers
 Title: Import Data on All Members of the Bundestag since 1949
-Version: 0.2.2
-Date: 2023-05-13
+Version: 0.2.3
+Date: 2023-05-16
 Authors@R: 
     person(given = "Philippe",
            family = "Joly",
@@ -17,7 +17,7 @@ Description: The Bundestag distributes data on all members of the parliament
     converts it to either (a) four data frames nested into a list (retaining all 
     the information of the original XML file) or (b) a single, condensed data 
     frame, where the units of analysis are member-terms.
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.5.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -30,6 +30,8 @@ Imports:
     rvest (>= 1.0.3),
     tibble (>= 3.2.1),
     tidyr (>= 1.3.0),
+    tidyselect (>= 1.2.0),
+    utils,
     xml2 (>= 1.3.4)
 Suggests: 
     knitr,

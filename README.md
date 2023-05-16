@@ -197,7 +197,9 @@ or `id` *and* `wp` (the parliamentary terms).
 
 ``` r
 library(dplyr)
+#> Warning: Paket 'dplyr' wurde unter R Version 4.2.3 erstellt
 library(magrittr)
+#> Warning: Paket 'magrittr' wurde unter R Version 4.2.3 erstellt
 
 members$namen %>%
   group_by(id) %>%
@@ -224,7 +226,7 @@ members$namen %>%
 To cite the package ‘btmembers’ in publications use:
 
 > Joly, P. (2023). *btmembers: Import Data on All Members of the
-> Bundestag since 1949*. R package version 0.2.2.
+> Bundestag since 1949*. R package version 0.2.3.
 > <https://github.com/jolyphil/btmembers>
 
 The package should be cited with [the original
