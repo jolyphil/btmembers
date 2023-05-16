@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 
 The German Bundestag distributes [data on all members of the parliament since 1949](https://www.bundestag.de/services/opendata/) in the form of an XML file. These data, however, can be difficult to work with because XML files store information in an arbitrary number of dimensions. btmembers downloads the file "Stammdaten aller Abgeordneten seit 1949 im XML-Format" from the Bundestag website and converts it into either (a) four data frames nested in a list (retaining all the information of the original XML file) or (b) a single, condensed data frame, where the units of analysis are the terms served by a member (member-terms).
 
-**Not an R user?** You can also download the various datasets as [CSV](csv/) or [Excel](excel/) files.
+**Not an R user?** You can also download the various datasets as [CSV](csv/) (encoding: UFT-8) or [Excel](excel/) files.
 
 A **codebook** for the four data frames is available [here](codebook/codebook.pdf).
 
@@ -109,9 +109,8 @@ head(members_df[c("nachname", "vorname", "wp", "fraktion")])
 
 You can join data frames by `id` (the members' identification numbers) or `id` _and_ `wp` (the parliamentary terms).
 
-```{r join, message = FALSE}
+```{r join, message = FALSE, warning=FALSE}
 library(dplyr)
-library(magrittr)
 
 members$namen %>%
   group_by(id) %>%
@@ -129,7 +128,7 @@ members$namen %>%
 
 To cite the package 'btmembers' in publications use:
 
-> Joly, P. (2023). _btmembers: Import Data on All Members of the Bundestag since 1949_. R package version 0.2.2. https://github.com/jolyphil/btmembers
+> Joly, P. (2023). _btmembers: Import Data on All Members of the Bundestag since 1949_. R package version 0.2.3. https://github.com/jolyphil/btmembers
 
 The package should be cited with [the original source](https://www.bundestag.de/services/opendata).
 

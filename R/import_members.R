@@ -73,7 +73,7 @@ import_members <- function(condensed_df = FALSE,
            ") from the Bundestag website") %>%
       message()
     temp_zip_file <- tempfile()
-    download.file(link_info$href, temp_zip_file)
+    utils::download.file(link_info$href, temp_zip_file)
     if (!test_dtd(temp_zip_file)) {
       stop("The Bundestag seems to have changed the format of the XML file used by btmembers. You can download the previous version of the data using the argument data_source = \"GitHub\".  Consider opening an issue here: https://github.com/jolyphil/btmembers/issues")
     }
@@ -212,107 +212,84 @@ restructure_list <- function(list_raw) {
 
   namen <- tbl_mdb_list %>%
 
-    dplyr::select(.data$ID, .data$NAMEN) %>%
+    dplyr::select("ID", "NAMEN") %>%
 
     # Take column "NAMEN" and unnest list within each row by adding rows
     # creating multiple entries for the same ID
-    tidyr::unnest_longer(.data$NAMEN, indices_include = FALSE) %>%
+    tidyr::unnest_longer("NAMEN", indices_include = FALSE) %>%
 
     # Unnest each row and turn list elements into cols: NACHNAME, VORNAME, ...
-    tidyr::unnest_wider(.data$NAMEN) %>%
+    tidyr::unnest_wider("NAMEN") %>%
 
     # Apply following function to all rows: Convert null elements to NA and then
     # unlist all elements
-    dplyr::mutate(dplyr::across(.cols = .data$ID:.data$HISTORIE_BIS,
+    dplyr::mutate(dplyr::across(.cols = tidyselect::everything(),
                                 .fns = unlist_all)) %>%
 
     # Recode date variables
-    dplyr::mutate(dplyr::across(.cols = c(.data$HISTORIE_VON, .data$HISTORIE_BIS),
-                                .fns = ~as.Date(.x, format = "%d.%m.%Y"))) %>%
-
-    dplyr::relocate(.data$ID,
-                    .data$NACHNAME,
-                    .data$VORNAME,
-                    .data$ORTSZUSATZ,
-                    .data$ADEL,
-                    .data$PRAEFIX,
-                    .data$ANREDE_TITEL,
-                    .data$AKAD_TITEL,
-                    .data$HISTORIE_VON,
-                    .data$HISTORIE_BIS)
+    dplyr::mutate(dplyr::across(.cols = c("HISTORIE_VON", "HISTORIE_BIS"),
+                                .fns = ~as.Date(.x, format = "%d.%m.%Y")))
 
 
   bio <- tbl_mdb_list %>%
-    dplyr::select(.data$ID, .data$BIOGRAFISCHE_ANGABEN) %>%
-    tidyr::unnest_wider(.data$BIOGRAFISCHE_ANGABEN) %>%
-    dplyr::mutate(dplyr::across(.cols = .data$ID:.data$VEROEFFENTLICHUNGSPFLICHTIGES,
+    dplyr::select("ID", "BIOGRAFISCHE_ANGABEN") %>%
+    tidyr::unnest_wider("BIOGRAFISCHE_ANGABEN") %>%
+    dplyr::mutate(dplyr::across(.cols = tidyselect::everything(),
                                 .fns = unlist_all)) %>%
-    dplyr::mutate(dplyr::across(.cols = c(.data$GEBURTSDATUM, .data$STERBEDATUM),
+    dplyr::mutate(dplyr::across(.cols = c("GEBURTSDATUM", "STERBEDATUM"),
                                 .fns = ~as.Date(.x, format = "%d.%m.%Y"))) %>%
-    dplyr::mutate(dplyr::across(.cols = c(.data$FAMILIENSTAND, .data$RELIGION, .data$BERUF),
-                                .fns = recode_missing)) %>%
-    dplyr::relocate(.data$ID,
-                    .data$GEBURTSDATUM,
-                    .data$GEBURTSORT,
-                    .data$GEBURTSLAND,
-                    .data$STERBEDATUM,
-                    .data$GESCHLECHT,
-                    .data$FAMILIENSTAND,
-                    .data$RELIGION,
-                    .data$BERUF,
-                    .data$PARTEI_KURZ,
-                    .data$VITA_KURZ)
+    dplyr::mutate(dplyr::across(.cols = c("FAMILIENSTAND", "RELIGION", "BERUF"),
+                                .fns = recode_missing))
 
   tbl_wp_list <- tbl_mdb_list %>%
-    dplyr::select(.data$ID, .data$WAHLPERIODEN) %>%
-    tidyr::unnest_longer(.data$WAHLPERIODEN, indices_include = FALSE) %>%
-    tidyr::unnest_wider(.data$WAHLPERIODEN)
+    dplyr::select("ID", "WAHLPERIODEN") %>%
+    tidyr::unnest_longer("WAHLPERIODEN", indices_include = FALSE) %>%
+    tidyr::unnest_wider("WAHLPERIODEN")
 
   wp_temp <- tbl_mdb_list %>%
-    dplyr::select(.data$ID, .data$WAHLPERIODEN) %>%
-    tidyr::unnest_longer(.data$WAHLPERIODEN, indices_include = FALSE) %>%
-    tidyr::unnest_wider(.data$WAHLPERIODEN) %>%
-    dplyr::mutate(dplyr::across(.cols = c(.data$ID,
-                                          .data$WP,
-                                          .data$MDBWP_VON,
-                                          .data$MDBWP_BIS,
-                                          .data$WKR_NUMMER,
-                                          .data$WKR_LAND,
-                                          .data$MANDATSART,
-                                          .data$LISTE,
-                                          .data$WKR_NAME),
+    dplyr::select("ID", "WAHLPERIODEN") %>%
+    tidyr::unnest_longer("WAHLPERIODEN", indices_include = FALSE) %>%
+    tidyr::unnest_wider("WAHLPERIODEN") %>%
+    dplyr::mutate(dplyr::across(.cols = c("ID",
+                                          "WP",
+                                          "MDBWP_VON",
+                                          "MDBWP_BIS",
+                                          "WKR_NUMMER",
+                                          "WKR_NAME",
+                                          "WKR_LAND",
+                                          "LISTE",
+                                          "MANDATSART"),
                                 .fns = unlist_all)) %>%
-    dplyr::mutate(dplyr::across(.cols = c(.data$MDBWP_VON, .data$MDBWP_BIS),
+    dplyr::mutate(dplyr::across(.cols = c("MDBWP_VON", "MDBWP_BIS"),
                                 .fns = ~as.Date(.x, format = "%d.%m.%Y"))) %>%
-    dplyr::mutate(dplyr::across(.cols = c(.data$WP, .data$WKR_NUMMER),
+    dplyr::mutate(dplyr::across(.cols = c("WP", "WKR_NUMMER"),
                                 .fns = ~as.integer(.x)))
 
   wp <- wp_temp %>%
-    dplyr::select(-.data$INSTITUTIONEN) %>%
-    dplyr::relocate(.data$ID,
-                    .data$WP,
-                    .data$MDBWP_VON,
-                    .data$MDBWP_BIS,
-                    .data$WKR_NUMMER,
-                    .data$WKR_NAME,
-                    .data$WKR_LAND,
-                    .data$LISTE,
-                    .data$MANDATSART)
+    dplyr::select(c("ID",
+                    "WP",
+                    "MDBWP_VON",
+                    "MDBWP_BIS",
+                    "WKR_NUMMER",
+                    "WKR_NAME",
+                    "WKR_LAND",
+                    "LISTE",
+                    "MANDATSART"))
 
   inst <- wp_temp %>%
-    dplyr::select(.data$ID,
-                  .data$WP,
-                  .data$MDBWP_VON,
-                  .data$MDBWP_BIS,
-                  .data$INSTITUTIONEN) %>%
-    tidyr::unnest_longer(.data$INSTITUTIONEN, indices_include = FALSE) %>%
-    tidyr::unnest_wider(.data$INSTITUTIONEN) %>%
-    dplyr::mutate(dplyr::across(.cols = .data$ID:.data$FKTINS_BIS,
+    dplyr::select("ID",
+                  "WP",
+                  "MDBWP_VON",
+                  "MDBWP_BIS",
+                  "INSTITUTIONEN") %>%
+    tidyr::unnest_longer("INSTITUTIONEN", indices_include = FALSE) %>%
+    tidyr::unnest_wider("INSTITUTIONEN") %>%
+    dplyr::mutate(dplyr::across(.cols = tidyselect::everything(),
                                 .fns = unlist_all)) %>%
-    dplyr::mutate(dplyr::across(.cols = c(.data$MDBINS_VON,
-                                          .data$MDBINS_BIS,
-                                          .data$FKTINS_VON,
-                                          .data$FKTINS_BIS),
+    dplyr::mutate(dplyr::across(.cols = c("MDBINS_VON",
+                                          "MDBINS_BIS",
+                                          "FKTINS_VON",
+                                          "FKTINS_BIS"),
                                 .fns = ~as.Date(.x, format = "%d.%m.%Y"))) %>%
     dplyr::mutate(MDBINS_VON = dplyr::if_else(is.na(.data$MDBINS_VON),
                                               .data$MDBWP_VON,
@@ -326,7 +303,15 @@ restructure_list <- function(list_raw) {
                   FKTINS_BIS = dplyr::if_else(!is.na(.data$FKT_LANG) & is.na(.data$FKTINS_BIS),
                                               .data$MDBINS_BIS,
                                               .data$FKTINS_BIS)) %>%
-    dplyr::select(-.data$MDBWP_VON, -.data$MDBWP_BIS)
+    dplyr::select("ID",
+                  "WP",
+                  "INSART_LANG",
+                  "INS_LANG",
+                  "MDBINS_VON",
+                  "MDBINS_BIS",
+                  "FKT_LANG",
+                  "FKTINS_VON",
+                  "FKTINS_BIS")
 
   list_clean <- list(namen = namen,
                      bio = bio,
@@ -367,16 +352,23 @@ to_condensed_df <- function(list_clean, data_version){
     dplyr::group_by(.data$id) %>%
     dplyr::slice_max(.data$historie_von) %>%
     dplyr::ungroup() %>%
-    dplyr::select(-.data$historie_von, -.data$historie_bis)
+    dplyr::select("id",
+                  "nachname",
+                  "vorname",
+                  "ortszusatz",
+                  "adel",
+                  "praefix",
+                  "anrede_titel",
+                  "akad_titel")
 
   frak_temp <- list_clean$inst %>%
     dplyr::filter(.data$insart_lang == "Fraktion/Gruppe") %>%
-    dplyr::select(.data$id,
-                  .data$wp,
-                  .data$ins_lang,
-                  .data$mdbins_von,
-                  .data$mdbins_bis) %>%
-    dplyr::rename(fraktion = .data$ins_lang) %>%
+    dplyr::select("id",
+                  "wp",
+                  "ins_lang",
+                  "mdbins_von",
+                  "mdbins_bis") %>%
+    dplyr::rename(fraktion = "ins_lang") %>%
     dplyr::distinct() %>%
     dplyr::group_by(.data$id, .data$wp) %>%
     dplyr::add_count(name = "fraktion_n")
@@ -396,11 +388,11 @@ to_condensed_df <- function(list_clean, data_version){
     dplyr::summarize(frak_dauer_sum = sum(.data$frak_dauer)) %>%
     dplyr::group_by(.data$id, .data$wp) %>%
     dplyr::slice_max(.data$frak_dauer_sum) %>%
-    dplyr::select(.data$id, .data$wp, .data$fraktion)
+    dplyr::select("id", "wp", "fraktion")
 
   frak <- frak_temp %>%
     dplyr::filter(.data$fraktion_n == 1) %>%
-    dplyr::select(.data$id, .data$wp, .data$fraktion) %>%
+    dplyr::select("id", "wp", "fraktion") %>%
     dplyr::bind_rows(frak_multi) %>%
     dplyr::ungroup()
 

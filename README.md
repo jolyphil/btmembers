@@ -24,7 +24,7 @@ original XML file) or (b) a single, condensed data frame, where the
 units of analysis are the terms served by a member (member-terms).
 
 **Not an R user?** You can also download the various datasets as
-[CSV](csv/) or [Excel](excel/) files.
+[CSV](csv/) (encoding: UFT-8) or [Excel](excel/) files.
 
 A **codebook** for the four data frames is available
 [here](codebook/codebook.pdf).
@@ -197,7 +197,6 @@ or `id` *and* `wp` (the parliamentary terms).
 
 ``` r
 library(dplyr)
-library(magrittr)
 
 members$namen %>%
   group_by(id) %>%
@@ -224,7 +223,7 @@ members$namen %>%
 To cite the package ‘btmembers’ in publications use:
 
 > Joly, P. (2023). *btmembers: Import Data on All Members of the
-> Bundestag since 1949*. R package version 0.2.2.
+> Bundestag since 1949*. R package version 0.2.3.
 > <https://github.com/jolyphil/btmembers>
 
 The package should be cited with [the original
