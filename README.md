@@ -24,7 +24,7 @@ original XML file) or (b) a single, condensed data frame, where the
 units of analysis are the terms served by a member (member-terms).
 
 **Not an R user?** You can also download the various datasets as
-[CSV](csv/) (encoding: UFT-8) or [Excel](excel/) files.
+[CSV](csv/) (encoding: UTF-8) or [Excel](excel/) files.
 
 A **codebook** for the four data frames is available
 [here](codebook/codebook.pdf).
@@ -44,7 +44,8 @@ dem die Analyseeinheiten die jeweiliegen Wahlperioden der einzelnen
 Abgeordneten sind (Abgeordneten-Wahlperioden).
 
 **Sie verwenden R nicht?** Sie können die verschiedenen Datensätze auch
-als [CSV-Dateien](csv/) oder als [Excel-Dateien](excel/) herunterladen.
+als [CSV-Dateien](csv/) (Zeichenkodierung: UTF-8) oder als
+[Excel-Dateien](excel/) herunterladen.
 
 Ein **Codebook** für die vier Datensätze finden Sie
 [hier](codebook/codebook.pdf).
