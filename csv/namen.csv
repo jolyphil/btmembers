@@ -2133,7 +2133,7 @@
 "11002007","Schmidt","Helmut","(Hamburg)",NA,NA,NA,NA,1953-10-06,NA
 "11002008","Schmidt","Hermann","(Würgendorf)",NA,NA,NA,NA,1961-10-17,NA
 "11002009","Schmidt","Horst","(Offenbach)",NA,NA,"Dr.","Dr.",1961-10-17,NA
-"11002010","Schmidt","Joachim","(Halsbrücke)",NA,NA,"Dr. - Ing.","Dr. - Ing.",1990-12-20,NA
+"11002010","Schmidt","Joachim","(Halsbrücke)",NA,NA,"Dr.","Dr. - Ing.",1990-12-20,NA
 "11002011","Schmidt","Manfred","(München)",NA,NA,NA,NA,1969-10-20,NA
 "11002012","Schmidt","Manfred","(Wuppertal)",NA,NA,NA,NA,1975-01-17,NA
 "11002013","Schmidt","Marie-Luise",NA,NA,NA,NA,NA,1989-02-20,NA
@@ -3287,7 +3287,7 @@
 "11003542","Grübel","Markus",NA,NA,NA,NA,NA,2002-10-17,NA
 "11003543","Guttenberg","Karl-Theodor",NA,"Frhr.","zu",NA,NA,2002-10-17,2007-05-08
 "11003543","Guttenberg","Karl-Theodor",NA,"Frhr.","zu","Dr.","Dr.",2007-05-08,2011-02-23
-"11003543","Guttenberg","Karl-Theodor",NA,"Frhr.","zu",NA,NA,2011-02-24,NA
+"11003543","Guttenberg","Karl-Theodor",NA,"Freiherr","zu",NA,NA,2011-02-24,NA
 "11003544","Gutting","Olav",NA,NA,NA,NA,NA,2002-10-17,NA
 "11003545","Hagedorn","Bettina",NA,NA,NA,NA,NA,2002-10-17,NA
 "11003546","Haibach","Holger",NA,NA,NA,NA,NA,2002-10-17,NA
@@ -4498,7 +4498,8 @@
 "11005123","Latendorf","Ina",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005124","Leiser","Kevin",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005125","Lenders","Jürgen",NA,NA,NA,NA,NA,2021-10-26,NA
-"11005126","Lenk","Barbara",NA,NA,NA,NA,NA,2021-10-26,NA
+"11005126","Lenk","Barbara",NA,NA,NA,NA,NA,2021-10-26,2023-08-16
+"11005126","Benkstein","Barbara",NA,NA,NA,NA,NA,2023-08-16,NA
 "11005127","Leye","Christian",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005128","Licina-Bode","Luiza",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005129","Lieb","Thorsten",NA,NA,NA,"Dr.","Dr.",2021-10-26,NA
@@ -4517,7 +4518,7 @@
 "11005142","Martens","Zanda",NA,NA,NA,"Dr.","Dr.",2021-10-26,NA
 "11005143","Marvi","Parsa",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005144","Mascheck","Franziska",NA,NA,NA,NA,NA,2021-10-26,NA
-"11005145","Mayer","Zoe",NA,NA,NA,NA,NA,2021-10-26,NA
+"11005145","Mayer","Zoe",NA,NA,NA,"Dr.","Dr.",2021-10-26,NA
 "11005146","Mayer-Lay","Volker",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005147","Mehltretter","Andreas",NA,NA,NA,NA,NA,2021-10-26,NA
 "11005148","Mehmet Ali","Takis",NA,NA,NA,NA,NA,2021-10-26,NA
@@ -4653,3 +4654,5 @@
 "11005303","Mende","Dirk-Ulrich",NA,NA,NA,NA,NA,2023-01-25,NA
 "11005304","Föhr","Alexander",NA,NA,NA,NA,NA,2023-03-01,NA
 "11005305","Rothfuß","Rainer",NA,NA,NA,"Dr.","Dr.",2023-03-02,NA
+"11005306","Trăsnea","Ana-Maria",NA,NA,NA,NA,NA,2023-05-16,NA
+"11005308","Bartelt","Christian",NA,NA,NA,NA,NA,2023-09-04,NA
