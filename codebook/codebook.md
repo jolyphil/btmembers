@@ -2,18 +2,18 @@
 
 # Data on All Members of the Bundestag since 1949: Codebook
 
-Version: 2025-05-15
+Version: 2025-09-30
 
 The btmembers R package restructures the open data provided by the Bundestag. See:
 
-> Bundestag (2025), _Stammdaten aller Abgeordneten seit 1949 im XML-Format_, version: 2025-05-15. https://www.bundestag.de/services/opendata
+> Bundestag (2025), _Stammdaten aller Abgeordneten seit 1949 im XML-Format_, version: 2025-09-30. https://www.bundestag.de/services/opendata
 
 By default, the function `import_members()` returns a list containing four data frames: `namen` (names), `bio` (biographical information), `wp` (parliamentary terms), and `inst` (institutions). These four data frames are presented below.
 
 ---
 
 ## Data frame `namen`
-`namen` contains 4893 observations from 4609 members of the Bundestag. It includes 10 variables:
+`namen` contains 4900 observations from 4613 members of the Bundestag. It includes 10 variables:
 
 ### `id`
 
@@ -78,7 +78,7 @@ By default, the function `import_members()` returns a list containing four data 
 ---
 
 ## Data frame `bio`
-`bio` contains 4609 observations from 4609 members of the Bundestag. It includes 12 variables:
+`bio` contains 4613 observations from 4613 members of the Bundestag. It includes 12 variables:
 
 ### `id`
 
@@ -155,7 +155,7 @@ By default, the function `import_members()` returns a list containing four data 
 ---
 
 ## Data frame `wp`
-`wp` contains 13041 observations from 4609 members of the Bundestag. It includes 9 variables:
+`wp` contains 13045 observations from 4613 members of the Bundestag. It includes 9 variables:
 
 ### `id`
 
@@ -214,7 +214,7 @@ By default, the function `import_members()` returns a list containing four data 
 ---
 
 ## Data frame `inst`
-`inst` contains 14013 observations from 4609 members of the Bundestag. It includes 9 variables:
+`inst` contains 16653 observations from 4613 members of the Bundestag. It includes 9 variables:
 
 ### `id`
 
