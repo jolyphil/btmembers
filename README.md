@@ -71,7 +71,11 @@ contained in the XML file provided by the Bundestag.
 ``` r
 library(btmembers)
 members <- import_members()
-#> Downloading pre-processed data (version: 2023-03-15) from GitHub
+#> Downloading primary data (version: 2025-09-30) from the Bundestag website
+#> Converting XML file to list...
+#> Done.
+#> Restructuring list...
+#> Done.
 summary(members)
 #>       Length Class  Mode
 #> namen 10     tbl_df list
@@ -176,7 +180,11 @@ parliamentary term.
 
 ``` r
 members_df <- import_members(condensed_df = TRUE)
-#> Downloading pre-processed data (version: 2023-03-15) from GitHub
+#> Downloading primary data (version: 2025-09-30) from the Bundestag website
+#> Converting XML file to list...
+#> Done.
+#> Restructuring list...
+#> Done.
 #> Converting list to data frame...
 #> Done.
 head(members_df[c("nachname", "vorname", "wp", "fraktion")])
@@ -223,8 +231,8 @@ members$namen %>%
 
 To cite the package ‘btmembers’ in publications use:
 
-> Joly, P. (2023). *btmembers: Import Data on All Members of the
-> Bundestag since 1949*. R package version 0.2.3.
+> Joly, P. (2025). *btmembers: Import Data on All Members of the
+> Bundestag since 1949*. R package version 0.2.4.
 > <https://github.com/jolyphil/btmembers>
 
 The package should be cited with [the original
