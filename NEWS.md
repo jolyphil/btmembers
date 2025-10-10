@@ -1,3 +1,11 @@
+# btmembers 0.2.4
+
+* Fix download bug: download XML and DTD files separately instead of ZIP file.
+* Rely on `httr::GET` for more reliable downloads. 
+* Drop `magrittr` dependency and use native pipe instead. 
+* Depend on `R (>= 4.1.0)`
+
+
 # btmembers 0.2.3
 
 * Integrate changes to the `tidyselect` package.

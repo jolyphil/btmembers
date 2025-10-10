@@ -15,3 +15,4 @@ R/update_data.R
 ^todo\.md$
 ^R/tests$
 ^checklist\.md$
+^LICENSE\.md$

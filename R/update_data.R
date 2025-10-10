@@ -38,7 +38,7 @@ write_csv_all <- function(members_list) {
 write_csv_df <- function(df, df_name) {
   filename <- paste0(df_name, ".csv")
   if (df_name == "bio") {
-    df <- df %>%
+    df <- df |>
       dplyr::mutate(dplyr::across(.cols = c("vita_kurz",
                                             "veroeffentlichungspflichtiges"),
                                   .fns = ~gsub("\r?\n|\r", " ", .x))) # Remove line breaks
@@ -55,7 +55,7 @@ write_excel_all <- function(members_list) {
 
 write_excel_df <- function(df, df_name) {
 
-  df <- df %>%
+  df <- df |>
     dplyr::mutate(dplyr::across(where(~ class(.x) == "Date"), as.character))
 
   filename <- paste0(df_name, ".xlsx")

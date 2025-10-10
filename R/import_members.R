@@ -41,10 +41,8 @@
 #' import_members(condensed_df = TRUE)
 #'
 #' @export
-#' @importFrom magrittr "%>%"
 #' @importFrom rlang .data
 #' @importFrom tibble tibble
-#' @importFrom utils download.file
 
 
 import_members <- function(condensed_df = FALSE,
@@ -70,15 +68,23 @@ import_members <- function(condensed_df = FALSE,
   if (data_source == "Bundestag") {
     paste0("Downloading primary data (version: ",
            link_info$version_bt,
-           ") from the Bundestag website") %>%
+           ") from the Bundestag website") |>
       message()
-    temp_zip_file <- tempfile()
-    utils::download.file(link_info$href, temp_zip_file)
-    if (!test_dtd(temp_zip_file)) {
+
+    temp_file_xml <- tempfile(fileext = ".xml")
+    temp_file_dtd <- tempfile(fileext = ".dtd")
+
+    resp <- httr::GET(link_info$href_xml, httr::write_disk(temp_file_xml, overwrite = TRUE))
+    httr::stop_for_status(resp)
+
+    resp <- httr::GET(link_info$href_dtd, httr::write_disk(temp_file_dtd, overwrite = TRUE))
+    httr::stop_for_status(resp)
+
+    if (!test_dtd(temp_file_dtd)) {
       stop("The Bundestag seems to have changed the format of the XML file used by btmembers. You can download the previous version of the data using the argument data_source = \"GitHub\".  Consider opening an issue here: https://github.com/jolyphil/btmembers/issues")
     }
     data_version <- link_info$version_bt
-    list_raw <- import_list_raw(temp_zip_file)
+    list_raw <- import_list_raw(temp_file_xml)
     list_clean <- restructure_list(list_raw)
     attr(list_clean, "version") <- data_version
   } else { # data_source == "GitHub"
@@ -87,7 +93,7 @@ import_members <- function(condensed_df = FALSE,
     }
     paste0("Downloading pre-processed data (version: ",
            version_github,
-           ") from GitHub") %>%
+           ") from GitHub") |>
       message()
     data_version <- version_github
     list_clean <- extract_github_list()
@@ -111,44 +117,62 @@ extract_link_info <- function() {
   url <-"https://www.bundestag.de/services/opendata"
   url_parsed <- xml2::read_html(url)
 
-  node_attrs <- url_parsed %>%
-    rvest::html_elements(css = ".bt-link-dokument") %>%
+  node_attrs <- url_parsed |>
+    rvest::html_elements(css = ".bt-link-dokument") |>
     rvest::html_attrs()
 
-  pattern_title <- "Stammdaten aller Abgeordneten seit 1949 im XML-Format"
+  pattern_title_xml <- "Stammdaten aller Abgeordneten seit 1949 im XML-Format"
+  pattern_title_dtd <- "DTD f\u00FCr Stammdaten aller Abgeordneten seit 1949"
+  pattern_data_version <- "\\d{2}\\.\\d{2}\\.\\d{4}"
+
+  href_xml <- NULL
+  href_dtd <- NULL
+  data_version <- NA
 
   for (i in seq_along(node_attrs)){
+
     title <- node_attrs[[i]][["title"]]
-    if (grepl(pattern = pattern_title, x = title)) {
-      pattern_data_version <- paste0(
-        "[[:digit:]]{2}", # d
-        "\\.",
-        "[[:digit:]]{2}", # m
-        "\\.",
-        "[[:digit:]]{4}" # Y
-      )
-      matches <- regexpr(pattern = pattern_data_version,
-                         text = title) # digits
-      data_version <- regmatches(title, m = matches) %>%
+
+    # --- XML link ---
+    if (grepl(pattern = pattern_title_xml, x = title)) {
+      match <- regexpr(pattern = pattern_data_version,
+                       text = title) # digits
+      data_version <- regmatches(title, m = match) |>
         as.Date(format = "%d.%m.%Y")
-      href <- paste0(
+      href_xml <- paste0(
         "https://www.bundestag.de",
         node_attrs[[i]][["href"]]
       )
-      break
     }
+
+    # --- DTD link ---
+    if (grepl(pattern = pattern_title_dtd, x = title)) {
+      href_dtd <- paste0(
+        "https://www.bundestag.de",
+        node_attrs[[i]][["href"]]
+      )
+    }
+
+    if (!is.null(href_xml) && !is.null(href_dtd)) break
   }
-  if (!exists("data_version")) {
+  if (is.null(href_xml)) {
     stop("Unable to locate XML file.")
   }
+  if (is.null(href_dtd)) {
+    stop("Unable to locate DTD file.")
+  }
+  if (is.na(data_version)) {
+    stop("Unable to locate data version.")
+  }
   link_info <- list(version_bt = data_version,
-                    href = href)
+                    href_xml = href_xml,
+                    href_dtd = href_dtd)
   link_info
 }
 
 extract_github_version <- function() {
   version_url <- paste0(github_storage_url(), "data_version.rds")
-  data_version <- url(version_url) %>%
+  data_version <- url(version_url) |>
     readRDS()
   data_version
 }
@@ -162,94 +186,87 @@ github_storage_url <- function(branch = "main") {
 
 extract_github_list <- function() {
   list_url <- paste0(github_storage_url(), "members_list.rds")
-  members_list <- url(list_url) %>%
+  members_list <- url(list_url) |>
     readRDS()
   members_list
 }
 
-download_zip_file <- function(href){
-  temp_zip_file <- tempfile()
-  download.file(href, temp_zip_file)
-  temp_zip_file # Returns location of temporary ZIP file
-}
-
-test_dtd <- function(temp_zip_file) {
-  con <- temp_zip_file %>%
-    unz("MDB_STAMMDATEN.DTD")
-  test_passed <- con %>%
-    readLines() %>%
+test_dtd <- function(temp_file_dtd) {
+  temp_file_dtd |>
+    readLines() |>
     identical(ref_dtd)
-  close(con)
-  test_passed
 }
 
-import_list_raw <- function(temp_zip_file){
+import_list_raw <- function(temp_file_xml){
   message("Converting XML file to list...")
-  list_raw <- unz(temp_zip_file, "MDB_STAMMDATEN.XML") %>% # Unzip XML data
-    xml2::read_xml() %>%
-    xml2::as_list() %>%
-    `[[`("DOCUMENT") %>% # Select first nested list
-    `[`(-c(1)) # Delete first element of the list "VERSION"
-  # All other siblings are named "MDB", representing one member
+
+  list_raw <- temp_file_xml |>
+    xml2::read_xml() |>
+    xml2::as_list()
+
   message("Done.")
-  list_raw
+
+  list_raw[["DOCUMENT"]][-1] # Select first nested list
+                             # Delete first element of the list "VERSION"
+                             # All other siblings are named "MDB", representing
+                             # one member
 }
 
 restructure_list <- function(list_raw) {
 
   message("Restructuring list...")
 
-  tbl_mdb_list <- list_raw %>%
+  tbl_mdb_list <- list_raw |>
 
     # Create a tibble with one column, where each row (a nested list) contains
     # all the information of one MDB
-    tibble::as_tibble_col() %>%
+    tibble::as_tibble_col() |>
 
     # Unnest each row (each list representing an MDB) and turn list elements
     # into columns: ID, NAMEN, BIOGRAPHISCHE_ANGABEN, WAHLPERIODEN
     tidyr::unnest_wider("value")
 
 
-  namen <- tbl_mdb_list %>%
+  namen <- tbl_mdb_list |>
 
-    dplyr::select("ID", "NAMEN") %>%
+    dplyr::select("ID", "NAMEN") |>
 
     # Take column "NAMEN" and unnest list within each row by adding rows
     # creating multiple entries for the same ID
-    tidyr::unnest_longer("NAMEN", indices_include = FALSE) %>%
+    tidyr::unnest_longer("NAMEN", indices_include = FALSE) |>
 
     # Unnest each row and turn list elements into cols: NACHNAME, VORNAME, ...
-    tidyr::unnest_wider("NAMEN") %>%
+    tidyr::unnest_wider("NAMEN") |>
 
     # Apply following function to all rows: Convert null elements to NA and then
     # unlist all elements
     dplyr::mutate(dplyr::across(.cols = tidyselect::everything(),
-                                .fns = unlist_all)) %>%
+                                .fns = unlist_all)) |>
 
     # Recode date variables
     dplyr::mutate(dplyr::across(.cols = c("HISTORIE_VON", "HISTORIE_BIS"),
                                 .fns = ~as.Date(.x, format = "%d.%m.%Y")))
 
 
-  bio <- tbl_mdb_list %>%
-    dplyr::select("ID", "BIOGRAFISCHE_ANGABEN") %>%
-    tidyr::unnest_wider("BIOGRAFISCHE_ANGABEN") %>%
+  bio <- tbl_mdb_list |>
+    dplyr::select("ID", "BIOGRAFISCHE_ANGABEN") |>
+    tidyr::unnest_wider("BIOGRAFISCHE_ANGABEN") |>
     dplyr::mutate(dplyr::across(.cols = tidyselect::everything(),
-                                .fns = unlist_all)) %>%
+                                .fns = unlist_all)) |>
     dplyr::mutate(dplyr::across(.cols = c("GEBURTSDATUM", "STERBEDATUM"),
-                                .fns = ~as.Date(.x, format = "%d.%m.%Y"))) %>%
+                                .fns = ~as.Date(.x, format = "%d.%m.%Y"))) |>
     dplyr::mutate(dplyr::across(.cols = c("FAMILIENSTAND", "RELIGION", "BERUF"),
                                 .fns = recode_missing))
 
-  tbl_wp_list <- tbl_mdb_list %>%
-    dplyr::select("ID", "WAHLPERIODEN") %>%
-    tidyr::unnest_longer("WAHLPERIODEN", indices_include = FALSE) %>%
+  tbl_wp_list <- tbl_mdb_list |>
+    dplyr::select("ID", "WAHLPERIODEN") |>
+    tidyr::unnest_longer("WAHLPERIODEN", indices_include = FALSE) |>
     tidyr::unnest_wider("WAHLPERIODEN")
 
-  wp_temp <- tbl_mdb_list %>%
-    dplyr::select("ID", "WAHLPERIODEN") %>%
-    tidyr::unnest_longer("WAHLPERIODEN", indices_include = FALSE) %>%
-    tidyr::unnest_wider("WAHLPERIODEN") %>%
+  wp_temp <- tbl_mdb_list |>
+    dplyr::select("ID", "WAHLPERIODEN") |>
+    tidyr::unnest_longer("WAHLPERIODEN", indices_include = FALSE) |>
+    tidyr::unnest_wider("WAHLPERIODEN") |>
     dplyr::mutate(dplyr::across(.cols = c("ID",
                                           "WP",
                                           "MDBWP_VON",
@@ -259,13 +276,13 @@ restructure_list <- function(list_raw) {
                                           "WKR_LAND",
                                           "LISTE",
                                           "MANDATSART"),
-                                .fns = unlist_all)) %>%
+                                .fns = unlist_all)) |>
     dplyr::mutate(dplyr::across(.cols = c("MDBWP_VON", "MDBWP_BIS"),
-                                .fns = ~as.Date(.x, format = "%d.%m.%Y"))) %>%
+                                .fns = ~as.Date(.x, format = "%d.%m.%Y"))) |>
     dplyr::mutate(dplyr::across(.cols = c("WP", "WKR_NUMMER"),
                                 .fns = ~as.integer(.x)))
 
-  wp <- wp_temp %>%
+  wp <- wp_temp |>
     dplyr::select(c("ID",
                     "WP",
                     "MDBWP_VON",
@@ -276,21 +293,21 @@ restructure_list <- function(list_raw) {
                     "LISTE",
                     "MANDATSART"))
 
-  inst <- wp_temp %>%
+  inst <- wp_temp |>
     dplyr::select("ID",
                   "WP",
                   "MDBWP_VON",
                   "MDBWP_BIS",
-                  "INSTITUTIONEN") %>%
-    tidyr::unnest_longer("INSTITUTIONEN", indices_include = FALSE) %>%
-    tidyr::unnest_wider("INSTITUTIONEN") %>%
+                  "INSTITUTIONEN") |>
+    tidyr::unnest_longer("INSTITUTIONEN", indices_include = FALSE) |>
+    tidyr::unnest_wider("INSTITUTIONEN") |>
     dplyr::mutate(dplyr::across(.cols = tidyselect::everything(),
-                                .fns = unlist_all)) %>%
+                                .fns = unlist_all)) |>
     dplyr::mutate(dplyr::across(.cols = c("MDBINS_VON",
                                           "MDBINS_BIS",
                                           "FKTINS_VON",
                                           "FKTINS_BIS"),
-                                .fns = ~as.Date(.x, format = "%d.%m.%Y"))) %>%
+                                .fns = ~as.Date(.x, format = "%d.%m.%Y"))) |>
     dplyr::mutate(MDBINS_VON = dplyr::if_else(is.na(.data$MDBINS_VON),
                                               .data$MDBWP_VON,
                                               .data$MDBINS_VON),
@@ -302,7 +319,7 @@ restructure_list <- function(list_raw) {
                                               .data$FKTINS_VON),
                   FKTINS_BIS = dplyr::if_else(!is.na(.data$FKT_LANG) & is.na(.data$FKTINS_BIS),
                                               .data$MDBINS_BIS,
-                                              .data$FKTINS_BIS)) %>%
+                                              .data$FKTINS_BIS)) |>
     dplyr::select("ID",
                   "WP",
                   "INSART_LANG",
@@ -316,8 +333,8 @@ restructure_list <- function(list_raw) {
   list_clean <- list(namen = namen,
                      bio = bio,
                      wp = wp,
-                     inst = inst) %>%
-    lapply(function(x){names(x) <- tolower(names(x)); x}) %>%
+                     inst = inst) |>
+    lapply(function(x){names(x) <- tolower(names(x)); x}) |>
     lapply(add_labels)
 
   message("Done.")
@@ -348,10 +365,10 @@ to_condensed_df <- function(list_clean, data_version){
 
   message("Converting list to data frame...")
 
-  namen <- list_clean$namen %>%
-    dplyr::group_by(.data$id) %>%
-    dplyr::slice_max(.data$historie_von) %>%
-    dplyr::ungroup() %>%
+  namen <- list_clean$namen |>
+    dplyr::group_by(.data$id) |>
+    dplyr::slice_max(.data$historie_von) |>
+    dplyr::ungroup() |>
     dplyr::select("id",
                   "nachname",
                   "vorname",
@@ -361,44 +378,44 @@ to_condensed_df <- function(list_clean, data_version){
                   "anrede_titel",
                   "akad_titel")
 
-  frak_temp <- list_clean$inst %>%
-    dplyr::filter(.data$insart_lang == "Fraktion/Gruppe") %>%
+  frak_temp <- list_clean$inst |>
+    dplyr::filter(.data$insart_lang == "Fraktion/Gruppe") |>
     dplyr::select("id",
                   "wp",
                   "ins_lang",
                   "mdbins_von",
-                  "mdbins_bis") %>%
-    dplyr::rename(fraktion = "ins_lang") %>%
-    dplyr::distinct() %>%
-    dplyr::group_by(.data$id, .data$wp) %>%
+                  "mdbins_bis") |>
+    dplyr::rename(fraktion = "ins_lang") |>
+    dplyr::distinct() |>
+    dplyr::group_by(.data$id, .data$wp) |>
     dplyr::add_count(name = "fraktion_n")
 
   wp_max <- max(frak_temp$wp)
 
   # If member was member of multiple factions in the same WP, select WP in which
   # he/she spent most time
-  frak_multi <- frak_temp %>%
-    dplyr::filter(.data$fraktion_n > 1) %>%
+  frak_multi <- frak_temp |>
+    dplyr::filter(.data$fraktion_n > 1) |>
     # Adjust end date to date of data_version if current WP.
     dplyr::mutate(mdbins_bis = dplyr::if_else(is.na(.data$mdbins_bis) & .data$wp == wp_max,
                                               data_version,
                                               .data$mdbins_bis),
-                  frak_dauer = .data$mdbins_bis - .data$mdbins_von) %>%
-    dplyr::group_by(.data$id, .data$wp, .data$fraktion) %>%
-    dplyr::summarize(frak_dauer_sum = sum(.data$frak_dauer)) %>%
-    dplyr::group_by(.data$id, .data$wp) %>%
-    dplyr::slice_max(.data$frak_dauer_sum) %>%
+                  frak_dauer = .data$mdbins_bis - .data$mdbins_von) |>
+    dplyr::group_by(.data$id, .data$wp, .data$fraktion) |>
+    dplyr::summarize(frak_dauer_sum = sum(.data$frak_dauer)) |>
+    dplyr::group_by(.data$id, .data$wp) |>
+    dplyr::slice_max(.data$frak_dauer_sum) |>
     dplyr::select("id", "wp", "fraktion")
 
-  frak <- frak_temp %>%
-    dplyr::filter(.data$fraktion_n == 1) %>%
-    dplyr::select("id", "wp", "fraktion") %>%
-    dplyr::bind_rows(frak_multi) %>%
+  frak <- frak_temp |>
+    dplyr::filter(.data$fraktion_n == 1) |>
+    dplyr::select("id", "wp", "fraktion") |>
+    dplyr::bind_rows(frak_multi) |>
     dplyr::ungroup()
 
-  condensed_df <- namen %>%
-    dplyr::left_join(list_clean$bio, by = "id") %>%
-    dplyr::left_join(list_clean$wp, by = "id") %>%
+  condensed_df <- namen |>
+    dplyr::left_join(list_clean$bio, by = "id") |>
+    dplyr::left_join(list_clean$wp, by = "id") |>
     dplyr::left_join(frak, by = c("id", "wp"))
 
   message("Done.")
