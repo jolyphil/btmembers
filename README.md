@@ -31,17 +31,17 @@ A **codebook** for the four data frames is available
 
 **(DE)**
 
-Der Deutsche Bundestag verteilt [Stammdaten aller Abgeordneten seit
+Der Deutsche Bundestag stellt die [Stammdaten aller Abgeordneten seit
 1949](https://www.bundestag.de/services/opendata/) in Form einer
-XML-Datei. Die Arbeit mit diesen Daten kann jedoch schwierig sein, da
-XML-Dateien Informationen in beliebig vielen Dimensionen speichern.
-btmembers lädt die Datei “Stammdaten aller Abgeordneten seit 1949 im
-XML-Format” von der Website des Bundestages herunter und konvertiert sie
-entweder (a) in vier *data frames*, die zu einer Liste gruppiert sind
-(wobei alle Informationen der ursprünglichen XML-Datei erhalten
-bleiben), oder (b) in einen einzigen, komprimierten *data frame*, bei
-dem die Analyseeinheiten die jeweiliegen Wahlperioden der einzelnen
-Abgeordneten sind (Abgeordneten-Wahlperioden).
+XML-Datei bereit. Die Arbeit mit diesen Daten kann jedoch herausfordernd
+sein, da XML-Dateien Informationen in beliebig vielen Dimensionen
+speichern. **btmembers** lädt die Datei *„Stammdaten aller Abgeordneten
+seit 1949 im XML-Format“* von der Website des Bundestages herunter und
+konvertiert sie entweder (a) in vier *data frames*, die zu einer Liste
+gruppiert sind (wobei alle Informationen der ursprünglichen XML-Datei
+erhalten bleiben), oder (b) in einen einzigen, komprimierten *data
+frame*, bei dem die Analyseeinheiten die jeweiligen Wahlperioden der
+einzelnen Abgeordneten sind (Abgeordneten-Wahlperioden).
 
 **Sie verwenden R nicht?** Sie können die verschiedenen Datensätze auch
 als [CSV-Dateien](csv/) (Zeichenkodierung: UTF-8) oder als
@@ -71,11 +71,7 @@ contained in the XML file provided by the Bundestag.
 ``` r
 library(btmembers)
 members <- import_members()
-#> Downloading primary data (version: 2025-09-30) from the Bundestag website
-#> Converting XML file to list...
-#> Done.
-#> Restructuring list...
-#> Done.
+#> Downloading pre-processed data (version: 2025-09-30) from GitHub
 summary(members)
 #>       Length Class  Mode
 #> namen 10     tbl_df list
@@ -180,11 +176,7 @@ parliamentary term.
 
 ``` r
 members_df <- import_members(condensed_df = TRUE)
-#> Downloading primary data (version: 2025-09-30) from the Bundestag website
-#> Converting XML file to list...
-#> Done.
-#> Restructuring list...
-#> Done.
+#> Downloading pre-processed data (version: 2025-09-30) from GitHub
 #> Converting list to data frame...
 #> Done.
 head(members_df[c("nachname", "vorname", "wp", "fraktion")])
@@ -232,7 +224,7 @@ members$namen %>%
 To cite the package ‘btmembers’ in publications use:
 
 > Joly, P. (2025). *btmembers: Import Data on All Members of the
-> Bundestag since 1949*. R package version 0.2.4.
+> Bundestag since 1949*. R package version 0.2.5.
 > <https://github.com/jolyphil/btmembers>
 
 The package should be cited with [the original

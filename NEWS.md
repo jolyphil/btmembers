@@ -1,3 +1,8 @@
+# btmembers 0.2.5
+
+* Fix download bug: download ZIP file instead of XML and DTD files separately. 
+
+
 # btmembers 0.2.4
 
 * Fix download bug: download XML and DTD files separately instead of ZIP file.

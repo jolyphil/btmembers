@@ -71,14 +71,27 @@ import_members <- function(condensed_df = FALSE,
            ") from the Bundestag website") |>
       message()
 
+    temp_file_zip <- tempfile(fileext = ".zip")
     temp_file_xml <- tempfile(fileext = ".xml")
     temp_file_dtd <- tempfile(fileext = ".dtd")
 
-    resp <- httr::GET(link_info$href_xml, httr::write_disk(temp_file_xml, overwrite = TRUE))
+    resp <- httr::GET(
+      link_info$href_zip,
+      httr::write_disk(temp_file_zip, overwrite = TRUE)
+    )
     httr::stop_for_status(resp)
 
-    resp <- httr::GET(link_info$href_dtd, httr::write_disk(temp_file_dtd, overwrite = TRUE))
-    httr::stop_for_status(resp)
+    # Extract XML
+    con_xml <- unz(temp_file_zip, "MDB_STAMMDATEN.XML")
+    xml_text <- readLines(con_xml, warn = FALSE)
+    close(con_xml)
+    writeLines(xml_text, temp_file_xml)
+
+    # Extract DTD
+    con_dtd <- unz(temp_file_zip, "MDB_STAMMDATEN.DTD")
+    dtd_text <- readLines(con_dtd, warn = FALSE)
+    close(con_dtd)
+    writeLines(dtd_text, temp_file_dtd)
 
     if (!test_dtd(temp_file_dtd)) {
       stop("The Bundestag seems to have changed the format of the XML file used by btmembers. You can download the previous version of the data using the argument data_source = \"GitHub\".  Consider opening an issue here: https://github.com/jolyphil/btmembers/issues")
@@ -121,52 +134,38 @@ extract_link_info <- function() {
     rvest::html_elements(css = ".bt-link-dokument") |>
     rvest::html_attrs()
 
-  pattern_title_xml <- "Stammdaten aller Abgeordneten seit 1949 im XML-Format"
-  pattern_title_dtd <- "DTD f\u00FCr Stammdaten aller Abgeordneten seit 1949"
+  pattern_title_zip <- "Stammdaten aller Abgeordneten seit 1949 im XML-Format"
   pattern_data_version <- "\\d{2}\\.\\d{2}\\.\\d{4}"
 
-  href_xml <- NULL
-  href_dtd <- NULL
+  href_zip <- NULL
   data_version <- NA
 
   for (i in seq_along(node_attrs)){
 
     title <- node_attrs[[i]][["title"]]
 
-    # --- XML link ---
-    if (grepl(pattern = pattern_title_xml, x = title)) {
+    # --- ZIP link ---
+    if (grepl(pattern = pattern_title_zip, x = title)) {
       match <- regexpr(pattern = pattern_data_version,
                        text = title) # digits
       data_version <- regmatches(title, m = match) |>
         as.Date(format = "%d.%m.%Y")
-      href_xml <- paste0(
+      href_zip <- paste0(
         "https://www.bundestag.de",
         node_attrs[[i]][["href"]]
       )
     }
 
-    # --- DTD link ---
-    if (grepl(pattern = pattern_title_dtd, x = title)) {
-      href_dtd <- paste0(
-        "https://www.bundestag.de",
-        node_attrs[[i]][["href"]]
-      )
-    }
-
-    if (!is.null(href_xml) && !is.null(href_dtd)) break
+    if (!is.null(href_zip)) break
   }
-  if (is.null(href_xml)) {
-    stop("Unable to locate XML file.")
-  }
-  if (is.null(href_dtd)) {
-    stop("Unable to locate DTD file.")
+  if (is.null(href_zip)) {
+    stop("Unable to locate ZIP file.")
   }
   if (is.na(data_version)) {
     stop("Unable to locate data version.")
   }
   link_info <- list(version_bt = data_version,
-                    href_xml = href_xml,
-                    href_dtd = href_dtd)
+                    href_zip = href_zip)
   link_info
 }
 
