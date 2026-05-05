@@ -55,8 +55,8 @@ Ein **Codebook** für die vier Datensätze finden Sie
 You can install btmembers from GitHub with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("jolyphil/btmembers")
+# install.packages("pak")
+pak::pkg_install("jolyphil/btmembers")
 ```
 
 ## Usage
@@ -71,11 +71,7 @@ contained in the XML file provided by the Bundestag.
 ``` r
 library(btmembers)
 members <- import_members()
-#> Downloading primary data (version: 2026-04-29) from the Bundestag website
-#> Converting XML file to list...
-#> Done.
-#> Restructuring list...
-#> Done.
+#> Downloading pre-processed data (version: 2026-04-29) from GitHub
 summary(members)
 #>       Length Class  Mode
 #> namen 10     tbl_df list
@@ -180,11 +176,7 @@ parliamentary term.
 
 ``` r
 members_df <- import_members(condensed_df = TRUE)
-#> Downloading primary data (version: 2026-04-29) from the Bundestag website
-#> Converting XML file to list...
-#> Done.
-#> Restructuring list...
-#> Done.
+#> Downloading pre-processed data (version: 2026-04-29) from GitHub
 #> Converting list to data frame...
 #> Done.
 head(members_df[c("nachname", "vorname", "wp", "fraktion")])
