@@ -43,8 +43,8 @@ Ein **Codebook** für die vier Datensätze finden Sie [hier](codebook/codebook.p
 You can install btmembers from GitHub with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("jolyphil/btmembers")
+# install.packages("pak")
+pak::pkg_install("jolyphil/btmembers")
 ```
 ## Usage
 
