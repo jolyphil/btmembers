@@ -1,3 +1,7 @@
+# btmembers 0.2.6
+
+* Fix download bug: Implement more robust approach to collect link information. 
+
 # btmembers 0.2.5
 
 * Fix download bug: download ZIP file instead of XML and DTD files separately. 

@@ -127,46 +127,41 @@ import_members <- function(condensed_df = FALSE,
 
 extract_link_info <- function() {
 
-  url <-"https://www.bundestag.de/services/opendata"
-  url_parsed <- xml2::read_html(url)
-
-  node_attrs <- url_parsed |>
-    rvest::html_elements(css = ".bt-link-dokument") |>
-    rvest::html_attrs()
+  url <- "https://www.bundestag.de/services/opendata"
+  page <- xml2::read_html(url)
 
   pattern_title_zip <- "Stammdaten aller Abgeordneten seit 1949 im XML-Format"
   pattern_data_version <- "\\d{2}\\.\\d{2}\\.\\d{4}"
 
-  href_zip <- NULL
-  data_version <- NA
+  links <- page |>
+    rvest::html_elements("a")
+  link_texts <- rvest::html_text2(links)
 
-  for (i in seq_along(node_attrs)){
+  keep <- grepl(pattern_title_zip, link_texts, ignore.case = TRUE)
 
-    title <- node_attrs[[i]][["title"]]
+  if (!any(keep)) stop("Unable to locate ZIP file.")
 
-    # --- ZIP link ---
-    if (grepl(pattern = pattern_title_zip, x = title)) {
-      match <- regexpr(pattern = pattern_data_version,
-                       text = title) # digits
-      data_version <- regmatches(title, m = match) |>
-        as.Date(format = "%d.%m.%Y")
-      href_zip <- paste0(
-        "https://www.bundestag.de",
-        node_attrs[[i]][["href"]]
-      )
-    }
+  # take first match
+  link_text_stammdaten <- link_texts[keep][1]
 
-    if (!is.null(href_zip)) break
+  match <- regexpr(pattern_data_version, link_text_stammdaten)
+
+  if (match == -1) stop("Unable to locate data version.")
+
+  data_version <- regmatches(link_text_stammdaten, match) |>
+    as.Date(format = "%d.%m.%Y")
+
+  href <- links[keep][1] |>
+    rvest::html_attr("href")
+
+  if (!grepl("^https?://", href)) {
+    href <- paste0("https://www.bundestag.de", href)
   }
-  if (is.null(href_zip)) {
-    stop("Unable to locate ZIP file.")
-  }
-  if (is.na(data_version)) {
-    stop("Unable to locate data version.")
-  }
-  link_info <- list(version_bt = data_version,
-                    href_zip = href_zip)
-  link_info
+
+  list(
+    version_bt = data_version,
+    href_zip = href
+  )
 }
 
 extract_github_version <- function() {
