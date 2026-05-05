@@ -818,7 +818,7 @@
 "11000766","Haasler","Horst",NA,NA,NA,NA,NA,1953-10-06,NA
 "11000767","Haberl","Fritz",NA,NA,NA,NA,NA,1976-12-14,NA
 "11000768","Habermann","Michael",NA,NA,NA,NA,NA,1990-12-20,NA
-"11000769","Hackel","Heinz Dieter",NA,NA,NA,NA,NA,1990-12-20,NA
+"11000769","Hackel","Heinz-Dieter",NA,NA,NA,NA,NA,1990-12-20,NA
 "11000770","Hackel","Wolfgang",NA,NA,NA,"Dr.","Dr.",1980-11-04,NA
 "11000771","Hacker","Hans-Joachim",NA,NA,NA,NA,NA,1990-10-03,NA
 "11000772","Hackethal","Karl",NA,NA,NA,NA,NA,1957-10-15,NA
@@ -2186,7 +2186,7 @@
 "11002052","Schober","Kurt",NA,NA,NA,"Dr.","Dr.",1965-10-19,NA
 "11002053","Schockenhoff","Andreas",NA,NA,NA,"Dr.","Dr.",1990-12-20,NA
 "11002054","Schöfberger","Rudolf",NA,NA,NA,"Dr.","Dr.",1972-12-13,NA
-"11002055","von Schoeler","Andreas",NA,NA,NA,NA,NA,1972-12-13,NA
+"11002055","Schoeler","Andreas",NA,NA,"von",NA,NA,1972-12-13,NA
 "11002056","Schöler","Walter",NA,NA,NA,NA,NA,1992-12-08,NA
 "11002057","Schönauer","Friedrich",NA,NA,NA,NA,NA,1949-09-07,NA
 "11002058","Schönburg-Glauchau","Joachim",NA,"Graf","von",NA,NA,1990-12-20,NA
@@ -2221,7 +2221,7 @@
 "11002085","Schröter","Carl",NA,NA,NA,NA,NA,1949-09-07,NA
 "11002086","Schröter","Gisela",NA,NA,NA,NA,NA,1990-12-20,2003-10-03
 "11002086","Hilbrecht","Gisela",NA,NA,NA,NA,NA,2003-10-03,NA
-"11002087","Schröter","Karl Heinz",NA,NA,NA,NA,NA,1990-12-20,NA
+"11002087","Schröter","Karl-Heinz",NA,NA,NA,NA,NA,1990-12-20,NA
 "11002088","Schröter","Richard",NA,NA,NA,NA,NA,1952-02-01,1953-09-07
 "11002088","Schröter","Richard","(Wilmersdorf)",NA,NA,NA,NA,1953-10-06,1957-10-06
 "11002088","Schröter","Richard","(Berlin)",NA,NA,NA,NA,1957-10-15,NA
@@ -2506,7 +2506,7 @@
 "11002349","Ueberhorst","Reinhard",NA,NA,NA,NA,NA,1976-12-14,NA
 "11002350","Ueberschär","Kurt",NA,NA,NA,"Dr.","Dr.",1981-02-02,NA
 "11002351","Uecker","Sabine",NA,NA,NA,NA,NA,1990-10-03,NA
-"11002352","Uelhoff","Klaus Dieter",NA,NA,NA,"Dr.","Dr.",1987-02-18,NA
+"11002352","Uelhoff","Klaus-Dieter",NA,NA,NA,"Dr.","Dr.",1987-02-18,NA
 "11002353","Uldall","Gunnar",NA,NA,NA,NA,NA,1983-03-29,NA
 "11002354","Ullmann","Wolfgang",NA,NA,NA,"Dr.","Dr.",1990-10-03,NA
 "11002355","Unertl","Franz Xaver",NA,NA,NA,NA,NA,1953-10-06,NA
@@ -4899,3 +4899,4 @@
 "11005624","Lübcke","Andrea",NA,NA,NA,"Dr.","Dr.",2025-07-01,NA
 "11005625","Schubert","Lisa",NA,NA,NA,NA,NA,2025-08-01,NA
 "11005626","Vriesema","Mayra",NA,NA,NA,NA,NA,2025-09-01,NA
+"11005627","Mandrella","David",NA,NA,NA,NA,NA,2026-03-30,NA

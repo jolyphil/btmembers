@@ -15,4 +15,7 @@ R/update_data.R
 ^todo\.md$
 ^R/tests$
 ^checklist\.md$
+^checklist\.Rmd$
 ^LICENSE\.md$
+^\.positai$
+^\.claude$

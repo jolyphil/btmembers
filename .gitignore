@@ -40,6 +40,7 @@ vignettes/*.pdf
 
 # This project
 checklist.md
+checklist.Rmd
 /codebook/codebook.html
 data-raw/MDB_STAMMDATEN.DTD
 data-raw/MDB_STAMMDATEN.XML
@@ -49,3 +50,4 @@ data-raw/mdb.R
 .Rproj.user
 doc
 Meta
+.positai
