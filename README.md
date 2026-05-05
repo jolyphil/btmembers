@@ -55,8 +55,8 @@ Ein **Codebook** für die vier Datensätze finden Sie
 You can install btmembers from GitHub with:
 
 ``` r
-# install.packages("pak")
-pak::pkg_install("jolyphil/btmembers")
+# install.packages("remotes")
+remotes::install_github("jolyphil/btmembers")
 ```
 
 ## Usage
